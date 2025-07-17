@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+dist
+coverage
+Dockerfile
+docker-compose.yml
+
+.git
+.gitignore
+.env*
+README.md
+tests
+cypress
+.vscode
+*.log 
