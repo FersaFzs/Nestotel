@@ -1,6 +1,7 @@
 # CONTEXTO DEL PROYECTO HOTEL-NEXT
 
 ## Stack y Versiones
+
 - **Frontend:** Next.js 14 (App Router), Tailwind CSS 3.4, GSAP 3.12, React 18, Shadcn/ui (opcional)
 - **Backend:** Next.js API Routes + Zod (validación), Mongoose 8, MongoDB 7 (Docker)
 - **Auth:** Firebase/Google
@@ -9,6 +10,7 @@
 - **Node:** 20 LTS
 
 ## Estructura de Carpetas
+
 ```
 hotel-next/
 ├── .github/workflows/       # CI/CD (test + deploy)
@@ -48,6 +50,7 @@ hotel-next/
 ```
 
 ## Convenciones y Consejos
+
 - **Server Actions** para mutaciones, React Server Components.
 - **Tailwind:** content correcto en config, animaciones extendidas.
 - **GSAP:** usar `@gsap/react` y `useGSAP` para SSR-friendly.
@@ -58,8 +61,9 @@ hotel-next/
 - **CI/CD:** workflows en `.github/workflows/`.
 
 ## Objetivo
+
 Desarrollar una app de hotel robusta, profesional, dockerizada, con autenticación, reservas, panel admin, animaciones y tests, lista para producción y CI/CD.
 
 ---
 
-**Este archivo sirve como referencia para la IA y para cualquier desarrollador que se incorpore al proyecto.** 
+**Este archivo sirve como referencia para la IA y para cualquier desarrollador que se incorpore al proyecto.**
