@@ -60,6 +60,73 @@ hotel-next/
 - **Scripts package.json:** dev, build, start, test, test:e2e, lint, format, prepare (husky).
 - **CI/CD:** workflows en `.github/workflows/`.
 
+## Estado Actual del Proyecto
+
+### ✅ **Completado:**
+
+- **Landing Page:** Diseño espectacular con animaciones GSAP complejas
+  - Hero-Hall transition cinematográfica
+  - Secciones animadas: Habitaciones, Eventos, Jardín con fotos polaroid
+  - Header inteligente con hide/show
+  - Footer completo y elegante
+  - Componente de reservas lateral deslizable
+- **Backend API:** Endpoints para users, rooms, reservations, invoices
+- **Base de datos:** Modelos MongoDB con Mongoose para User, Room, Reservation, Invoice
+- **Validación:** Esquemas Zod para todas las entidades
+- **Docker:** Configuración completa con MongoDB
+- **Testing:** Configuración Jest y Cypress
+
+### 🔄 **En progreso:**
+
+- Navegación del header a secciones
+- Decisión de próximos pasos de desarrollo
+
+### 📋 **Backend funcionalidades disponibles:**
+
+- **Users:** CRUD completo, autenticación
+- **Rooms:** Gestión de habitaciones y disponibilidad
+- **Reservations:** Sistema completo de reservas
+- **Invoices:** Facturación electrónica con normativas
+- **Payments:** Pasarela de pagos integrada
+
+### 🎨 **Diseño y UX:**
+
+- **Tema:** Hotel elegante con paleta negro/dorado
+- **Animaciones:** GSAP ScrollTrigger para experiencias cinematográticas
+- **Responsivo:** Tailwind CSS con breakpoints móvil-first
+- **Tipografía:** Font serif para elegancia, sans-serif para legibilidad
+
+### 📱 **Páginas planificadas:**
+
+- **Auth:** Login/Register con Firebase/Google
+- **Reservas:** Flujo completo de booking
+- **Habitaciones:** Detalle y galería de rooms
+- **Perfil:** Dashboard de usuario
+- **Admin:** Panel de administración
+- **Información:** Páginas institucionales
+
+## Próximos Pasos Sugeridos
+
+### **Opción A: Auth + Reservas (Funcionalidad Core)**
+
+- Implementar login/register
+- Crear página de reservas funcional
+- Conectar con backend de pagos
+- **Ventaja:** Funcionalidad principal operativa
+
+### **Opción B: Páginas Informativas (Frontend)**
+
+- Detalle de habitaciones con galerías
+- Página "Sobre nosotros"
+- Información de servicios
+- **Ventaja:** Contenido completo sin complejidad backend
+
+### **Opción C: Híbrido**
+
+- Páginas de habitaciones (frontend)
+- Sistema auth básico
+- **Ventaja:** Balance contenido/funcionalidad
+
 ## Objetivo
 
 Desarrollar una app de hotel robusta, profesional, dockerizada, con autenticación, reservas, panel admin, animaciones y tests, lista para producción y CI/CD.

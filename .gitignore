@@ -39,4 +39,6 @@ cypress/videos/
 cypress/screenshots/
 
 # Husky
-.husky/_/ 
+.husky/_/ # Environment variables
+.env.local
+.env

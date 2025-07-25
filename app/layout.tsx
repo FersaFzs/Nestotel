@@ -1,9 +1,10 @@
 import React from 'react';
 import '../styles/globals.css';
+import { AuthProvider } from '../lib/contexts/AuthContext';
 
 export const metadata = {
-  title: 'Hotel Next.js',
-  description: 'Landing page premium para hotel con reservas online.',
+  title: 'Granada Inn - Hotel Premium',
+  description: 'Experiencia única en Granada. Reserva tu estancia en nuestro hotel boutique.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -17,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans bg-black text-black">{children}</body>
+      <body className="font-sans bg-black text-black">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
