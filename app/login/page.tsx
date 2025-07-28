@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../lib/contexts/AuthContext';
+import { useAuthGuard } from '../../lib/hooks/useAuthGuard';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,17 @@ export default function LoginPage() {
   const { login, loginWithGoogle } = useAuth();
   const router = useRouter();
 
+  // Redirect if already logged in
+  const { isLoading } = useAuthGuard({ requireAuth: false });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="text-gold text-xl">Cargando...</div>
+      </div>
+    );
+  }
+
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -21,7 +33,22 @@ export default function LoginPage() {
 
     try {
       await login(email, password);
-      router.push('/'); // Redirect to home page
+
+      // Verificar si hay una reserva pendiente
+      const pendingBooking = localStorage.getItem('pendingBooking');
+      if (pendingBooking) {
+        localStorage.removeItem('pendingBooking');
+        const bookingData = JSON.parse(pendingBooking);
+        const searchParams = new URLSearchParams({
+          checkIn: bookingData.checkIn,
+          checkOut: bookingData.checkOut,
+          guests: bookingData.guests.toString(),
+          roomId: bookingData.roomId,
+        });
+        router.push(`/reserva?${searchParams.toString()}`);
+      } else {
+        router.push('/'); // Redirect to home page
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'Error de autenticación');
     } finally {
@@ -35,7 +62,22 @@ export default function LoginPage() {
 
     try {
       await loginWithGoogle();
-      router.push('/'); // Redirect to home page
+
+      // Verificar si hay una reserva pendiente
+      const pendingBooking = localStorage.getItem('pendingBooking');
+      if (pendingBooking) {
+        localStorage.removeItem('pendingBooking');
+        const bookingData = JSON.parse(pendingBooking);
+        const searchParams = new URLSearchParams({
+          checkIn: bookingData.checkIn,
+          checkOut: bookingData.checkOut,
+          guests: bookingData.guests.toString(),
+          roomId: bookingData.roomId,
+        });
+        router.push(`/reserva?${searchParams.toString()}`);
+      } else {
+        router.push('/'); // Redirect to home page
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'Error de autenticación');
     } finally {

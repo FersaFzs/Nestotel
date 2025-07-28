@@ -1,5 +1,13 @@
 import '@testing-library/jest-dom';
 
+// Mock fetch globally
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve([]),
+  }),
+);
+
 // Mock Firebase
 jest.mock('firebase/app', () => ({
   initializeApp: jest.fn(),
@@ -15,14 +23,30 @@ jest.mock('firebase/auth', () => ({
   signInWithPopup: jest.fn(),
 }));
 
+// Create mock ScrollTrigger
+const mockScrollTrigger = {
+  create: jest.fn(),
+  kill: jest.fn(),
+  refresh: jest.fn(),
+  getAll: jest.fn(() => []),
+  batch: jest.fn(),
+  matchMedia: jest.fn(),
+  update: jest.fn(),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+};
+
 // Mock GSAP for tests
 jest.mock('gsap', () => ({
   gsap: {
     registerPlugin: jest.fn(),
     timeline: jest.fn(() => ({
-      to: jest.fn(),
-      from: jest.fn(),
-      fromTo: jest.fn(),
+      to: jest.fn().mockReturnThis(),
+      from: jest.fn().mockReturnThis(),
+      fromTo: jest.fn().mockReturnThis(),
+      set: jest.fn().mockReturnThis(),
+      play: jest.fn().mockReturnThis(),
+      pause: jest.fn().mockReturnThis(),
       scrollTrigger: {
         kill: jest.fn(),
       },
@@ -30,12 +54,20 @@ jest.mock('gsap', () => ({
     to: jest.fn(),
     from: jest.fn(),
     fromTo: jest.fn(),
+    set: jest.fn(),
+    utils: {
+      toArray: jest.fn(() => []),
+    },
+    ScrollTrigger: mockScrollTrigger,
   },
 }));
 
 jest.mock('gsap/ScrollTrigger', () => ({
-  ScrollTrigger: {},
+  ScrollTrigger: mockScrollTrigger,
 }));
+
+// Global ScrollTrigger for direct access
+global.ScrollTrigger = mockScrollTrigger;
 
 // Mock Next.js router
 jest.mock('next/navigation', () => ({
@@ -43,6 +75,12 @@ jest.mock('next/navigation', () => ({
     push: jest.fn(),
     replace: jest.fn(),
     refresh: jest.fn(),
+  }),
+  useSearchParams: () => ({
+    get: jest.fn(() => null),
+    getAll: jest.fn(() => []),
+    has: jest.fn(() => false),
+    toString: jest.fn(() => ''),
   }),
 }));
 

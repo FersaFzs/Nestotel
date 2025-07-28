@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../lib/contexts/AuthContext';
+import { useAuthGuard } from '../../lib/hooks/useAuthGuard';
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,17 @@ export default function RegisterPage() {
 
   const { register, loginWithGoogle } = useAuth();
   const router = useRouter();
+
+  // Redirect if already logged in
+  const { isLoading } = useAuthGuard({ requireAuth: false });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+        <div className="text-gold text-xl">Cargando...</div>
+      </div>
+    );
+  }
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -11,6 +11,7 @@ function SmartHeader() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout, loading } = useAuth();
 
   useEffect(() => {
@@ -134,20 +135,151 @@ function SmartHeader() {
           {loading ? (
             <div className="text-gray-400">Cargando...</div>
           ) : user ? (
-            <div className="flex items-center gap-4">
-              <span className="text-white text-sm">{user.displayName || user.email}</span>
+            <div className="relative flex items-center gap-4">
+              {/* User Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center gap-2 text-white hover:text-gold transition-colors focus:outline-none"
+                >
+                  {/* Avatar placeholder */}
+                  <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center text-black font-bold text-sm">
+                    {user.displayName
+                      ? user.displayName[0].toUpperCase()
+                      : user.email?.[0].toUpperCase()}
+                  </div>
+                  <span className="text-white text-sm hidden md:block">
+                    {user.displayName || user.email?.split('@')[0]}
+                  </span>
+                  {/* Dropdown arrow */}
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+
+                {/* Dropdown Menu */}
+                {isDropdownOpen && (
+                  <div
+                    className="absolute right-0 top-full mt-2 w-48 bg-black/90 backdrop-blur-md border border-gold/30 rounded-xl shadow-2xl py-2 z-50"
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    {/* User Info */}
+                    <div className="px-4 py-2 border-b border-gold/20">
+                      <p className="text-white font-medium text-sm">
+                        {user.displayName || 'Usuario'}
+                      </p>
+                      <p className="text-gray-400 text-xs">{user.email}</p>
+                    </div>
+
+                    {/* Menu Items */}
+                    <Link
+                      href="/perfil"
+                      className="flex items-center gap-2 px-4 py-2 text-white hover:bg-gold/20 hover:text-gold transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <span className="text-sm">Mi Perfil</span>
+                    </Link>
+
+                    <Link
+                      href="/reservas"
+                      className="flex items-center gap-2 px-4 py-2 text-white hover:bg-gold/20 hover:text-gold transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                      </svg>
+                      <span className="text-sm">Mis Reservas</span>
+                    </Link>
+
+                    <Link
+                      href="/reserva"
+                      className="flex items-center gap-2 px-4 py-2 text-white hover:bg-gold/20 hover:text-gold transition-colors"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
+                      </svg>
+                      <span className="text-sm">Nueva Reserva</span>
+                    </Link>
+
+                    <div className="border-t border-gold/20 mt-2 pt-2">
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsDropdownOpen(false);
+                        }}
+                        className="flex items-center gap-2 px-4 py-2 text-white hover:bg-red-500/20 hover:text-red-400 transition-colors w-full text-left"
+                      >
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                          />
+                        </svg>
+                        <span className="text-sm">Cerrar Sesión</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Quick Actions */}
               <Link
-                href="/reservas"
-                className="bg-gold hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-medium transition-colors"
+                href="/reserva"
+                className="bg-gold hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-medium transition-colors text-sm"
               >
-                Mis Reservas
+                Reservar
               </Link>
-              <button
-                onClick={handleLogout}
-                className="text-white hover:text-gold transition-colors"
-              >
-                Cerrar Sesión
-              </button>
             </div>
           ) : (
             <div className="flex items-center gap-4">
@@ -644,70 +776,68 @@ function GardenSection() {
 
   useEffect(() => {
     if (jardinRef.current) {
-      // Pin la sección más tiempo (400% viewport para incluir las fotos)
-      gsap.to(
-        {},
-        {
-          scrollTrigger: {
-            trigger: jardinRef.current,
-            start: 'top top',
-            end: '+=400%',
-            scrub: true,
-            pin: true,
-            onUpdate: (self) => {
-              const progress = self.progress;
+      // ScrollTrigger con pin como las otras secciones
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: jardinRef.current,
+          start: 'top top',
+          end: '+=400%',
+          scrub: 1,
+          pin: true,
+          id: 'garden-section-main',
+          onUpdate: (self) => {
+            const progress = self.progress;
 
-              // Fase 1 (0-0.4): Puertas y título
-              if (progress < 0.4) {
-                setPuertas(progress / 0.4); // Las puertas se abren en el primer 40%
+            // Fase 1 (0-0.4): Puertas y título
+            if (progress < 0.4) {
+              setPuertas(progress / 0.4);
 
-                // Título aparece desde el inicio y desaparece justo antes de las fotos
-                if (progress < 0.08) {
-                  setTitleVisible(true);
-                  setTitleOpacity(Math.min(1, progress / 0.08));
-                } else if (progress >= 0.08 && progress < 0.35) {
-                  setTitleVisible(true);
-                  setTitleOpacity(1);
-                } else if (progress >= 0.35 && progress < 0.4) {
-                  setTitleVisible(true);
-                  setTitleOpacity(Math.max(0, 1 - (progress - 0.35) / 0.05));
-                } else {
-                  setTitleVisible(false);
-                  setTitleOpacity(0);
-                }
-
-                // Ya no necesitamos textProgress separado
-                setPhotosProgress(0);
-              }
-              // Fase 2 (0.4-0.7): Fotos volando hacia la pantalla
-              else if (progress >= 0.4 && progress <= 0.7) {
-                setPuertas(1); // Puertas completamente abiertas
+              // Título aparece desde el inicio y desaparece justo antes de las fotos
+              if (progress < 0.08) {
+                setTitleVisible(true);
+                setTitleOpacity(Math.min(1, progress / 0.08));
+              } else if (progress >= 0.08 && progress < 0.35) {
+                setTitleVisible(true);
+                setTitleOpacity(1);
+              } else if (progress >= 0.35 && progress < 0.4) {
+                setTitleVisible(true);
+                setTitleOpacity(Math.max(0, 1 - (progress - 0.35) / 0.05));
+              } else {
                 setTitleVisible(false);
                 setTitleOpacity(0);
-                setPhotosProgress((progress - 0.4) / 0.3); // Las fotos aparecen en el 30% del viewport
-                setHoverEnabled(false); // Hover desactivado mientras se mueven
               }
-              // Fase 3 (0.7-0.8): Pequeño espacio de transición
-              else if (progress >= 0.7 && progress <= 0.8) {
-                setPuertas(1);
-                setTitleVisible(false);
-                setTitleOpacity(0);
-                setPhotosProgress(1); // Fotos completamente posicionadas
-                setHoverEnabled(false); // Hover aún desactivado
-              }
-              // Fase 4 (0.8-1.0): Buffer con efectos hover activos
-              else {
-                setPuertas(1);
-                setTitleVisible(false);
-                setTitleOpacity(0);
-                setPhotosProgress(1); // Fotos completamente posicionadas
-                setHoverEnabled(true); // Hover activado en el buffer final
-              }
-            },
+
+              setPhotosProgress(0);
+            }
+            // Fase 2 (0.4-0.7): Fotos volando hacia la pantalla
+            else if (progress >= 0.4 && progress <= 0.7) {
+              setPuertas(1);
+              setTitleVisible(false);
+              setTitleOpacity(0);
+              setPhotosProgress((progress - 0.4) / 0.3);
+              setHoverEnabled(false);
+            }
+            // Fase 3 (0.7-0.8): Pequeño espacio de transición
+            else if (progress >= 0.7 && progress <= 0.8) {
+              setPuertas(1);
+              setTitleVisible(false);
+              setTitleOpacity(0);
+              setPhotosProgress(1);
+              setHoverEnabled(false);
+            }
+            // Fase 4 (0.8-1.0): Buffer con efectos hover activos
+            else {
+              setPuertas(1);
+              setTitleVisible(false);
+              setTitleOpacity(0);
+              setPhotosProgress(1);
+              setHoverEnabled(true);
+            }
           },
         },
-      );
-      // Zoom al jardín, más largo y con extra al final
+      });
+
+      // Zoom al jardín
       gsap.fromTo(
         '.jardin-img',
         { scale: 1, filter: 'brightness(0.7)' },
@@ -718,10 +848,23 @@ function GardenSection() {
             trigger: jardinRef.current,
             start: 'top top',
             end: '+=300%',
-            scrub: true,
+            scrub: 1,
+            id: 'garden-section-zoom',
           },
         },
       );
+
+      // Cleanup function
+      return () => {
+        if (tl.scrollTrigger) {
+          tl.scrollTrigger.kill();
+        }
+        // Limpiar ScrollTriggers específicos de esta sección
+        const gardenTriggers = ScrollTrigger.getAll().filter(
+          (st) => st.vars.id === 'garden-section-main' || st.vars.id === 'garden-section-zoom',
+        );
+        gardenTriggers.forEach((st) => st.kill());
+      };
     }
   }, []);
 
@@ -1048,11 +1191,62 @@ function HeroHallTransition() {
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const jardinRef = useRef<HTMLDivElement>(null);
-  const puertasProgress = useRef(0);
-  const [puertas, setPuertas] = React.useState(0); // 0=cerradas, 1=abiertas
   const [isBookingVisible, setIsBookingVisible] = useState(true);
   const bookingRef = useRef<HTMLDivElement>(null);
+
+  // Booking form states
+  const [rooms, setRooms] = useState<any[]>([]);
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState(1);
+  const [selectedRoom, setSelectedRoom] = useState('');
+  const { user } = useAuth();
+
+  // Cargar habitaciones al montar el componente
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('/api/rooms');
+        if (response.ok) {
+          const roomsData = await response.json();
+          setRooms(roomsData);
+          // Seleccionar la primera habitación por defecto
+          if (roomsData.length > 0) {
+            setSelectedRoom(roomsData[0]._id);
+          }
+        }
+      } catch (error) {
+        console.error('Error cargando habitaciones:', error);
+      }
+    };
+
+    fetchRooms();
+  }, []);
+
+  // Función para manejar la reserva
+  const handleBooking = () => {
+    if (!user) {
+      // Redirigir al login si no está autenticado
+      const bookingData = {
+        checkIn,
+        checkOut,
+        guests,
+        roomId: selectedRoom,
+      };
+      localStorage.setItem('pendingBooking', JSON.stringify(bookingData));
+      window.location.href = '/login';
+      return;
+    }
+
+    // Si está autenticado, ir directamente a la página de reservas con los datos
+    const searchParams = new URLSearchParams({
+      checkIn,
+      checkOut,
+      guests: guests.toString(),
+      roomId: selectedRoom,
+    });
+    window.location.href = `/reserva?${searchParams.toString()}`;
+  };
 
   useEffect(() => {
     // Hero animación fade-in
@@ -1077,7 +1271,7 @@ export default function HomePage() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    // Animaciones de scroll para secciones - ya no necesarias, cada sección maneja su propia animación
+
     // Animación de hover para las cards de habitaciones y eventos
     gsap.utils.toArray('.room-card').forEach((card) => {
       const el = card as Element;
@@ -1101,6 +1295,7 @@ export default function HomePage() {
         });
       });
     });
+
     gsap.utils.toArray('.event-card').forEach((card) => {
       const el = card as Element;
       gsap.set(el, { transformOrigin: 'center center' });
@@ -1123,9 +1318,6 @@ export default function HomePage() {
         });
       });
     });
-
-    // The GardenSection component now handles its own scroll and animation logic
-    // The puertasProgress ref and setPuertas state are no longer needed here
   }, []);
 
   return (
@@ -1176,6 +1368,8 @@ export default function HomePage() {
               </label>
               <input
                 type="date"
+                value={checkIn}
+                onChange={(e) => setCheckIn(e.target.value)}
                 className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md"
               />
             </div>
@@ -1186,6 +1380,8 @@ export default function HomePage() {
               </label>
               <input
                 type="date"
+                value={checkOut}
+                onChange={(e) => setCheckOut(e.target.value)}
                 className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md"
               />
             </div>
@@ -1194,12 +1390,15 @@ export default function HomePage() {
               <label className="text-xs font-semibold text-gold mb-2 block uppercase tracking-wide">
                 Huéspedes
               </label>
-              <select className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md">
-                <option>1 Adulto</option>
-                <option>2 Adultos</option>
-                <option>3 Adultos</option>
-                <option>4 Adultos</option>
-                <option>Familia</option>
+              <select
+                value={guests}
+                onChange={(e) => setGuests(parseInt(e.target.value))}
+                className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md"
+              >
+                <option value={1}>1 Adulto</option>
+                <option value={2}>2 Adultos</option>
+                <option value={3}>3 Adultos</option>
+                <option value={4}>4 Adultos</option>
               </select>
             </div>
 
@@ -1207,16 +1406,25 @@ export default function HomePage() {
               <label className="text-xs font-semibold text-gold mb-2 block uppercase tracking-wide">
                 Habitación
               </label>
-              <select className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md">
-                <option>Habitación Deluxe</option>
-                <option>Suite Premium</option>
-                <option>Habitación Individual</option>
-                <option>Habitación Doble</option>
+              <select
+                value={selectedRoom}
+                onChange={(e) => setSelectedRoom(e.target.value)}
+                className="w-full bg-white/90 border-b-2 border-gold/50 focus:border-gold outline-none text-lg font-medium px-3 py-2 transition-colors duration-300 text-black rounded-md"
+              >
+                {rooms.map((room) => (
+                  <option key={room._id} value={room._id}>
+                    {room.name} - desde {room.price}€/noche
+                  </option>
+                ))}
               </select>
             </div>
 
-            <button className="w-full bg-gold hover:bg-yellow-500 text-black font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-xl mt-6 font-serif">
-              RESERVAR AHORA
+            <button
+              onClick={handleBooking}
+              disabled={!checkIn || !checkOut || !selectedRoom}
+              className="w-full bg-gold hover:bg-yellow-500 disabled:bg-gray-400 disabled:cursor-not-allowed text-black font-bold px-6 py-4 rounded-xl text-lg transition-all duration-300 shadow-lg hover:shadow-xl mt-6 font-serif"
+            >
+              {user ? 'RESERVAR AHORA' : 'INICIAR SESIÓN PARA RESERVAR'}
             </button>
           </div>
 
