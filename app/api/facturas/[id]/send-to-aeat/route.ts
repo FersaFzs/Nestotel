@@ -15,21 +15,18 @@ const E_INVOICE_CONFIG = {
   aeat: {
     apiUrl: process.env.AEAT_API_URL || 'https://www.agenciatributaria.es/ws/facturae',
     apiKey: process.env.AEAT_API_KEY,
-  }
+  },
 };
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
-    
+
     const invoice = await Invoice.findById(params.id);
     if (!invoice) {
       return NextResponse.json(
         { success: false, message: 'Factura no encontrada' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -37,7 +34,7 @@ export async function POST(
     if (invoice.aeatStatus !== 'pending') {
       return NextResponse.json(
         { success: false, message: 'La factura ya ha sido procesada' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -50,7 +47,7 @@ export async function POST(
         nif: invoice.clientNIF,
         address: invoice.clientAddress,
       },
-      items: invoice.items.map(item => ({
+      items: invoice.items.map((item) => ({
         description: item.description,
         quantity: item.quantity,
         unitPrice: item.unitPrice,
@@ -61,7 +58,7 @@ export async function POST(
         subtotal: invoice.total,
         vat: invoice.vatTotal,
         total: invoice.grandTotal,
-      }
+      },
     };
 
     let success = false;
@@ -131,14 +128,13 @@ export async function POST(
       success: true,
       message: success ? 'Factura enviada correctamente' : 'Error al enviar factura',
       status: invoice.aeatStatus,
-      response
+      response,
     });
-
   } catch (error) {
     console.error('Error sending invoice to AEAT:', error);
     return NextResponse.json(
       { success: false, message: 'Error interno del servidor' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -149,7 +145,7 @@ async function sendToVerifacti(invoiceData: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${E_INVOICE_CONFIG.verifacti.apiKey}`,
+      Authorization: `Bearer ${E_INVOICE_CONFIG.verifacti.apiKey}`,
     },
     body: JSON.stringify({
       invoice: invoiceData,
@@ -210,7 +206,7 @@ async function sendToAEAT(invoiceData: any) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/xml',
-      'Authorization': `Bearer ${E_INVOICE_CONFIG.aeat.apiKey}`,
+      Authorization: `Bearer ${E_INVOICE_CONFIG.aeat.apiKey}`,
     },
     body: generateFacturaeXML(invoiceData),
   });
@@ -304,4 +300,4 @@ function generateFacturaeXML(invoiceData: any) {
     </Invoice>
   </Invoices>
 </Facturae>`;
-} 
+}

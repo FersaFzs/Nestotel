@@ -18,7 +18,9 @@ export default function HabitacionesPage() {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedFloor, setSelectedFloor] = useState<number | 'all'>('all');
-  const [filter, setFilter] = useState<'all' | 'available' | 'occupied' | 'cleaning' | 'maintenance'>('all');
+  const [filter, setFilter] = useState<
+    'all' | 'available' | 'occupied' | 'cleaning' | 'maintenance'
+  >('all');
 
   useEffect(() => {
     fetchRooms();
@@ -30,26 +32,164 @@ export default function HabitacionesPage() {
       // Simular datos de habitaciones
       const mockRooms: Room[] = [
         // Planta 1
-        { _id: '1', number: '101', type: 'Suite Premium', floor: 1, status: 'occupied', currentGuest: 'María García', checkOutDate: '2024-07-28', price: 120, capacity: 4 },
-        { _id: '2', number: '102', type: 'Habitación Deluxe', floor: 1, status: 'available', price: 80, capacity: 2 },
-        { _id: '3', number: '103', type: 'Habitación Deluxe', floor: 1, status: 'cleaning', price: 80, capacity: 2 },
-        { _id: '4', number: '104', type: 'Suite Premium', floor: 1, status: 'occupied', currentGuest: 'Carlos Rodríguez', checkOutDate: '2024-07-28', price: 120, capacity: 4 },
-        { _id: '5', number: '105', type: 'Habitación Standard', floor: 1, status: 'available', price: 60, capacity: 2 },
-        { _id: '6', number: '106', type: 'Habitación Standard', floor: 1, status: 'maintenance', price: 60, capacity: 2 },
-        { _id: '7', number: '107', type: 'Habitación Deluxe', floor: 1, status: 'available', price: 80, capacity: 2 },
-        { _id: '8', number: '108', type: 'Suite Premium', floor: 1, status: 'occupied', currentGuest: 'Ana Martínez', checkOutDate: '2024-07-30', price: 120, capacity: 4 },
-        
+        {
+          _id: '1',
+          number: '101',
+          type: 'Suite Premium',
+          floor: 1,
+          status: 'occupied',
+          currentGuest: 'María García',
+          checkOutDate: '2024-07-28',
+          price: 120,
+          capacity: 4,
+        },
+        {
+          _id: '2',
+          number: '102',
+          type: 'Habitación Deluxe',
+          floor: 1,
+          status: 'available',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '3',
+          number: '103',
+          type: 'Habitación Deluxe',
+          floor: 1,
+          status: 'cleaning',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '4',
+          number: '104',
+          type: 'Suite Premium',
+          floor: 1,
+          status: 'occupied',
+          currentGuest: 'Carlos Rodríguez',
+          checkOutDate: '2024-07-28',
+          price: 120,
+          capacity: 4,
+        },
+        {
+          _id: '5',
+          number: '105',
+          type: 'Habitación Standard',
+          floor: 1,
+          status: 'available',
+          price: 60,
+          capacity: 2,
+        },
+        {
+          _id: '6',
+          number: '106',
+          type: 'Habitación Standard',
+          floor: 1,
+          status: 'maintenance',
+          price: 60,
+          capacity: 2,
+        },
+        {
+          _id: '7',
+          number: '107',
+          type: 'Habitación Deluxe',
+          floor: 1,
+          status: 'available',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '8',
+          number: '108',
+          type: 'Suite Premium',
+          floor: 1,
+          status: 'occupied',
+          currentGuest: 'Ana Martínez',
+          checkOutDate: '2024-07-30',
+          price: 120,
+          capacity: 4,
+        },
+
         // Planta 2
-        { _id: '9', number: '201', type: 'Suite Premium', floor: 2, status: 'available', price: 120, capacity: 4 },
-        { _id: '10', number: '202', type: 'Habitación Deluxe', floor: 2, status: 'occupied', currentGuest: 'Luis Pérez', checkOutDate: '2024-07-29', price: 80, capacity: 2 },
-        { _id: '11', number: '203', type: 'Habitación Deluxe', floor: 2, status: 'cleaning', price: 80, capacity: 2 },
-        { _id: '12', number: '204', type: 'Suite Premium', floor: 2, status: 'available', price: 120, capacity: 4 },
-        { _id: '13', number: '205', type: 'Habitación Standard', floor: 2, status: 'available', price: 60, capacity: 2 },
-        { _id: '14', number: '206', type: 'Habitación Standard', floor: 2, status: 'occupied', currentGuest: 'Sofia López', checkOutDate: '2024-07-27', price: 60, capacity: 2 },
-        { _id: '15', number: '207', type: 'Habitación Deluxe', floor: 2, status: 'available', price: 80, capacity: 2 },
-        { _id: '16', number: '208', type: 'Suite Premium', floor: 2, status: 'maintenance', price: 120, capacity: 4 },
+        {
+          _id: '9',
+          number: '201',
+          type: 'Suite Premium',
+          floor: 2,
+          status: 'available',
+          price: 120,
+          capacity: 4,
+        },
+        {
+          _id: '10',
+          number: '202',
+          type: 'Habitación Deluxe',
+          floor: 2,
+          status: 'occupied',
+          currentGuest: 'Luis Pérez',
+          checkOutDate: '2024-07-29',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '11',
+          number: '203',
+          type: 'Habitación Deluxe',
+          floor: 2,
+          status: 'cleaning',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '12',
+          number: '204',
+          type: 'Suite Premium',
+          floor: 2,
+          status: 'available',
+          price: 120,
+          capacity: 4,
+        },
+        {
+          _id: '13',
+          number: '205',
+          type: 'Habitación Standard',
+          floor: 2,
+          status: 'available',
+          price: 60,
+          capacity: 2,
+        },
+        {
+          _id: '14',
+          number: '206',
+          type: 'Habitación Standard',
+          floor: 2,
+          status: 'occupied',
+          currentGuest: 'Sofia López',
+          checkOutDate: '2024-07-27',
+          price: 60,
+          capacity: 2,
+        },
+        {
+          _id: '15',
+          number: '207',
+          type: 'Habitación Deluxe',
+          floor: 2,
+          status: 'available',
+          price: 80,
+          capacity: 2,
+        },
+        {
+          _id: '16',
+          number: '208',
+          type: 'Suite Premium',
+          floor: 2,
+          status: 'maintenance',
+          price: 120,
+          capacity: 4,
+        },
       ];
-      
+
       setRooms(mockRooms);
     } catch (error) {
       console.error('Error fetching rooms:', error);
@@ -97,19 +237,19 @@ export default function HabitacionesPage() {
     }
   };
 
-  const filteredRooms = rooms.filter(room => {
+  const filteredRooms = rooms.filter((room) => {
     const floorMatch = selectedFloor === 'all' || room.floor === selectedFloor;
     const statusMatch = filter === 'all' || room.status === filter;
     return floorMatch && statusMatch;
   });
 
-  const floors = [...new Set(rooms.map(room => room.floor))].sort();
+  const floors = [...new Set(rooms.map((room) => room.floor))].sort();
   const stats = {
     total: rooms.length,
-    available: rooms.filter(r => r.status === 'available').length,
-    occupied: rooms.filter(r => r.status === 'occupied').length,
-    cleaning: rooms.filter(r => r.status === 'cleaning').length,
-    maintenance: rooms.filter(r => r.status === 'maintenance').length,
+    available: rooms.filter((r) => r.status === 'available').length,
+    occupied: rooms.filter((r) => r.status === 'occupied').length,
+    cleaning: rooms.filter((r) => r.status === 'cleaning').length,
+    maintenance: rooms.filter((r) => r.status === 'maintenance').length,
   };
 
   const occupancyRate = Math.round((stats.occupied / stats.total) * 100);
@@ -136,21 +276,17 @@ export default function HabitacionesPage() {
             <button
               onClick={() => setSelectedFloor('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedFloor === 'all' 
-                  ? 'bg-gold text-black' 
-                  : 'text-white hover:bg-white/10'
+                selectedFloor === 'all' ? 'bg-gold text-black' : 'text-white hover:bg-white/10'
               }`}
             >
               Todas las plantas
             </button>
-            {floors.map(floor => (
+            {floors.map((floor) => (
               <button
                 key={floor}
                 onClick={() => setSelectedFloor(floor)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  selectedFloor === floor 
-                    ? 'bg-gold text-black' 
-                    : 'text-white hover:bg-white/10'
+                  selectedFloor === floor ? 'bg-gold text-black' : 'text-white hover:bg-white/10'
                 }`}
               >
                 Planta {floor}
@@ -163,9 +299,7 @@ export default function HabitacionesPage() {
             <button
               onClick={() => setFilter('all')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' 
-                  ? 'bg-gold text-black' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'all' ? 'bg-gold text-black' : 'text-white hover:bg-white/10'
               }`}
             >
               Todas
@@ -173,9 +307,7 @@ export default function HabitacionesPage() {
             <button
               onClick={() => setFilter('available')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'available' 
-                  ? 'bg-green-500 text-white' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'available' ? 'bg-green-500 text-white' : 'text-white hover:bg-white/10'
               }`}
             >
               Disponibles
@@ -183,9 +315,7 @@ export default function HabitacionesPage() {
             <button
               onClick={() => setFilter('occupied')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'occupied' 
-                  ? 'bg-red-500 text-white' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'occupied' ? 'bg-red-500 text-white' : 'text-white hover:bg-white/10'
               }`}
             >
               Ocupadas
@@ -193,9 +323,7 @@ export default function HabitacionesPage() {
             <button
               onClick={() => setFilter('cleaning')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'cleaning' 
-                  ? 'bg-orange-500 text-white' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'cleaning' ? 'bg-orange-500 text-white' : 'text-white hover:bg-white/10'
               }`}
             >
               Limpieza
@@ -248,11 +376,13 @@ export default function HabitacionesPage() {
             {filteredRooms.length} habitaciones mostradas
           </p>
         </div>
-        
+
         {filteredRooms.length === 0 ? (
           <div className="p-8 text-center">
             <div className="text-6xl mb-4">🏨</div>
-            <p className="text-gray-400 text-lg">No hay habitaciones que coincidan con los filtros</p>
+            <p className="text-gray-400 text-lg">
+              No hay habitaciones que coincidan con los filtros
+            </p>
           </div>
         ) : (
           <div className="p-6">
@@ -261,17 +391,19 @@ export default function HabitacionesPage() {
                 <div
                   key={room._id}
                   className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer hover:scale-105 ${
-                    room.status === 'occupied' 
-                      ? 'border-red-500 bg-red-500/10' 
+                    room.status === 'occupied'
+                      ? 'border-red-500 bg-red-500/10'
                       : room.status === 'cleaning'
-                      ? 'border-orange-500 bg-orange-500/10'
-                      : room.status === 'maintenance'
-                      ? 'border-gray-500 bg-gray-500/10'
-                      : 'border-green-500 bg-green-500/10'
+                        ? 'border-orange-500 bg-orange-500/10'
+                        : room.status === 'maintenance'
+                          ? 'border-gray-500 bg-gray-500/10'
+                          : 'border-green-500 bg-green-500/10'
                   }`}
                 >
                   {/* Status Badge */}
-                  <div className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${getStatusColor(room.status)} flex items-center justify-center text-xs`}>
+                  <div
+                    className={`absolute -top-2 -right-2 w-6 h-6 rounded-full ${getStatusColor(room.status)} flex items-center justify-center text-xs`}
+                  >
                     {getStatusIcon(room.status)}
                   </div>
 
@@ -279,7 +411,7 @@ export default function HabitacionesPage() {
                   <div className="text-center">
                     <h3 className="text-lg font-bold text-white mb-1">{room.number}</h3>
                     <p className="text-xs text-gray-400 mb-2">{room.type}</p>
-                    
+
                     <div className="space-y-1 text-xs">
                       <p className="text-gray-300">€{room.price}/noche</p>
                       <p className="text-gray-300">{room.capacity} personas</p>
@@ -296,7 +428,9 @@ export default function HabitacionesPage() {
                       </div>
                     )}
 
-                    <div className={`mt-2 px-2 py-1 rounded text-xs font-medium ${getStatusColor(room.status)} text-white`}>
+                    <div
+                      className={`mt-2 px-2 py-1 rounded text-xs font-medium ${getStatusColor(room.status)} text-white`}
+                    >
                       {getStatusText(room.status)}
                     </div>
                   </div>
@@ -308,4 +442,4 @@ export default function HabitacionesPage() {
       </div>
     </div>
   );
-} 
+}

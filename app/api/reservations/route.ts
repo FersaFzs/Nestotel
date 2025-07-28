@@ -18,15 +18,15 @@ export async function GET(request: Request) {
 
     // Construir filtros
     let filter: any = {};
-    
+
     if (userId) {
       filter.userId = userId;
     }
-    
+
     if (status && status !== 'all') {
       filter.status = status;
     }
-    
+
     if (search) {
       filter.$or = [
         { 'guestInfo.firstName': { $regex: search, $options: 'i' } },

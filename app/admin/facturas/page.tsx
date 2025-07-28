@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../../lib/contexts/AuthContext';
 import { useAdminGuard } from '../../../lib/hooks/useAdminGuard';
 
@@ -62,7 +62,7 @@ export default function FacturasPage() {
     sent: 0,
     error: 0,
     totalAmount: 0,
-    monthlyAmount: 0
+    monthlyAmount: 0,
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'sent' | 'error'>('all');
@@ -73,26 +73,20 @@ export default function FacturasPage() {
   const [eInvoiceProviders, setEInvoiceProviders] = useState<EInvoiceProvider[]>([
     { id: 'verifacti', name: 'Verifacti', status: 'active' },
     { id: 'facturae', name: 'Facturae', status: 'active' },
-    { id: 'aeat', name: 'AEAT', status: 'active' }
+    { id: 'aeat', name: 'AEAT', status: 'active' },
   ]);
 
   // Proteger rutas de admin
-  const { user: adminUser, loading: guardLoading, hasAccess } = useAdminGuard({ 
+  const {
+    user: adminUser,
+    loading: guardLoading,
+    hasAccess,
+  } = useAdminGuard({
     requiredRole: 'admin',
-    redirectTo: '/login'
+    redirectTo: '/login',
   });
 
-  useEffect(() => {
-    if (hasAccess) {
-      fetchInvoices();
-    }
-  }, [hasAccess]);
-
-  useEffect(() => {
-    filterInvoices();
-  }, [invoices, searchTerm, statusFilter, dateFilter]);
-
-  const fetchInvoices = async () => {
+  const fetchInvoices = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch('/api/facturas');
@@ -108,7 +102,7 @@ export default function FacturasPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const calculateStats = (invoiceList: Invoice[]) => {
     const now = new Date();
@@ -117,45 +111,46 @@ export default function FacturasPage() {
 
     const stats = {
       total: invoiceList.length,
-      pending: invoiceList.filter(i => i.aeatStatus === 'pending').length,
-      sent: invoiceList.filter(i => i.aeatStatus === 'sent').length,
-      error: invoiceList.filter(i => i.aeatStatus === 'error').length,
+      pending: invoiceList.filter((i) => i.aeatStatus === 'pending').length,
+      sent: invoiceList.filter((i) => i.aeatStatus === 'sent').length,
+      error: invoiceList.filter((i) => i.aeatStatus === 'error').length,
       totalAmount: invoiceList.reduce((sum, inv) => sum + inv.grandTotal, 0),
       monthlyAmount: invoiceList
-        .filter(inv => {
+        .filter((inv) => {
           const invDate = new Date(inv.date);
           return invDate.getMonth() === currentMonth && invDate.getFullYear() === currentYear;
         })
-        .reduce((sum, inv) => sum + inv.grandTotal, 0)
+        .reduce((sum, inv) => sum + inv.grandTotal, 0),
     };
     setStats(stats);
   };
 
-  const filterInvoices = () => {
+  const filterInvoices = useCallback(() => {
     let filtered = invoices;
 
     // Filtrar por búsqueda
     if (searchTerm) {
-      filtered = filtered.filter(invoice =>
-        invoice.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        invoice.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        invoice.clientNIF.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (invoice) =>
+          invoice.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          invoice.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          invoice.clientNIF.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
     // Filtrar por estado
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(invoice => invoice.aeatStatus === statusFilter);
+      filtered = filtered.filter((invoice) => invoice.aeatStatus === statusFilter);
     }
 
     // Filtrar por fecha
     if (dateFilter !== 'all') {
       const now = new Date();
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      
-      filtered = filtered.filter(invoice => {
+
+      filtered = filtered.filter((invoice) => {
         const invoiceDate = new Date(invoice.date);
-        
+
         switch (dateFilter) {
           case 'today':
             return invoiceDate >= today;
@@ -172,7 +167,17 @@ export default function FacturasPage() {
     }
 
     setFilteredInvoices(filtered);
-  };
+  }, [invoices, searchTerm, statusFilter, dateFilter]);
+
+  useEffect(() => {
+    if (hasAccess) {
+      fetchInvoices();
+    }
+  }, [hasAccess, fetchInvoices]);
+
+  useEffect(() => {
+    filterInvoices();
+  }, [filterInvoices]);
 
   const handleViewInvoice = (invoice: Invoice) => {
     setSelectedInvoice(invoice);
@@ -188,8 +193,8 @@ export default function FacturasPage() {
 
       if (response.ok) {
         // Actualizar la lista local
-        const updatedInvoices = invoices.map(inv =>
-          inv._id === invoiceId ? { ...inv, aeatStatus: 'sent' } : inv
+        const updatedInvoices = invoices.map((inv) =>
+          inv._id === invoiceId ? { ...inv, aeatStatus: 'sent' as const } : inv,
         );
         setInvoices(updatedInvoices);
       } else {
@@ -333,16 +338,21 @@ export default function FacturasPage() {
         <h3 className="text-lg font-bold text-gold mb-4">Estado de Proveedores E-Facturación</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {eInvoiceProviders.map((provider) => (
-            <div key={provider.id} className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
+            <div
+              key={provider.id}
+              className="flex items-center justify-between p-4 bg-white/5 rounded-lg"
+            >
               <div>
                 <div className="font-medium text-white">{provider.name}</div>
                 <div className="text-sm text-gray-400">
                   {provider.status === 'active' ? 'Conectado' : 'Desconectado'}
                 </div>
               </div>
-              <div className={`w-3 h-3 rounded-full ${
-                provider.status === 'active' ? 'bg-green-400' : 'bg-red-400'
-              }`} />
+              <div
+                className={`w-3 h-3 rounded-full ${
+                  provider.status === 'active' ? 'bg-green-400' : 'bg-red-400'
+                }`}
+              />
             </div>
           ))}
         </div>
@@ -454,13 +464,17 @@ export default function FacturasPage() {
                       {formatDate(invoice.date)}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-white font-medium">{formatPrice(invoice.grandTotal)}</div>
+                      <div className="text-white font-medium">
+                        {formatPrice(invoice.grandTotal)}
+                      </div>
                       <div className="text-gray-400 text-sm">
                         IVA: {formatPrice(invoice.vatTotal)}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(invoice.aeatStatus)}`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(invoice.aeatStatus)}`}
+                      >
                         {getStatusText(invoice.aeatStatus)}
                       </span>
                     </td>
@@ -511,7 +525,12 @@ export default function FacturasPage() {
                 className="text-white hover:text-gold"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -544,15 +563,21 @@ export default function FacturasPage() {
                   <div className="space-y-2">
                     <div>
                       <span className="text-gray-400">Check-in:</span>
-                      <span className="text-white ml-2">{formatDate(selectedInvoice.reservation.checkIn)}</span>
+                      <span className="text-white ml-2">
+                        {formatDate(selectedInvoice.reservation.checkIn)}
+                      </span>
                     </div>
                     <div>
                       <span className="text-gray-400">Check-out:</span>
-                      <span className="text-white ml-2">{formatDate(selectedInvoice.reservation.checkOut)}</span>
+                      <span className="text-white ml-2">
+                        {formatDate(selectedInvoice.reservation.checkOut)}
+                      </span>
                     </div>
                     <div>
                       <span className="text-gray-400">Precio reserva:</span>
-                      <span className="text-white ml-2">{formatPrice(selectedInvoice.reservation.totalPrice)}</span>
+                      <span className="text-white ml-2">
+                        {formatPrice(selectedInvoice.reservation.totalPrice)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -569,7 +594,9 @@ export default function FacturasPage() {
                     </div>
                     <div>
                       <span className="text-gray-400">Estado AEAT:</span>
-                      <span className={`ml-2 px-2 py-1 rounded text-xs font-medium ${getStatusColor(selectedInvoice.aeatStatus)}`}>
+                      <span
+                        className={`ml-2 px-2 py-1 rounded text-xs font-medium ${getStatusColor(selectedInvoice.aeatStatus)}`}
+                      >
                         {getStatusText(selectedInvoice.aeatStatus)}
                       </span>
                     </div>
@@ -582,7 +609,9 @@ export default function FacturasPage() {
                     {selectedInvoice.items.map((item, index) => (
                       <div key={index} className="flex justify-between">
                         <span className="text-gray-400">{item.description}</span>
-                        <span className="text-white">{formatPrice(item.quantity * item.unitPrice)}</span>
+                        <span className="text-white">
+                          {formatPrice(item.quantity * item.unitPrice)}
+                        </span>
                       </div>
                     ))}
                     <div className="border-t border-white/20 pt-2 mt-2">
@@ -647,4 +676,4 @@ export default function FacturasPage() {
       )}
     </div>
   );
-} 
+}

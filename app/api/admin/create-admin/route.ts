@@ -28,13 +28,16 @@ export async function POST(request: NextRequest) {
     // Verificar que el usuario actual es super_admin
     const currentUser = await User.findOne({ firebaseUid: currentUserUid });
     if (!currentUser || currentUser.role !== 'super_admin') {
-      return NextResponse.json({ message: 'Solo los super administradores pueden crear administradores' }, { status: 403 });
+      return NextResponse.json(
+        { message: 'Solo los super administradores pueden crear administradores' },
+        { status: 403 },
+      );
     }
 
     // Obtener datos del nuevo administrador
     const data = await request.json();
     const parse = userSchema.safeParse(data);
-    
+
     if (!parse.success) {
       return NextResponse.json({ error: parse.error.flatten() }, { status: 400 });
     }
@@ -42,8 +45,8 @@ export async function POST(request: NextRequest) {
     const { firebaseUid, email, firstName, lastName, role, permissions } = parse.data;
 
     // Verificar que el usuario no existe ya
-    const existingUser = await User.findOne({ 
-      $or: [{ firebaseUid }, { email }] 
+    const existingUser = await User.findOne({
+      $or: [{ firebaseUid }, { email }],
     });
 
     if (existingUser) {
@@ -63,25 +66,24 @@ export async function POST(request: NextRequest) {
 
     await newUser.save();
 
-    return NextResponse.json({
-      message: 'Administrador creado exitosamente',
-      user: {
-        _id: newUser._id,
-        firebaseUid: newUser.firebaseUid,
-        email: newUser.email,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        role: newUser.role,
-        permissions: newUser.permissions,
-        isActive: newUser.isActive,
-      }
-    }, { status: 201 });
-
+    return NextResponse.json(
+      {
+        message: 'Administrador creado exitosamente',
+        user: {
+          _id: newUser._id,
+          firebaseUid: newUser.firebaseUid,
+          email: newUser.email,
+          firstName: newUser.firstName,
+          lastName: newUser.lastName,
+          role: newUser.role,
+          permissions: newUser.permissions,
+          isActive: newUser.isActive,
+        },
+      },
+      { status: 201 },
+    );
   } catch (error) {
     console.error('Error creating admin user:', error);
-    return NextResponse.json(
-      { message: 'Error al crear el administrador' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Error al crear el administrador' }, { status: 500 });
   }
-} 
+}

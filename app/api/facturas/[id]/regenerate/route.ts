@@ -2,18 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '../../../../../lib/db/mongoose';
 import Invoice from '../../../../../lib/db/models/Invoice';
 
-export async function POST(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
-    
+
     const invoice = await Invoice.findById(params.id);
     if (!invoice) {
       return NextResponse.json(
         { success: false, message: 'Factura no encontrada' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -29,14 +26,13 @@ export async function POST(
     return NextResponse.json({
       success: true,
       message: 'Factura regenerada correctamente',
-      status: 'pending'
+      status: 'pending',
     });
-
   } catch (error) {
     console.error('Error regenerating invoice:', error);
     return NextResponse.json(
       { success: false, message: 'Error al regenerar factura' },
-      { status: 500 }
+      { status: 500 },
     );
   }
-} 
+}

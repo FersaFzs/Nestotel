@@ -11,14 +11,11 @@ export async function GET(request: NextRequest) {
         email: 'admin@example.com',
         role: 'admin',
         firstName: 'Admin',
-        lastName: 'Temporal'
-      }
+        lastName: 'Temporal',
+      },
     });
   } catch (error) {
     console.error('Error fetching user data:', error);
-    return NextResponse.json(
-      { message: 'Error al obtener datos del usuario' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Error al obtener datos del usuario' }, { status: 500 });
   }
-} 
+}

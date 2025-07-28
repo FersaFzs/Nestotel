@@ -33,7 +33,7 @@ export default function UsuariosPage() {
     admins: 0,
     users: 0,
     active: 0,
-    inactive: 0
+    inactive: 0,
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState<'all' | 'admin' | 'user'>('all');
@@ -44,9 +44,13 @@ export default function UsuariosPage() {
   const [actionLoading, setActionLoading] = useState(false);
 
   // Proteger rutas de admin
-  const { user: adminUser, loading: guardLoading, hasAccess } = useAdminGuard({ 
+  const {
+    user: adminUser,
+    loading: guardLoading,
+    hasAccess,
+  } = useAdminGuard({
     requiredRole: 'admin',
-    redirectTo: '/login'
+    redirectTo: '/login',
   });
 
   useEffect(() => {
@@ -80,10 +84,10 @@ export default function UsuariosPage() {
   const calculateStats = (userList: User[]) => {
     const stats = {
       total: userList.length,
-      admins: userList.filter(u => u.role === 'admin').length,
-      users: userList.filter(u => u.role === 'user').length,
-      active: userList.filter(u => u.isActive).length,
-      inactive: userList.filter(u => !u.isActive).length
+      admins: userList.filter((u) => u.role === 'admin').length,
+      users: userList.filter((u) => u.role === 'user').length,
+      active: userList.filter((u) => u.isActive).length,
+      inactive: userList.filter((u) => !u.isActive).length,
     };
     setStats(stats);
   };
@@ -93,22 +97,23 @@ export default function UsuariosPage() {
 
     // Filtrar por búsqueda
     if (searchTerm) {
-      filtered = filtered.filter(user =>
-        user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (user) =>
+          user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
     // Filtrar por rol
     if (roleFilter !== 'all') {
-      filtered = filtered.filter(user => user.role === roleFilter);
+      filtered = filtered.filter((user) => user.role === roleFilter);
     }
 
     // Filtrar por estado
     if (statusFilter !== 'all') {
-      filtered = filtered.filter(user => 
-        statusFilter === 'active' ? user.isActive : !user.isActive
+      filtered = filtered.filter((user) =>
+        statusFilter === 'active' ? user.isActive : !user.isActive,
       );
     }
 
@@ -131,7 +136,7 @@ export default function UsuariosPage() {
       });
 
       if (response.ok) {
-        setUsers(users.map(u => u._id === updatedUser._id ? updatedUser : u));
+        setUsers(users.map((u) => (u._id === updatedUser._id ? updatedUser : u)));
         setEditingUser(null);
       } else {
         console.error('Error updating user');
@@ -158,7 +163,7 @@ export default function UsuariosPage() {
       });
 
       if (response.ok) {
-        setUsers(users.filter(u => u._id !== userToDelete._id));
+        setUsers(users.filter((u) => u._id !== userToDelete._id));
         setShowDeleteModal(false);
         setUserToDelete(null);
       } else {
@@ -177,7 +182,7 @@ export default function UsuariosPage() {
       month: 'short',
       day: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -332,30 +337,30 @@ export default function UsuariosPage() {
                           <div className="text-white font-medium">
                             {user.firstName} {user.lastName}
                           </div>
-                          {user.phone && (
-                            <div className="text-gray-400 text-sm">{user.phone}</div>
-                          )}
+                          {user.phone && <div className="text-gray-400 text-sm">{user.phone}</div>}
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-gray-300">
-                      {user.email}
-                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-300">{user.email}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        user.role === 'admin' 
-                          ? 'bg-blue-500/20 text-blue-400' 
-                          : 'bg-green-500/20 text-green-400'
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          user.role === 'admin'
+                            ? 'bg-blue-500/20 text-blue-400'
+                            : 'bg-green-500/20 text-green-400'
+                        }`}
+                      >
                         {user.role === 'admin' ? 'Administrador' : 'Usuario'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        user.isActive 
-                          ? 'bg-emerald-500/20 text-emerald-400' 
-                          : 'bg-red-500/20 text-red-400'
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          user.isActive
+                            ? 'bg-emerald-500/20 text-emerald-400'
+                            : 'bg-red-500/20 text-red-400'
+                        }`}
+                      >
                         {user.isActive ? 'Activo' : 'Inactivo'}
                       </span>
                     </td>
@@ -391,17 +396,19 @@ export default function UsuariosPage() {
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50">
           <div className="bg-gray-900 rounded-xl p-6 w-full max-w-md mx-4 border border-white/10">
             <h3 className="text-xl font-bold text-gold mb-4">Editar Usuario</h3>
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              handleSaveUser(editingUser);
-            }}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSaveUser(editingUser);
+              }}
+            >
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
                   <input
                     type="text"
                     value={editingUser.firstName}
-                    onChange={(e) => setEditingUser({...editingUser, firstName: e.target.value})}
+                    onChange={(e) => setEditingUser({ ...editingUser, firstName: e.target.value })}
                     className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-gold"
                   />
                 </div>
@@ -410,7 +417,7 @@ export default function UsuariosPage() {
                   <input
                     type="text"
                     value={editingUser.lastName}
-                    onChange={(e) => setEditingUser({...editingUser, lastName: e.target.value})}
+                    onChange={(e) => setEditingUser({ ...editingUser, lastName: e.target.value })}
                     className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-gold"
                   />
                 </div>
@@ -419,7 +426,7 @@ export default function UsuariosPage() {
                   <input
                     type="email"
                     value={editingUser.email}
-                    onChange={(e) => setEditingUser({...editingUser, email: e.target.value})}
+                    onChange={(e) => setEditingUser({ ...editingUser, email: e.target.value })}
                     className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-gold"
                   />
                 </div>
@@ -428,7 +435,7 @@ export default function UsuariosPage() {
                   <input
                     type="tel"
                     value={editingUser.phone || ''}
-                    onChange={(e) => setEditingUser({...editingUser, phone: e.target.value})}
+                    onChange={(e) => setEditingUser({ ...editingUser, phone: e.target.value })}
                     className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-gold"
                   />
                 </div>
@@ -436,7 +443,9 @@ export default function UsuariosPage() {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Rol</label>
                   <select
                     value={editingUser.role}
-                    onChange={(e) => setEditingUser({...editingUser, role: e.target.value as 'admin' | 'user'})}
+                    onChange={(e) =>
+                      setEditingUser({ ...editingUser, role: e.target.value as 'admin' | 'user' })
+                    }
                     className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-gold"
                   >
                     <option value="user">Usuario</option>
@@ -448,7 +457,9 @@ export default function UsuariosPage() {
                     <input
                       type="checkbox"
                       checked={editingUser.isActive}
-                      onChange={(e) => setEditingUser({...editingUser, isActive: e.target.checked})}
+                      onChange={(e) =>
+                        setEditingUser({ ...editingUser, isActive: e.target.checked })
+                      }
                       className="mr-2"
                     />
                     <span className="text-sm text-gray-300">Usuario activo</span>
@@ -485,8 +496,8 @@ export default function UsuariosPage() {
               ¿Estás seguro de que quieres eliminar al usuario{' '}
               <span className="text-gold font-medium">
                 {userToDelete.firstName} {userToDelete.lastName}
-              </span>?
-              Esta acción no se puede deshacer.
+              </span>
+              ? Esta acción no se puede deshacer.
             </p>
             <div className="flex gap-3">
               <button
@@ -511,4 +522,4 @@ export default function UsuariosPage() {
       )}
     </div>
   );
-} 
+}

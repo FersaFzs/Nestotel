@@ -199,10 +199,7 @@ export default function ReservationDetail() {
     return (
       <div className="text-center py-12">
         <div className="text-red-400 text-xl mb-4">Reserva no encontrada</div>
-        <Link
-          href="/admin/reservas"
-          className="text-gold hover:text-yellow-400"
-        >
+        <Link href="/admin/reservas" className="text-gold hover:text-yellow-400">
           Volver a la lista
         </Link>
       </div>
@@ -215,17 +212,12 @@ export default function ReservationDetail() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-4">
-            <Link
-              href="/admin/reservas"
-              className="text-gold hover:text-yellow-400"
-            >
+            <Link href="/admin/reservas" className="text-gold hover:text-yellow-400">
               ← Volver
             </Link>
             <h1 className="text-3xl font-bold text-white">Detalle de Reserva</h1>
           </div>
-          <p className="text-gray-400 mt-2">
-            Reserva #{reservation._id.slice(-8).toUpperCase()}
-          </p>
+          <p className="text-gray-400 mt-2">Reserva #{reservation._id.slice(-8).toUpperCase()}</p>
         </div>
         <div className="flex gap-4">
           <button
@@ -265,7 +257,8 @@ export default function ReservationDetail() {
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-300 mb-1">Dirección</label>
                 <p className="text-white">
-                  {reservation.guestInfo.address}, {reservation.guestInfo.city} {reservation.guestInfo.postalCode}, {reservation.guestInfo.country}
+                  {reservation.guestInfo.address}, {reservation.guestInfo.city}{' '}
+                  {reservation.guestInfo.postalCode}, {reservation.guestInfo.country}
                 </p>
               </div>
             </div>
@@ -293,7 +286,9 @@ export default function ReservationDetail() {
                 <p className="text-white">{formatDate(reservation.checkOut)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Precio por noche</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Precio por noche
+                </label>
                 <p className="text-white">{formatPrice(reservation.room.price)}</p>
               </div>
               <div>
@@ -308,33 +303,47 @@ export default function ReservationDetail() {
             <h2 className="text-xl font-bold text-white mb-4">Información Adicional</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Método de pago</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Método de pago
+                </label>
                 <p className="text-white">{getPaymentMethodText(reservation.paymentMethod)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Estado de pago</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Estado de pago
+                </label>
                 <p className="text-white capitalize">{reservation.paymentStatus}</p>
               </div>
               {reservation.estimatedArrivalTime && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Hora de llegada</label>
-                  <p className="text-white">{getArrivalTimeText(reservation.estimatedArrivalTime)}</p>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                    Hora de llegada
+                  </label>
+                  <p className="text-white">
+                    {getArrivalTimeText(reservation.estimatedArrivalTime)}
+                  </p>
                 </div>
               )}
               {reservation.flightNumber && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Número de vuelo</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                    Número de vuelo
+                  </label>
                   <p className="text-white">{reservation.flightNumber}</p>
                 </div>
               )}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Alquiler de coche</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Alquiler de coche
+                </label>
                 <p className="text-white">{reservation.carRental ? 'Sí' : 'No'}</p>
               </div>
             </div>
             {reservation.specialRequests && (
               <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Solicitudes especiales</label>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Solicitudes especiales
+                </label>
                 <p className="text-white">{reservation.specialRequests}</p>
               </div>
             )}
@@ -346,7 +355,7 @@ export default function ReservationDetail() {
           {/* Status and Actions */}
           <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
             <h3 className="text-lg font-bold text-white mb-4">Estado y Acciones</h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Estado</label>
@@ -364,7 +373,9 @@ export default function ReservationDetail() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Estado de pago</label>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Estado de pago
+                </label>
                 <select
                   value={reservation.paymentStatus}
                   onChange={(e) => updateReservation('paymentStatus', e.target.value)}
@@ -424,4 +435,4 @@ export default function ReservationDetail() {
       </div>
     </div>
   );
-} 
+}

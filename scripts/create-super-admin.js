@@ -15,13 +15,13 @@ async function createSuperAdmin() {
       'SUPER_ADMIN_EMAIL',
       'FIREBASE_ADMIN_PROJECT_ID',
       'FIREBASE_ADMIN_PRIVATE_KEY',
-      'FIREBASE_ADMIN_CLIENT_EMAIL'
+      'FIREBASE_ADMIN_CLIENT_EMAIL',
     ];
 
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+    const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
     if (missingVars.length > 0) {
       console.error('❌ Variables de entorno faltantes:');
-      missingVars.forEach(varName => console.error(`   - ${varName}`));
+      missingVars.forEach((varName) => console.error(`   - ${varName}`));
       console.log('\n📋 Asegúrate de configurar todas las variables en .env.local');
       process.exit(1);
     }
@@ -52,20 +52,23 @@ async function createSuperAdmin() {
     console.log('✅ Conectado a MongoDB');
 
     // Definir el modelo de usuario
-    const UserSchema = new mongoose.Schema({
-      firebaseUid: { type: String, required: true, unique: true },
-      email: { type: String, required: true, unique: true },
-      firstName: { type: String },
-      lastName: { type: String },
-      role: {
-        type: String,
-        enum: ['user', 'admin', 'super_admin'],
-        default: 'user',
+    const UserSchema = new mongoose.Schema(
+      {
+        firebaseUid: { type: String, required: true, unique: true },
+        email: { type: String, required: true, unique: true },
+        firstName: { type: String },
+        lastName: { type: String },
+        role: {
+          type: String,
+          enum: ['user', 'admin', 'super_admin'],
+          default: 'user',
+        },
+        permissions: [{ type: String }],
+        isActive: { type: Boolean, default: true },
+        lastLogin: { type: Date },
       },
-      permissions: [{ type: String }],
-      isActive: { type: Boolean, default: true },
-      lastLogin: { type: Date },
-    }, { timestamps: true });
+      { timestamps: true },
+    );
 
     const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
@@ -83,7 +86,7 @@ async function createSuperAdmin() {
         'manage_admins',
         'view_reports',
         'manage_finances',
-        'system_settings'
+        'system_settings',
       ],
       isActive: true,
     };
@@ -108,8 +111,8 @@ async function createSuperAdmin() {
     }
 
     // Verificar si el super admin ya existe
-    const existingUser = await User.findOne({ 
-      $or: [{ firebaseUid: superAdminData.firebaseUid }, { email: superAdminData.email }] 
+    const existingUser = await User.findOne({
+      $or: [{ firebaseUid: superAdminData.firebaseUid }, { email: superAdminData.email }],
     });
 
     if (existingUser) {
@@ -146,7 +149,6 @@ async function createSuperAdmin() {
     console.log('4. 🔑 Inicia sesión con:', superAdminData.email);
     console.log('5. 🏢 Ve a http://localhost:3000/admin');
     console.log('6. ✅ El sistema verificará automáticamente tus permisos');
-
   } catch (error) {
     console.error('❌ Error creando super administrador:', error.message);
     if (error.code === 'auth/user-not-found') {
@@ -174,4 +176,4 @@ createSuperAdmin()
   .catch((error) => {
     console.error('\n❌ Error en el script:', error.message);
     process.exit(1);
-  }); 
+  });

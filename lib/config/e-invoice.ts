@@ -23,9 +23,9 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
       'Envío directo a AEAT',
       'Generación de PDF con QR',
       'Validación de NIF/CIF',
-      'Cumplimiento normativa española'
+      'Cumplimiento normativa española',
     ],
-    documentation: 'https://docs.verifacti.com'
+    documentation: 'https://docs.verifacti.com',
   },
   {
     id: 'facturae',
@@ -38,9 +38,9 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
       'Firma electrónica XAdES',
       'Envío a AEAT',
       'Generación de QR',
-      'Validación automática'
+      'Validación automática',
     ],
-    documentation: 'https://www.facturae.es'
+    documentation: 'https://www.facturae.es',
   },
   {
     id: 'aeat',
@@ -52,10 +52,10 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
       'Envío directo a AEAT',
       'Respuesta inmediata',
       'Códigos de error detallados',
-      'Trazabilidad completa'
+      'Trazabilidad completa',
     ],
-    documentation: 'https://www.agenciatributaria.es'
-  }
+    documentation: 'https://www.agenciatributaria.es',
+  },
 ];
 
 export interface InvoiceData {
@@ -99,17 +99,17 @@ export const COMPANY_CONFIG = {
     city: 'Granada',
     province: 'Granada',
     postalCode: '18015',
-    country: 'ESP'
+    country: 'ESP',
   },
   contact: {
     phone: '958 123 456',
-    email: 'info@granadainn.com'
+    email: 'info@granadainn.com',
   },
   taxInfo: {
     ivaType: 'reduced', // IVA reducido para hoteles (10%)
     ivaRate: 10,
-    taxOffice: '1801' // Delegación de Granada
-  }
+    taxOffice: '1801', // Delegación de Granada
+  },
 };
 
 // Tipos de IVA según normativa española
@@ -117,7 +117,7 @@ export const VAT_RATES = {
   general: 21, // IVA general
   reduced: 10, // IVA reducido (hoteles, restaurantes)
   super_reduced: 4, // IVA súper reducido
-  zero: 0 // IVA cero
+  zero: 0, // IVA cero
 };
 
 // Códigos de error comunes de la AEAT
@@ -129,5 +129,5 @@ export const AEAT_ERROR_CODES = {
   '005': 'IVA incorrecto',
   '006': 'Error en la firma electrónica',
   '007': 'Servicio temporalmente no disponible',
-  '999': 'Error interno del sistema'
-}; 
+  '999': 'Error interno del sistema',
+};

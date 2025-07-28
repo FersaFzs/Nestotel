@@ -3,10 +3,7 @@ import dbConnect from '../../../../lib/db/mongoose';
 import Reservation from '../../../../lib/db/models/Reservation';
 
 // Obtener reserva por ID (GET)
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
@@ -33,15 +30,12 @@ export async function GET(
 }
 
 // Actualizar reserva (PATCH)
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
     const data = await request.json();
-    
+
     // Validar que la reserva existe
     const existingReservation = await Reservation.findById(params.id);
     if (!existingReservation) {
@@ -51,18 +45,17 @@ export async function PATCH(
     // Actualizar solo los campos permitidos
     const allowedFields = ['status', 'paymentStatus', 'adminNotes'];
     const updateData: any = {};
-    
+
     for (const field of allowedFields) {
       if (data[field] !== undefined) {
         updateData[field] = data[field];
       }
     }
 
-    const updatedReservation = await Reservation.findByIdAndUpdate(
-      params.id,
-      updateData,
-      { new: true, runValidators: true }
-    ).populate('roomId', 'name type price');
+    const updatedReservation = await Reservation.findByIdAndUpdate(params.id, updateData, {
+      new: true,
+      runValidators: true,
+    }).populate('roomId', 'name type price');
 
     if (!updatedReservation) {
       return NextResponse.json({ message: 'Error al actualizar la reserva' }, { status: 500 });
@@ -83,15 +76,12 @@ export async function PATCH(
 }
 
 // Eliminar reserva (DELETE)
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
     const reservation = await Reservation.findByIdAndDelete(params.id);
-    
+
     if (!reservation) {
       return NextResponse.json({ message: 'Reserva no encontrada' }, { status: 404 });
     }
@@ -101,4 +91,4 @@ export async function DELETE(
     console.error('Error deleting reservation:', error);
     return NextResponse.json({ message: 'Error al eliminar la reserva' }, { status: 500 });
   }
-} 
+}

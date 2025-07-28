@@ -28,4 +28,4 @@ export function initAdmin() {
   adminInitialized = true;
 }
 
-export { getAuth }; 
+export { getAuth };

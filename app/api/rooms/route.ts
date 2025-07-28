@@ -4,21 +4,20 @@ import Room from '../../../lib/db/models/Room';
 
 export async function GET(request: NextRequest) {
   try {
-    console.log('Attempting to connect to database...');
     await dbConnect();
-    console.log('Connected to database successfully');
-
-    console.log('Fetching rooms...');
     const rooms = await Room.find({ isActive: { $ne: false } }).sort({ price: 1 });
-    console.log('Found rooms:', rooms.length);
 
     return NextResponse.json(rooms);
   } catch (error) {
-    console.error('Error fetching rooms:', error);
+    // Log error for debugging in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching rooms:', error);
+    }
+    
     return NextResponse.json(
       {
         message: 'Error al obtener las habitaciones',
-        error: error instanceof Error ? error.message : 'Error desconocido',
+        error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Error desconocido' : 'Internal server error',
       },
       { status: 500 },
     );
@@ -35,7 +34,17 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(room, { status: 201 });
   } catch (error) {
-    console.error('Error creating room:', error);
-    return NextResponse.json({ message: 'Error al crear la habitación' }, { status: 500 });
+    // Log error for debugging in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error creating room:', error);
+    }
+    
+    return NextResponse.json(
+      { 
+        message: 'Error al crear la habitación',
+        error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Error desconocido' : 'Internal server error'
+      }, 
+      { status: 500 }
+    );
   }
 }

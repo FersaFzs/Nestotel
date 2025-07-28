@@ -6,26 +6,23 @@ import { userSchema } from '../../../lib/validators/user';
 export async function GET(request: NextRequest) {
   try {
     await dbConnect();
-    
-    const users = await User.find({})
-      .select('-password')
-      .sort({ createdAt: -1 })
-      .lean();
 
-    return NextResponse.json({ 
-      success: true, 
-      users: users.map(user => ({
+    const users = await User.find({}).select('-password').sort({ createdAt: -1 }).lean();
+
+    return NextResponse.json({
+      success: true,
+      users: users.map((user) => ({
         ...user,
         _id: user._id.toString(),
         createdAt: user.createdAt.toISOString(),
-        lastLogin: user.lastLogin ? user.lastLogin.toISOString() : null
-      }))
+        lastLogin: user.lastLogin ? user.lastLogin.toISOString() : null,
+      })),
     });
   } catch (error) {
     console.error('Error fetching users:', error);
     return NextResponse.json(
       { success: false, message: 'Error al obtener usuarios' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

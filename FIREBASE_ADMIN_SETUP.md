@@ -60,6 +60,7 @@ La `private_key` es la más complicada porque contiene saltos de línea. Debes:
 3. **Encerrar entre comillas dobles** en el `.env.local`
 
 Ejemplo correcto:
+
 ```bash
 FIREBASE_ADMIN_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...\n-----END PRIVATE KEY-----\n"
 ```
@@ -139,4 +140,4 @@ MONGODB_URI=mongodb://localhost:27017/hotel-next
 
 ---
 
-**💡 Consejo**: Una vez configurado, puedes eliminar el archivo JSON descargado por seguridad, ya que toda la información estará en las variables de entorno. 
+**💡 Consejo**: Una vez configurado, puedes eliminar el archivo JSON descargado por seguridad, ya que toda la información estará en las variables de entorno.

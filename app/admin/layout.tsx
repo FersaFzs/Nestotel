@@ -14,11 +14,15 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const { user, logout } = useAuth();
-  
+
   // Proteger rutas de admin con verificación de roles
-  const { user: adminUser, loading, hasAccess } = useAdminGuard({ 
+  const {
+    user: adminUser,
+    loading,
+    hasAccess,
+  } = useAdminGuard({
     requiredRole: 'admin',
-    redirectTo: '/login'
+    redirectTo: '/login',
   });
 
   if (loading) {
@@ -34,11 +38,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
         <div className="text-center">
           <div className="text-red-400 text-xl mb-4">Acceso denegado</div>
-          <p className="text-gray-400 mb-4">No tienes permisos para acceder al panel de administración</p>
-          <Link
-            href="/"
-            className="text-gold hover:text-yellow-400"
-          >
+          <p className="text-gray-400 mb-4">
+            No tienes permisos para acceder al panel de administración
+          </p>
+          <Link href="/" className="text-gold hover:text-yellow-400">
             Volver al inicio
           </Link>
         </div>
@@ -48,9 +51,24 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const navigation = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: '📊', description: 'Vista general' },
-    { name: 'Reservas Activas', href: '/admin/reservas-activas', icon: '🛏️', description: 'Huéspedes actuales' },
-    { name: 'Todas las Reservas', href: '/admin/reservas', icon: '📅', description: 'Gestión completa' },
-    { name: 'Habitaciones', href: '/admin/habitaciones', icon: '🏨', description: 'Estado en tiempo real' },
+    {
+      name: 'Reservas Activas',
+      href: '/admin/reservas-activas',
+      icon: '🛏️',
+      description: 'Huéspedes actuales',
+    },
+    {
+      name: 'Todas las Reservas',
+      href: '/admin/reservas',
+      icon: '📅',
+      description: 'Gestión completa',
+    },
+    {
+      name: 'Habitaciones',
+      href: '/admin/habitaciones',
+      icon: '🏨',
+      description: 'Estado en tiempo real',
+    },
     { name: 'Usuarios', href: '/admin/usuarios', icon: '👥', description: 'Gestión de usuarios' },
     { name: 'Facturas', href: '/admin/facturas', icon: '💰', description: 'Gestión financiera' },
   ];
@@ -71,7 +89,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           <div className="p-6 border-b border-white/10">
             <h1 className="text-xl font-bold text-gold">Panel Admin</h1>
           </div>
-          
+
           <nav className="flex-1 p-6 space-y-2">
             {navigation.map((item) => (
               <Link
@@ -86,14 +104,16 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <span className="text-xl mt-1">{item.icon}</span>
                 <div className="flex-1">
                   <div className="font-medium">{item.name}</div>
-                  <div className={`text-xs ${pathname === item.href ? 'text-black/70' : 'text-gray-400'}`}>
+                  <div
+                    className={`text-xs ${pathname === item.href ? 'text-black/70' : 'text-gray-400'}`}
+                  >
                     {item.description}
                   </div>
                 </div>
               </Link>
             ))}
           </nav>
-          
+
           <div className="p-6 border-t border-white/10">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
@@ -103,7 +123,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </div>
               <div className="flex-1">
                 <p className="text-white text-sm font-medium">
-                  {adminUser?.firstName ? `${adminUser.firstName} ${adminUser.lastName || ''}` : user?.email}
+                  {adminUser?.firstName
+                    ? `${adminUser.firstName} ${adminUser.lastName || ''}`
+                    : user?.email}
                 </p>
                 <p className="text-gray-400 text-xs capitalize">{adminUser?.role || 'Usuario'}</p>
               </div>
@@ -124,12 +146,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="fixed inset-y-0 left-0 w-80 bg-black/95 backdrop-blur-md border-r border-white/10">
           <div className="flex items-center justify-between p-6 border-b border-white/10">
             <h1 className="text-xl font-bold text-gold">Panel Admin</h1>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="text-white hover:text-gold"
-            >
+            <button onClick={() => setSidebarOpen(false)} className="text-white hover:text-gold">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -148,7 +172,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                 <span className="text-xl mt-1">{item.icon}</span>
                 <div className="flex-1">
                   <div className="font-medium">{item.name}</div>
-                  <div className={`text-xs ${pathname === item.href ? 'text-black/70' : 'text-gray-400'}`}>
+                  <div
+                    className={`text-xs ${pathname === item.href ? 'text-black/70' : 'text-gray-400'}`}
+                  >
                     {item.description}
                   </div>
                 </div>
@@ -163,12 +189,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         {/* Mobile header */}
         <div className="lg:hidden bg-black/80 backdrop-blur-md border-b border-white/10">
           <div className="flex items-center justify-between p-4">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="text-white hover:text-gold"
-            >
+            <button onClick={() => setSidebarOpen(true)} className="text-white hover:text-gold">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
             </button>
             <h1 className="text-lg font-bold text-gold">Panel Admin</h1>
@@ -177,10 +205,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         </div>
 
         {/* Page content */}
-        <main className="p-6">
-          {children}
-        </main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );
-} 
+}

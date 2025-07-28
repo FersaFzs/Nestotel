@@ -69,12 +69,12 @@ export default function AdminReservations() {
 
       if (response.ok) {
         // Actualizar la lista local
-        setReservations(prev =>
-          prev.map(reservation =>
+        setReservations((prev) =>
+          prev.map((reservation) =>
             reservation._id === reservationId
               ? { ...reservation, status: newStatus as any }
-              : reservation
-          )
+              : reservation,
+          ),
         );
       }
     } catch (error) {
@@ -349,13 +349,13 @@ export default function AdminReservations() {
             </div>
             <div>
               <div className="text-2xl font-bold text-green-400">
-                {reservations.filter(r => r.status === 'confirmed').length}
+                {reservations.filter((r) => r.status === 'confirmed').length}
               </div>
               <div className="text-sm text-gray-400">Confirmadas</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-yellow-400">
-                {reservations.filter(r => r.status === 'pending').length}
+                {reservations.filter((r) => r.status === 'pending').length}
               </div>
               <div className="text-sm text-gray-400">Pendientes</div>
             </div>
@@ -364,4 +364,4 @@ export default function AdminReservations() {
       )}
     </div>
   );
-} 
+}

@@ -66,7 +66,7 @@ export function useAdminGuard(options: UseAdminGuardOptions = {}) {
       // Para otros usuarios, intentar verificar con la API
       const response = await fetch(`/api/users/me`, {
         headers: {
-          'Authorization': `Bearer ${await user.getIdToken()}`,
+          Authorization: `Bearer ${await user.getIdToken()}`,
         },
       });
 
@@ -75,12 +75,14 @@ export function useAdminGuard(options: UseAdminGuardOptions = {}) {
         setUserData(userData);
 
         // Verificar rol
-        const hasRequiredRole = userData.role === requiredRole || 
+        const hasRequiredRole =
+          userData.role === requiredRole ||
           (requiredRole === 'admin' && userData.role === 'super_admin');
 
         // Verificar permisos
-        const hasRequiredPermissions = requiredPermissions.length === 0 ||
-          requiredPermissions.every(permission => userData.permissions.includes(permission));
+        const hasRequiredPermissions =
+          requiredPermissions.length === 0 ||
+          requiredPermissions.every((permission) => userData.permissions.includes(permission));
 
         const access = hasRequiredRole && hasRequiredPermissions && userData.isActive;
         setHasAccess(access);
@@ -106,4 +108,4 @@ export function useAdminGuard(options: UseAdminGuardOptions = {}) {
     hasAccess,
     isAuthenticated: !!user,
   };
-} 
+}

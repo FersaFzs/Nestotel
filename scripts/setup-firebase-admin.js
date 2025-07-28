@@ -6,7 +6,9 @@ const path = require('path');
 console.log('🔥 Configuración de Firebase Admin SDK\n');
 
 // Verificar si existe el archivo JSON
-const jsonFiles = fs.readdirSync('.').filter(file => file.endsWith('.json') && file.includes('firebase-adminsdk'));
+const jsonFiles = fs
+  .readdirSync('.')
+  .filter((file) => file.endsWith('.json') && file.includes('firebase-adminsdk'));
 
 if (jsonFiles.length === 0) {
   console.log('❌ No se encontró ningún archivo JSON de Firebase Admin SDK');
@@ -45,7 +47,7 @@ try {
     'SUPER_ADMIN_UID=tu_uid_del_usuario_firebase',
     'SUPER_ADMIN_EMAIL=admin@tuhotel.com',
     'SUPER_ADMIN_FIRST_NAME=Super',
-    'SUPER_ADMIN_LAST_NAME=Admin'
+    'SUPER_ADMIN_LAST_NAME=Admin',
   ].join('\n');
 
   // Verificar si existe .env.local
@@ -84,8 +86,7 @@ try {
   console.log('4. Ejecutar: pnpm create-admin');
   console.log('\n🗑️  Puedes eliminar el archivo JSON por seguridad:');
   console.log(`   rm ${jsonFile}`);
-
 } catch (error) {
   console.error('❌ Error procesando el archivo JSON:', error.message);
   process.exit(1);
-} 
+}

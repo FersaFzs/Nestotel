@@ -42,7 +42,7 @@ export default function ReservasActivasPage() {
           status: 'active',
           nights: 3,
           totalPrice: 360,
-          specialRequests: 'Cama extra para niño'
+          specialRequests: 'Cama extra para niño',
         },
         {
           _id: '2',
@@ -54,7 +54,7 @@ export default function ReservasActivasPage() {
           checkOut: '2024-07-28',
           status: 'checkout-today',
           nights: 2,
-          totalPrice: 160
+          totalPrice: 160,
         },
         {
           _id: '3',
@@ -67,10 +67,10 @@ export default function ReservasActivasPage() {
           status: 'extended',
           nights: 10,
           totalPrice: 1200,
-          specialRequests: 'Servicio de limpieza diario'
-        }
+          specialRequests: 'Servicio de limpieza diario',
+        },
       ];
-      
+
       setActiveReservations(mockData);
     } catch (error) {
       console.error('Error fetching active reservations:', error);
@@ -101,12 +101,12 @@ export default function ReservasActivasPage() {
     }
   };
 
-  const filteredReservations = activeReservations.filter(reservation => {
+  const filteredReservations = activeReservations.filter((reservation) => {
     if (filter === 'all') return true;
     return reservation.status === filter;
   });
 
-  const checkoutToday = activeReservations.filter(r => r.status === 'checkout-today').length;
+  const checkoutToday = activeReservations.filter((r) => r.status === 'checkout-today').length;
   const totalActive = activeReservations.length;
 
   if (loading) {
@@ -130,9 +130,7 @@ export default function ReservasActivasPage() {
             <button
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'all' 
-                  ? 'bg-gold text-black' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'all' ? 'bg-gold text-black' : 'text-white hover:bg-white/10'
               }`}
             >
               Todas ({totalActive})
@@ -140,8 +138,8 @@ export default function ReservasActivasPage() {
             <button
               onClick={() => setFilter('checkout-today')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'checkout-today' 
-                  ? 'bg-orange-500 text-white' 
+                filter === 'checkout-today'
+                  ? 'bg-orange-500 text-white'
                   : 'text-white hover:bg-white/10'
               }`}
             >
@@ -150,9 +148,7 @@ export default function ReservasActivasPage() {
             <button
               onClick={() => setFilter('extended')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                filter === 'extended' 
-                  ? 'bg-blue-500 text-white' 
-                  : 'text-white hover:bg-white/10'
+                filter === 'extended' ? 'bg-blue-500 text-white' : 'text-white hover:bg-white/10'
               }`}
             >
               Extendidas
@@ -210,26 +206,36 @@ export default function ReservasActivasPage() {
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-3">
                       <div>
-                        <h3 className="text-lg font-semibold text-white">{reservation.guestName}</h3>
+                        <h3 className="text-lg font-semibold text-white">
+                          {reservation.guestName}
+                        </h3>
                         <p className="text-gray-400">{reservation.guestEmail}</p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reservation.status)}`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reservation.status)}`}
+                      >
                         {getStatusText(reservation.status)}
                       </span>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                       <div>
                         <p className="text-gray-400 text-sm">Habitación</p>
-                        <p className="text-white font-medium">{reservation.roomNumber} - {reservation.roomType}</p>
+                        <p className="text-white font-medium">
+                          {reservation.roomNumber} - {reservation.roomType}
+                        </p>
                       </div>
                       <div>
                         <p className="text-gray-400 text-sm">Check-in</p>
-                        <p className="text-white font-medium">{new Date(reservation.checkIn).toLocaleDateString('es-ES')}</p>
+                        <p className="text-white font-medium">
+                          {new Date(reservation.checkIn).toLocaleDateString('es-ES')}
+                        </p>
                       </div>
                       <div>
                         <p className="text-gray-400 text-sm">Check-out</p>
-                        <p className="text-white font-medium">{new Date(reservation.checkOut).toLocaleDateString('es-ES')}</p>
+                        <p className="text-white font-medium">
+                          {new Date(reservation.checkOut).toLocaleDateString('es-ES')}
+                        </p>
                       </div>
                       <div>
                         <p className="text-gray-400 text-sm">Noches</p>
@@ -240,7 +246,9 @@ export default function ReservasActivasPage() {
                     {reservation.specialRequests && (
                       <div className="mt-3">
                         <p className="text-gray-400 text-sm">Solicitudes especiales</p>
-                        <p className="text-white text-sm italic">"{reservation.specialRequests}"</p>
+                        <p className="text-white text-sm italic">
+                          &quot;{reservation.specialRequests}&quot;
+                        </p>
                       </div>
                     )}
                   </div>
@@ -264,4 +272,4 @@ export default function ReservasActivasPage() {
       </div>
     </div>
   );
-} 
+}

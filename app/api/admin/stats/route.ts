@@ -30,10 +30,7 @@ export async function GET() {
         {
           $addFields: {
             nights: {
-              $divide: [
-                { $subtract: ['$checkOut', '$checkIn'] },
-                1000 * 60 * 60 * 24,
-              ],
+              $divide: [{ $subtract: ['$checkOut', '$checkIn'] }, 1000 * 60 * 60 * 24],
             },
           },
         },
@@ -80,7 +77,8 @@ export async function GET() {
 
     const currentWeek = currentWeekRevenue.length > 0 ? currentWeekRevenue[0].total : 0;
     const previousWeek = previousWeekRevenue.length > 0 ? previousWeekRevenue[0].total : 0;
-    const revenueGrowth = previousWeek > 0 ? ((currentWeek - previousWeek) / previousWeek) * 100 : 0;
+    const revenueGrowth =
+      previousWeek > 0 ? ((currentWeek - previousWeek) / previousWeek) * 100 : 0;
 
     return NextResponse.json({
       totalReservations,
@@ -109,4 +107,4 @@ export async function GET() {
       { status: 500 },
     );
   }
-} 
+}
