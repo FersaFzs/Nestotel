@@ -6,7 +6,8 @@
 2. Selecciona tu proyecto
 3. Ve a **Project Settings** (⚙️) → **Service accounts**
 4. Haz clic en **Generate new private key**
-5. Descarga el archivo JSON (ejemplo: `hotel-next-firebase-adminsdk-xxxxx-xxxxxxxxxx.json`)
+5. Descarga el archivo JSON (ejemplo:
+   `hotel-next-firebase-adminsdk-xxxxx-xxxxxxxxxx.json`)
 
 ## 📄 Estructura del archivo JSON
 
@@ -140,4 +141,5 @@ MONGODB_URI=mongodb://localhost:27017/hotel-next
 
 ---
 
-**💡 Consejo**: Una vez configurado, puedes eliminar el archivo JSON descargado por seguridad, ya que toda la información estará en las variables de entorno.
+**💡 Consejo**: Una vez configurado, puedes eliminar el archivo JSON descargado
+por seguridad, ya que toda la información estará en las variables de entorno.

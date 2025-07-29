@@ -17,10 +17,10 @@ export const reservationSchema = z.object({
   userId: z.string().min(1, 'El ID de usuario es obligatorio'),
   userEmail: z.string().email('Email inválido'),
   roomId: z.string().min(1, 'La habitación es obligatoria'),
-  checkIn: z.string().refine((date) => !isNaN(Date.parse(date)), {
+  checkIn: z.string().refine(date => !isNaN(Date.parse(date)), {
     message: 'Fecha de entrada inválida',
   }),
-  checkOut: z.string().refine((date) => !isNaN(Date.parse(date)), {
+  checkOut: z.string().refine(date => !isNaN(Date.parse(date)), {
     message: 'Fecha de salida inválida',
   }),
   guests: z.number().min(1, 'Debe haber al menos una persona').max(6, 'Máximo 6 huéspedes'),

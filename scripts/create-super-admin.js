@@ -18,10 +18,10 @@ async function createSuperAdmin() {
       'FIREBASE_ADMIN_CLIENT_EMAIL',
     ];
 
-    const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
+    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
     if (missingVars.length > 0) {
       console.error('❌ Variables de entorno faltantes:');
-      missingVars.forEach((varName) => console.error(`   - ${varName}`));
+      missingVars.forEach(varName => console.error(`   - ${varName}`));
       console.log('\n📋 Asegúrate de configurar todas las variables en .env.local');
       process.exit(1);
     }
@@ -173,7 +173,7 @@ createSuperAdmin()
     console.log('\n✅ Script completado exitosamente');
     process.exit(0);
   })
-  .catch((error) => {
+  .catch(error => {
     console.error('\n❌ Error en el script:', error.message);
     process.exit(1);
   });

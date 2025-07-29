@@ -91,7 +91,7 @@ export async function GET() {
       revenueGrowth: Math.round(revenueGrowth * 100) / 100,
       currentWeekRevenue: currentWeek,
       previousWeekRevenue: previousWeek,
-      recentReservations: recentReservations.map((r) => ({
+      recentReservations: recentReservations.map(r => ({
         date: r.createdAt,
         revenue: r.totalPrice,
         status: r.status,

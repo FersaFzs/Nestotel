@@ -237,42 +237,42 @@ export default function HabitacionesPage() {
     }
   };
 
-  const filteredRooms = rooms.filter((room) => {
+  const filteredRooms = rooms.filter(room => {
     const floorMatch = selectedFloor === 'all' || room.floor === selectedFloor;
     const statusMatch = filter === 'all' || room.status === filter;
     return floorMatch && statusMatch;
   });
 
-  const floors = [...new Set(rooms.map((room) => room.floor))].sort();
+  const floors = [...new Set(rooms.map(room => room.floor))].sort();
   const stats = {
     total: rooms.length,
-    available: rooms.filter((r) => r.status === 'available').length,
-    occupied: rooms.filter((r) => r.status === 'occupied').length,
-    cleaning: rooms.filter((r) => r.status === 'cleaning').length,
-    maintenance: rooms.filter((r) => r.status === 'maintenance').length,
+    available: rooms.filter(r => r.status === 'available').length,
+    occupied: rooms.filter(r => r.status === 'occupied').length,
+    cleaning: rooms.filter(r => r.status === 'cleaning').length,
+    maintenance: rooms.filter(r => r.status === 'maintenance').length,
   };
 
   const occupancyRate = Math.round((stats.occupied / stats.total) * 100);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
-        <div className="text-gold text-xl">Cargando habitaciones...</div>
+      <div className='min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center'>
+        <div className='text-gold text-xl'>Cargando habitaciones...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Gestión de Habitaciones</h1>
-          <p className="text-gray-400">Estado en tiempo real de todas las habitaciones</p>
+          <h1 className='text-3xl font-bold text-white mb-2'>Gestión de Habitaciones</h1>
+          <p className='text-gray-400'>Estado en tiempo real de todas las habitaciones</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className='flex items-center gap-4'>
           {/* Floor Filter */}
-          <div className="flex bg-black/50 backdrop-blur-md rounded-xl p-2">
+          <div className='flex bg-black/50 backdrop-blur-md rounded-xl p-2'>
             <button
               onClick={() => setSelectedFloor('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -281,7 +281,7 @@ export default function HabitacionesPage() {
             >
               Todas las plantas
             </button>
-            {floors.map((floor) => (
+            {floors.map(floor => (
               <button
                 key={floor}
                 onClick={() => setSelectedFloor(floor)}
@@ -295,7 +295,7 @@ export default function HabitacionesPage() {
           </div>
 
           {/* Status Filter */}
-          <div className="flex bg-black/50 backdrop-blur-md rounded-xl p-2">
+          <div className='flex bg-black/50 backdrop-blur-md rounded-xl p-2'>
             <button
               onClick={() => setFilter('all')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -333,61 +333,61 @@ export default function HabitacionesPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10">
-          <div className="text-center">
-            <p className="text-gray-400 text-sm">Total</p>
-            <p className="text-2xl font-bold text-white">{stats.total}</p>
+      <div className='grid grid-cols-2 md:grid-cols-5 gap-4'>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10'>
+          <div className='text-center'>
+            <p className='text-gray-400 text-sm'>Total</p>
+            <p className='text-2xl font-bold text-white'>{stats.total}</p>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10">
-          <div className="text-center">
-            <p className="text-gray-400 text-sm">Disponibles</p>
-            <p className="text-2xl font-bold text-green-400">{stats.available}</p>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10'>
+          <div className='text-center'>
+            <p className='text-gray-400 text-sm'>Disponibles</p>
+            <p className='text-2xl font-bold text-green-400'>{stats.available}</p>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10">
-          <div className="text-center">
-            <p className="text-gray-400 text-sm">Ocupadas</p>
-            <p className="text-2xl font-bold text-red-400">{stats.occupied}</p>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10'>
+          <div className='text-center'>
+            <p className='text-gray-400 text-sm'>Ocupadas</p>
+            <p className='text-2xl font-bold text-red-400'>{stats.occupied}</p>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10">
-          <div className="text-center">
-            <p className="text-gray-400 text-sm">Limpieza</p>
-            <p className="text-2xl font-bold text-orange-400">{stats.cleaning}</p>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10'>
+          <div className='text-center'>
+            <p className='text-gray-400 text-sm'>Limpieza</p>
+            <p className='text-2xl font-bold text-orange-400'>{stats.cleaning}</p>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10">
-          <div className="text-center">
-            <p className="text-gray-400 text-sm">Ocupación</p>
-            <p className="text-2xl font-bold text-blue-400">{occupancyRate}%</p>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-4 border border-white/10'>
+          <div className='text-center'>
+            <p className='text-gray-400 text-sm'>Ocupación</p>
+            <p className='text-2xl font-bold text-blue-400'>{occupancyRate}%</p>
           </div>
         </div>
       </div>
 
       {/* Rooms Grid */}
-      <div className="bg-black/50 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden">
-        <div className="p-6 border-b border-white/10">
-          <h2 className="text-xl font-bold text-white">
+      <div className='bg-black/50 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden'>
+        <div className='p-6 border-b border-white/10'>
+          <h2 className='text-xl font-bold text-white'>
             Habitaciones {selectedFloor !== 'all' ? `- Planta ${selectedFloor}` : ''}
           </h2>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className='text-gray-400 text-sm mt-1'>
             {filteredRooms.length} habitaciones mostradas
           </p>
         </div>
 
         {filteredRooms.length === 0 ? (
-          <div className="p-8 text-center">
-            <div className="text-6xl mb-4">🏨</div>
-            <p className="text-gray-400 text-lg">
+          <div className='p-8 text-center'>
+            <div className='text-6xl mb-4'>🏨</div>
+            <p className='text-gray-400 text-lg'>
               No hay habitaciones que coincidan con los filtros
             </p>
           </div>
         ) : (
-          <div className="p-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-              {filteredRooms.map((room) => (
+          <div className='p-6'>
+            <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4'>
+              {filteredRooms.map(room => (
                 <div
                   key={room._id}
                   className={`relative p-4 rounded-xl border-2 transition-all cursor-pointer hover:scale-105 ${
@@ -408,20 +408,20 @@ export default function HabitacionesPage() {
                   </div>
 
                   {/* Room Info */}
-                  <div className="text-center">
-                    <h3 className="text-lg font-bold text-white mb-1">{room.number}</h3>
-                    <p className="text-xs text-gray-400 mb-2">{room.type}</p>
+                  <div className='text-center'>
+                    <h3 className='text-lg font-bold text-white mb-1'>{room.number}</h3>
+                    <p className='text-xs text-gray-400 mb-2'>{room.type}</p>
 
-                    <div className="space-y-1 text-xs">
-                      <p className="text-gray-300">€{room.price}/noche</p>
-                      <p className="text-gray-300">{room.capacity} personas</p>
+                    <div className='space-y-1 text-xs'>
+                      <p className='text-gray-300'>€{room.price}/noche</p>
+                      <p className='text-gray-300'>{room.capacity} personas</p>
                     </div>
 
                     {room.currentGuest && (
-                      <div className="mt-2 p-2 bg-black/30 rounded text-xs">
-                        <p className="text-white font-medium truncate">{room.currentGuest}</p>
+                      <div className='mt-2 p-2 bg-black/30 rounded text-xs'>
+                        <p className='text-white font-medium truncate'>{room.currentGuest}</p>
                         {room.checkOutDate && (
-                          <p className="text-gray-400">
+                          <p className='text-gray-400'>
                             Salida: {new Date(room.checkOutDate).toLocaleDateString('es-ES')}
                           </p>
                         )}

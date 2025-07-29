@@ -25,7 +25,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       },
     });
   } catch (error) {
-    console.error('Error fetching user:', error);
+    // Error fetching user - silent in production
     return NextResponse.json(
       { success: false, message: 'Error al obtener usuario' },
       { status: 500 },
@@ -91,7 +91,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       },
     });
   } catch (error) {
-    console.error('Error updating user:', error);
+    // Error updating user - silent in production
     return NextResponse.json(
       { success: false, message: 'Error al actualizar usuario' },
       { status: 500 },
@@ -130,7 +130,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       message: 'Usuario eliminado correctamente',
     });
   } catch (error) {
-    console.error('Error deleting user:', error);
+    // Error deleting user - silent in production
     return NextResponse.json(
       { success: false, message: 'Error al eliminar usuario' },
       { status: 500 },

@@ -159,7 +159,7 @@ global.fetch = jest.fn();
 describe('Component Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    
+
     // Mock successful API response
     (global.fetch as jest.Mock).mockResolvedValue({
       ok: true,
@@ -179,7 +179,7 @@ describe('Component Tests', () => {
 
   it('should render a simple component', () => {
     const TestComponent = () => (
-      <div data-testid="test-component">
+      <div data-testid='test-component'>
         <h1>Test Component</h1>
         <p>This is a test component</p>
       </div>
@@ -198,10 +198,10 @@ describe('Component Tests', () => {
 
       return (
         <div>
-          <button onClick={() => setCount(count + 1)} data-testid="increment">
+          <button onClick={() => setCount(count + 1)} data-testid='increment'>
             Increment
           </button>
-          <span data-testid="count">{count}</span>
+          <span data-testid='count'>{count}</span>
         </div>
       );
     };
@@ -231,9 +231,9 @@ describe('Component Tests', () => {
       return (
         <div>
           {data ? (
-            <div data-testid="data-loaded">Data loaded</div>
+            <div data-testid='data-loaded'>Data loaded</div>
           ) : (
-            <div data-testid="loading">Loading...</div>
+            <div data-testid='loading'>Loading...</div>
           )}
         </div>
       );
@@ -256,13 +256,13 @@ describe('Component Tests', () => {
       return (
         <form>
           <input
-            type="text"
+            type='text'
             value={value}
-            onChange={(e) => setValue(e.target.value)}
-            data-testid="input"
-            placeholder="Enter text"
+            onChange={e => setValue(e.target.value)}
+            data-testid='input'
+            placeholder='Enter text'
           />
-          <span data-testid="display">{value}</span>
+          <span data-testid='display'>{value}</span>
         </form>
       );
     };
@@ -281,4 +281,4 @@ describe('Component Tests', () => {
     expect(input).toHaveValue('Hello World');
     expect(display).toHaveTextContent('Hello World');
   });
-}); 
+});

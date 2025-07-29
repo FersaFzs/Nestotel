@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const invoiceSchema = z.object({
   number: z.string().min(1, 'El número de factura es obligatorio'),
-  date: z.string().refine((date) => !isNaN(Date.parse(date)), {
+  date: z.string().refine(date => !isNaN(Date.parse(date)), {
     message: 'Fecha de factura inválida',
   }),
   clientName: z.string().min(1, 'El nombre del cliente es obligatorio'),

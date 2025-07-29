@@ -22,7 +22,7 @@ async function dbConnect() {
       .connect(MONGODB_URI, {
         bufferCommands: false,
       })
-      .then((mongoose) => {
+      .then(mongoose => {
         return mongoose;
       });
   }

@@ -47,7 +47,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         nif: invoice.clientNIF,
         address: invoice.clientAddress,
       },
-      items: invoice.items.map((item) => ({
+      items: invoice.items.map(item => ({
         description: item.description,
         quantity: item.quantity,
         unitPrice: item.unitPrice,
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
           qrUrl = verifactiResponse.qrUrl;
         }
       } catch (error) {
-        console.error('Error sending to Verifacti:', error);
+        // Error sending to Verifacti - silent in production
       }
     }
 
@@ -95,7 +95,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
           qrUrl = facturaeResponse.qrUrl;
         }
       } catch (error) {
-        console.error('Error sending to Facturae:', error);
+        // Error sending to Facturae - silent in production
       }
     }
 
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
           qrUrl = aeatResponse.qrUrl;
         }
       } catch (error) {
-        console.error('Error sending to AEAT:', error);
+        // Error sending to AEAT - silent in production
       }
     }
 
@@ -131,7 +131,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       response,
     });
   } catch (error) {
-    console.error('Error sending invoice to AEAT:', error);
+    // Error sending invoice to AEAT - silent in production
     return NextResponse.json(
       { success: false, message: 'Error interno del servidor' },
       { status: 500 },

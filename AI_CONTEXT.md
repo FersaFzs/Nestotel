@@ -2,8 +2,10 @@
 
 ## Stack y Versiones
 
-- **Frontend:** Next.js 14 (App Router), Tailwind CSS 3.4, GSAP 3.12, React 18, Shadcn/ui (opcional)
-- **Backend:** Next.js API Routes + Zod (validación), Mongoose 8, MongoDB 7 (Docker)
+- **Frontend:** Next.js 14 (App Router), Tailwind CSS 3.4, GSAP 3.12, React 18,
+  Shadcn/ui (opcional)
+- **Backend:** Next.js API Routes + Zod (validación), Mongoose 8, MongoDB 7
+  (Docker)
 - **Auth:** Firebase/Google
 - **Testing:** Jest 29 + React Testing Library, Cypress 13 (E2E)
 - **Herramientas:** pnpm 8, ESLint, Prettier, Husky, Docker 24+
@@ -54,10 +56,13 @@ hotel-next/
 - **Server Actions** para mutaciones, React Server Components.
 - **Tailwind:** content correcto en config, animaciones extendidas.
 - **GSAP:** usar `@gsap/react` y `useGSAP` para SSR-friendly.
-- **Docker:** multi-stage build, pnpm, caché de dependencias, compose con MongoDB y volúmenes.
+- **Docker:** multi-stage build, pnpm, caché de dependencias, compose con
+  MongoDB y volúmenes.
 - **Testing:** Jest para unitarios, Cypress para E2E.
-- **Variables de entorno:** `NEXT_PUBLIC_` para frontend, resto en `.env.local` (no versionar).
-- **Scripts package.json:** dev, build, start, test, test:e2e, lint, format, prepare (husky).
+- **Variables de entorno:** `NEXT_PUBLIC_` para frontend, resto en `.env.local`
+  (no versionar).
+- **Scripts package.json:** dev, build, start, test, test:e2e, lint, format,
+  prepare (husky).
 - **CI/CD:** workflows en `.github/workflows/`.
 
 ## Estado Actual del Proyecto
@@ -71,7 +76,8 @@ hotel-next/
   - Footer completo y elegante
   - Componente de reservas lateral deslizable
 - **Backend API:** Endpoints para users, rooms, reservations, invoices
-- **Base de datos:** Modelos MongoDB con Mongoose para User, Room, Reservation, Invoice
+- **Base de datos:** Modelos MongoDB con Mongoose para User, Room, Reservation,
+  Invoice
 - **Validación:** Esquemas Zod para todas las entidades
 - **Docker:** Configuración completa con MongoDB
 - **Testing:** Configuración Jest y Cypress
@@ -129,8 +135,11 @@ hotel-next/
 
 ## Objetivo
 
-Desarrollar una app de hotel robusta, profesional, dockerizada, con autenticación, reservas, panel admin, animaciones y tests, lista para producción y CI/CD.
+Desarrollar una app de hotel robusta, profesional, dockerizada, con
+autenticación, reservas, panel admin, animaciones y tests, lista para producción
+y CI/CD.
 
 ---
 
-**Este archivo sirve como referencia para la IA y para cualquier desarrollador que se incorpore al proyecto.**
+**Este archivo sirve como referencia para la IA y para cualquier desarrollador
+que se incorpore al proyecto.**

@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   workflow_run:
-    workflows: ["CI/CD Pipeline"]
+    workflows: ['CI/CD Pipeline']
     types:
       - completed
     branches: [main, master, develop]
@@ -132,4 +132,3 @@ jobs:
           echo "Image: ${{ secrets.DOCKER_USERNAME }}/hotel-next:${{ github.sha }}"
           # Add your deployment commands here
           # Example: ssh to server and pull new image
-

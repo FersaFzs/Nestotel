@@ -67,13 +67,11 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return <div>{children}</div>;
 };
 
-const customRender = (
-  ui: React.ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'>,
-) => render(ui, { wrapper: AllTheProviders, ...options });
+const customRender = (ui: React.ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
+  render(ui, { wrapper: AllTheProviders, ...options });
 
 // Re-export everything
 export * from '@testing-library/react';
 
 // Override render method
-export { customRender as render }; 
+export { customRender as render };

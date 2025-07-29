@@ -1,14 +1,12 @@
 module.exports = {
-  extends: [
-    'next/core-web-vitals',
-  ],
+  extends: ['next/core-web-vitals'],
   rules: {
     // Next.js specific rules
     '@next/next/no-img-element': 'warn',
     '@next/next/no-page-custom-font': 'warn',
     '@next/next/no-html-link-for-pages': 'error',
     '@next/next/no-unwanted-polyfillio': 'error',
-    
+
     // React specific rules
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
@@ -27,7 +25,7 @@ module.exports = {
     'react/no-unknown-property': 'error',
     'react/no-unsafe': 'warn',
     'react/self-closing-comp': 'warn',
-    
+
     // General JavaScript rules
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': 'error',
@@ -93,7 +91,14 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx', '**/*.cy.js', '**/*.cy.ts'],
+      files: [
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/*.cy.js',
+        '**/*.cy.ts',
+      ],
       rules: {
         'no-console': 'off',
         'no-unused-vars': 'off',

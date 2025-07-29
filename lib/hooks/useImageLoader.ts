@@ -10,10 +10,10 @@ export function useImageLoader({ imageUrls, onComplete }: UseImageLoaderProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('useImageLoader: Starting with', imageUrls.length, 'images');
-    
+    // useImageLoader: Starting with images - silent in production
+
     if (imageUrls.length === 0) {
-      console.log('useImageLoader: No images, completing immediately');
+      // useImageLoader: No images, completing immediately - silent in production
       setIsLoading(false);
       onComplete?.();
       return;
@@ -26,65 +26,69 @@ export function useImageLoader({ imageUrls, onComplete }: UseImageLoaderProps) {
     const totalImages = imageUrls.length;
 
     const completeLoading = () => {
-      console.log('useImageLoader: Completing loading');
+      // useImageLoader: Completing loading - silent in production
       setTimeout(() => {
-        console.log('useImageLoader: Setting loading to false');
+        // useImageLoader: Setting isLoading to false - silent in production
         setIsLoading(false);
         onComplete?.();
-      }, 1000);
+      }, 100);
     };
 
-    const handleImageLoad = () => {
-      loadedCount++;
-      console.log('useImageLoader: Image loaded', loadedCount, '/', totalImages);
-      setLoadedImages(loadedCount);
-
+    const checkComplete = () => {
+      // useImageLoader: Checking completion - silent in production
       if (loadedCount >= totalImages) {
         completeLoading();
       }
     };
 
-    const handleImageError = () => {
-      loadedCount++;
-      console.log('useImageLoader: Image error', loadedCount, '/', totalImages);
-      setLoadedImages(loadedCount);
-
-      if (loadedCount >= totalImages) {
+    // Set fallback timer
+    const fallbackTimer = setTimeout(() => {
+      // useImageLoader: Fallback timer triggered - silent in production
+      if (isLoading) {
         completeLoading();
       }
-    };
+    }, 4000);
 
-    // Precargar todas las imágenes
+    // Load each image
     imageUrls.forEach((url, index) => {
-      console.log('useImageLoader: Loading image', index + 1, url);
       const img = new Image();
-      img.onload = handleImageLoad;
-      img.onerror = handleImageError;
+
+      img.onload = () => {
+        loadedCount++;
+        setLoadedImages(loadedCount);
+        // useImageLoader: Image loaded - silent in production
+        checkComplete();
+      };
+
+      img.onerror = () => {
+        loadedCount++;
+        setLoadedImages(loadedCount);
+        // useImageLoader: Image failed - silent in production
+        checkComplete();
+      };
+
       img.src = url;
     });
-
-    // Fallback: si después de 3 segundos no se han cargado todas, completar de todas formas
-    const fallbackTimer = setTimeout(() => {
-      console.log('useImageLoader: Fallback timer triggered');
-      if (isLoading) {
-        console.log('useImageLoader: Force completing due to timeout');
-        setIsLoading(false);
-        onComplete?.();
-      }
-    }, 3000);
 
     return () => {
       clearTimeout(fallbackTimer);
     };
   }, [imageUrls, onComplete]);
 
-  const progress = imageUrls.length > 0 ? (loadedImages / imageUrls.length) * 100 : 0;
-  console.log('useImageLoader: Current state', { isLoading, loadedImages, totalImages: imageUrls.length, progress });
+  // Dependency array issue fix
+  useEffect(() => {
+    if (!isLoading) {
+      // Loading complete - silent in production
+    }
+  }, [isLoading]);
+
+  const progress = imageUrls.length > 0 ? Math.round((loadedImages / imageUrls.length) * 100) : 0;
+  // Current progress - silent in production
 
   return {
     isLoading,
+    progress,
     loadedImages,
     totalImages: imageUrls.length,
-    progress,
   };
-} 
+}

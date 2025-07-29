@@ -82,7 +82,7 @@ export function useAdminGuard(options: UseAdminGuardOptions = {}) {
         // Verificar permisos
         const hasRequiredPermissions =
           requiredPermissions.length === 0 ||
-          requiredPermissions.every((permission) => userData.permissions.includes(permission));
+          requiredPermissions.every(permission => userData.permissions.includes(permission));
 
         const access = hasRequiredRole && hasRequiredPermissions && userData.isActive;
         setHasAccess(access);
@@ -95,7 +95,7 @@ export function useAdminGuard(options: UseAdminGuardOptions = {}) {
         router.push('/unauthorized');
       }
     } catch (error) {
-      console.error('Error checking user permissions:', error);
+      // Error checking user permissions - silent in production
       router.push('/unauthorized');
     } finally {
       setIsLoading(false);

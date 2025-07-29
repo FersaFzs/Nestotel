@@ -8,7 +8,7 @@ console.log('🔥 Configuración de Firebase Admin SDK\n');
 // Verificar si existe el archivo JSON
 const jsonFiles = fs
   .readdirSync('.')
-  .filter((file) => file.endsWith('.json') && file.includes('firebase-adminsdk'));
+  .filter(file => file.endsWith('.json') && file.includes('firebase-adminsdk'));
 
 if (jsonFiles.length === 0) {
   console.log('❌ No se encontró ningún archivo JSON de Firebase Admin SDK');

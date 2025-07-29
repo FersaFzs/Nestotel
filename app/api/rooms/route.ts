@@ -13,11 +13,16 @@ export async function GET(request: NextRequest) {
     if (process.env.NODE_ENV === 'development') {
       // Error fetching rooms - handled silently in production
     }
-    
+
     return NextResponse.json(
       {
         message: 'Error al obtener las habitaciones',
-        error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Error desconocido' : 'Internal server error',
+        error:
+          process.env.NODE_ENV === 'development'
+            ? error instanceof Error
+              ? error.message
+              : 'Error desconocido'
+            : 'Internal server error',
       },
       { status: 500 },
     );
@@ -38,13 +43,18 @@ export async function POST(request: NextRequest) {
     if (process.env.NODE_ENV === 'development') {
       // Error creating room - handled silently in production
     }
-    
+
     return NextResponse.json(
-      { 
+      {
         message: 'Error al crear la habitación',
-        error: process.env.NODE_ENV === 'development' ? error instanceof Error ? error.message : 'Error desconocido' : 'Internal server error'
-      }, 
-      { status: 500 }
+        error:
+          process.env.NODE_ENV === 'development'
+            ? error instanceof Error
+              ? error.message
+              : 'Error desconocido'
+            : 'Internal server error',
+      },
+      { status: 500 },
     );
   }
 }

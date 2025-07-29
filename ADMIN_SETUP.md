@@ -166,4 +166,5 @@ Si tienes problemas:
 
 ---
 
-**⚠️ Importante**: Este sistema es para uso en producción. Asegúrate de configurar correctamente todas las medidas de seguridad antes de desplegar.
+**⚠️ Importante**: Este sistema es para uso en producción. Asegúrate de
+configurar correctamente todas las medidas de seguridad antes de desplegar.

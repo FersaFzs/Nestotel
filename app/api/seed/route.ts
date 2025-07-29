@@ -68,7 +68,7 @@ export async function POST() {
       rooms: createdRooms,
     });
   } catch (error) {
-    console.error('Error creating sample rooms:', error);
+    // Error creating sample rooms - silent in production
     return NextResponse.json(
       {
         message: 'Error al crear las habitaciones de ejemplo',

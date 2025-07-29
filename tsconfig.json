@@ -45,13 +45,7 @@
     ".next/types/**/*.ts",
     "middleware.ts"
   ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    "out",
-    "dist",
-    "build"
-  ],
+  "exclude": ["node_modules", ".next", "out", "dist", "build"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

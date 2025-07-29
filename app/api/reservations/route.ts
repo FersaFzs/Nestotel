@@ -54,7 +54,7 @@ export async function GET(request: Request) {
     const reservations = await query;
 
     // Transform the response to match frontend expectations
-    const transformedReservations = reservations.map((reservation) => {
+    const transformedReservations = reservations.map(reservation => {
       const reservationObj = reservation.toObject();
       return {
         ...reservationObj,

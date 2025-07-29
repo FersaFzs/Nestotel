@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 interface ActiveReservation {
   _id: string;
@@ -101,32 +100,32 @@ export default function ReservasActivasPage() {
     }
   };
 
-  const filteredReservations = activeReservations.filter((reservation) => {
+  const filteredReservations = activeReservations.filter(reservation => {
     if (filter === 'all') return true;
     return reservation.status === filter;
   });
 
-  const checkoutToday = activeReservations.filter((r) => r.status === 'checkout-today').length;
+  const checkoutToday = activeReservations.filter(r => r.status === 'checkout-today').length;
   const totalActive = activeReservations.length;
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
-        <div className="text-gold text-xl">Cargando reservas activas...</div>
+      <div className='min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center'>
+        <div className='text-gold text-xl'>Cargando reservas activas...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Reservas Activas</h1>
-          <p className="text-gray-400">Huéspedes actualmente en el hotel</p>
+          <h1 className='text-3xl font-bold text-white mb-2'>Reservas Activas</h1>
+          <p className='text-gray-400'>Huéspedes actualmente en el hotel</p>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex bg-black/50 backdrop-blur-md rounded-xl p-2">
+        <div className='flex items-center gap-4'>
+          <div className='flex bg-black/50 backdrop-blur-md rounded-xl p-2'>
             <button
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -158,58 +157,58 @@ export default function ReservasActivasPage() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10">
-          <div className="flex items-center justify-between">
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10'>
+          <div className='flex items-center justify-between'>
             <div>
-              <p className="text-gray-400 text-sm">Total Activas</p>
-              <p className="text-2xl font-bold text-white">{totalActive}</p>
+              <p className='text-gray-400 text-sm'>Total Activas</p>
+              <p className='text-2xl font-bold text-white'>{totalActive}</p>
             </div>
-            <div className="text-3xl">🛏️</div>
+            <div className='text-3xl'>🛏️</div>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10">
-          <div className="flex items-center justify-between">
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10'>
+          <div className='flex items-center justify-between'>
             <div>
-              <p className="text-gray-400 text-sm">Check-out Hoy</p>
-              <p className="text-2xl font-bold text-orange-400">{checkoutToday}</p>
+              <p className='text-gray-400 text-sm'>Check-out Hoy</p>
+              <p className='text-2xl font-bold text-orange-400'>{checkoutToday}</p>
             </div>
-            <div className="text-3xl">⏰</div>
+            <div className='text-3xl'>⏰</div>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10">
-          <div className="flex items-center justify-between">
+        <div className='bg-black/50 backdrop-blur-md rounded-xl p-6 border border-white/10'>
+          <div className='flex items-center justify-between'>
             <div>
-              <p className="text-gray-400 text-sm">Ocupación</p>
-              <p className="text-2xl font-bold text-green-400">85%</p>
+              <p className='text-gray-400 text-sm'>Ocupación</p>
+              <p className='text-2xl font-bold text-green-400'>85%</p>
             </div>
-            <div className="text-3xl">📊</div>
+            <div className='text-3xl'>📊</div>
           </div>
         </div>
       </div>
 
       {/* Reservations List */}
-      <div className="bg-black/50 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden">
-        <div className="p-6 border-b border-white/10">
-          <h2 className="text-xl font-bold text-white">Huéspedes Activos</h2>
+      <div className='bg-black/50 backdrop-blur-md rounded-xl border border-white/10 overflow-hidden'>
+        <div className='p-6 border-b border-white/10'>
+          <h2 className='text-xl font-bold text-white'>Huéspedes Activos</h2>
         </div>
-        <div className="divide-y divide-white/10">
+        <div className='divide-y divide-white/10'>
           {filteredReservations.length === 0 ? (
-            <div className="p-8 text-center">
-              <div className="text-6xl mb-4">🛏️</div>
-              <p className="text-gray-400 text-lg">No hay reservas activas</p>
+            <div className='p-8 text-center'>
+              <div className='text-6xl mb-4'>🛏️</div>
+              <p className='text-gray-400 text-lg'>No hay reservas activas</p>
             </div>
           ) : (
-            filteredReservations.map((reservation) => (
-              <div key={reservation._id} className="p-6 hover:bg-white/5 transition-all">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-3">
+            filteredReservations.map(reservation => (
+              <div key={reservation._id} className='p-6 hover:bg-white/5 transition-all'>
+                <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>
+                  <div className='flex-1'>
+                    <div className='flex items-start justify-between mb-3'>
                       <div>
-                        <h3 className="text-lg font-semibold text-white">
+                        <h3 className='text-lg font-semibold text-white'>
                           {reservation.guestName}
                         </h3>
-                        <p className="text-gray-400">{reservation.guestEmail}</p>
+                        <p className='text-gray-400'>{reservation.guestEmail}</p>
                       </div>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reservation.status)}`}
@@ -218,49 +217,49 @@ export default function ReservasActivasPage() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
                       <div>
-                        <p className="text-gray-400 text-sm">Habitación</p>
-                        <p className="text-white font-medium">
+                        <p className='text-gray-400 text-sm'>Habitación</p>
+                        <p className='text-white font-medium'>
                           {reservation.roomNumber} - {reservation.roomType}
                         </p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">Check-in</p>
-                        <p className="text-white font-medium">
+                        <p className='text-gray-400 text-sm'>Check-in</p>
+                        <p className='text-white font-medium'>
                           {new Date(reservation.checkIn).toLocaleDateString('es-ES')}
                         </p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">Check-out</p>
-                        <p className="text-white font-medium">
+                        <p className='text-gray-400 text-sm'>Check-out</p>
+                        <p className='text-white font-medium'>
                           {new Date(reservation.checkOut).toLocaleDateString('es-ES')}
                         </p>
                       </div>
                       <div>
-                        <p className="text-gray-400 text-sm">Noches</p>
-                        <p className="text-white font-medium">{reservation.nights} noches</p>
+                        <p className='text-gray-400 text-sm'>Noches</p>
+                        <p className='text-white font-medium'>{reservation.nights} noches</p>
                       </div>
                     </div>
 
                     {reservation.specialRequests && (
-                      <div className="mt-3">
-                        <p className="text-gray-400 text-sm">Solicitudes especiales</p>
-                        <p className="text-white text-sm italic">
+                      <div className='mt-3'>
+                        <p className='text-gray-400 text-sm'>Solicitudes especiales</p>
+                        <p className='text-white text-sm italic'>
                           &quot;{reservation.specialRequests}&quot;
                         </p>
                       </div>
                     )}
                   </div>
 
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <button className="px-4 py-2 bg-gold hover:bg-yellow-500 text-black font-medium rounded-lg transition-all text-sm">
+                  <div className='flex flex-col sm:flex-row gap-2'>
+                    <button className='px-4 py-2 bg-gold hover:bg-yellow-500 text-black font-medium rounded-lg transition-all text-sm'>
                       Ver detalles
                     </button>
-                    <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all text-sm">
+                    <button className='px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-all text-sm'>
                       Check-out
                     </button>
-                    <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all text-sm">
+                    <button className='px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all text-sm'>
                       Extender
                     </button>
                   </div>

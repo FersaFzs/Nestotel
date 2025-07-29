@@ -30,11 +30,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
-      (user) => {
+      user => {
         setUser(user);
         setLoading(false);
       },
-      (error) => {
+      error => {
         // Auth state change error - handled silently in production
         setLoading(false);
       },

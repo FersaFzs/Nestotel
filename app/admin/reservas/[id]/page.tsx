@@ -189,17 +189,17 @@ export default function ReservationDetail() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-gold text-xl">Cargando reserva...</div>
+      <div className='flex items-center justify-center h-64'>
+        <div className='text-gold text-xl'>Cargando reserva...</div>
       </div>
     );
   }
 
   if (!reservation) {
     return (
-      <div className="text-center py-12">
-        <div className="text-red-400 text-xl mb-4">Reserva no encontrada</div>
-        <Link href="/admin/reservas" className="text-gold hover:text-yellow-400">
+      <div className='text-center py-12'>
+        <div className='text-red-400 text-xl mb-4'>Reserva no encontrada</div>
+        <Link href='/admin/reservas' className='text-gold hover:text-yellow-400'>
           Volver a la lista
         </Link>
       </div>
@@ -207,56 +207,56 @@ export default function ReservationDetail() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         <div>
-          <div className="flex items-center gap-4">
-            <Link href="/admin/reservas" className="text-gold hover:text-yellow-400">
+          <div className='flex items-center gap-4'>
+            <Link href='/admin/reservas' className='text-gold hover:text-yellow-400'>
               ← Volver
             </Link>
-            <h1 className="text-3xl font-bold text-white">Detalle de Reserva</h1>
+            <h1 className='text-3xl font-bold text-white'>Detalle de Reserva</h1>
           </div>
-          <p className="text-gray-400 mt-2">Reserva #{reservation._id.slice(-8).toUpperCase()}</p>
+          <p className='text-gray-400 mt-2'>Reserva #{reservation._id.slice(-8).toUpperCase()}</p>
         </div>
-        <div className="flex gap-4">
+        <div className='flex gap-4'>
           <button
             onClick={deleteReservation}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all"
+            className='px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all'
           >
             Eliminar
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className='lg:col-span-2 space-y-6'>
           {/* Guest Information */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Información del Huésped</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h2 className='text-xl font-bold text-white mb-4'>Información del Huésped</h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Nombre</label>
-                <p className="text-white">
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Nombre</label>
+                <p className='text-white'>
                   {reservation.guestInfo.firstName} {reservation.guestInfo.lastName}
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">DNI/NIE</label>
-                <p className="text-white">{reservation.guestInfo.dni}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>DNI/NIE</label>
+                <p className='text-white'>{reservation.guestInfo.dni}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Teléfono</label>
-                <p className="text-white">{reservation.guestInfo.phone}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Teléfono</label>
+                <p className='text-white'>{reservation.guestInfo.phone}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                <p className="text-white">{reservation.userEmail}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Email</label>
+                <p className='text-white'>{reservation.userEmail}</p>
               </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-300 mb-1">Dirección</label>
-                <p className="text-white">
+              <div className='md:col-span-2'>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Dirección</label>
+                <p className='text-white'>
                   {reservation.guestInfo.address}, {reservation.guestInfo.city}{' '}
                   {reservation.guestInfo.postalCode}, {reservation.guestInfo.country}
                 </p>
@@ -265,126 +265,126 @@ export default function ReservationDetail() {
           </div>
 
           {/* Reservation Details */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Detalles de la Reserva</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h2 className='text-xl font-bold text-white mb-4'>Detalles de la Reserva</h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Habitación</label>
-                <p className="text-white">{reservation.room.name}</p>
-                <p className="text-gray-400 text-sm">{reservation.room.type}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Habitación</label>
+                <p className='text-white'>{reservation.room.name}</p>
+                <p className='text-gray-400 text-sm'>{reservation.room.type}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Huéspedes</label>
-                <p className="text-white">{reservation.guests}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Huéspedes</label>
+                <p className='text-white'>{reservation.guests}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Entrada</label>
-                <p className="text-white">{formatDate(reservation.checkIn)}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Entrada</label>
+                <p className='text-white'>{formatDate(reservation.checkIn)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Salida</label>
-                <p className="text-white">{formatDate(reservation.checkOut)}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Salida</label>
+                <p className='text-white'>{formatDate(reservation.checkOut)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className='block text-sm font-medium text-gray-300 mb-1'>
                   Precio por noche
                 </label>
-                <p className="text-white">{formatPrice(reservation.room.price)}</p>
+                <p className='text-white'>{formatPrice(reservation.room.price)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Total</label>
-                <p className="text-gold font-bold">{formatPrice(reservation.totalPrice)}</p>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>Total</label>
+                <p className='text-gold font-bold'>{formatPrice(reservation.totalPrice)}</p>
               </div>
             </div>
           </div>
 
           {/* Additional Information */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h2 className="text-xl font-bold text-white mb-4">Información Adicional</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h2 className='text-xl font-bold text-white mb-4'>Información Adicional</h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className='block text-sm font-medium text-gray-300 mb-1'>
                   Método de pago
                 </label>
-                <p className="text-white">{getPaymentMethodText(reservation.paymentMethod)}</p>
+                <p className='text-white'>{getPaymentMethodText(reservation.paymentMethod)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className='block text-sm font-medium text-gray-300 mb-1'>
                   Estado de pago
                 </label>
-                <p className="text-white capitalize">{reservation.paymentStatus}</p>
+                <p className='text-white capitalize'>{reservation.paymentStatus}</p>
               </div>
               {reservation.estimatedArrivalTime && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className='block text-sm font-medium text-gray-300 mb-1'>
                     Hora de llegada
                   </label>
-                  <p className="text-white">
+                  <p className='text-white'>
                     {getArrivalTimeText(reservation.estimatedArrivalTime)}
                   </p>
                 </div>
               )}
               {reservation.flightNumber && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">
+                  <label className='block text-sm font-medium text-gray-300 mb-1'>
                     Número de vuelo
                   </label>
-                  <p className="text-white">{reservation.flightNumber}</p>
+                  <p className='text-white'>{reservation.flightNumber}</p>
                 </div>
               )}
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+                <label className='block text-sm font-medium text-gray-300 mb-1'>
                   Alquiler de coche
                 </label>
-                <p className="text-white">{reservation.carRental ? 'Sí' : 'No'}</p>
+                <p className='text-white'>{reservation.carRental ? 'Sí' : 'No'}</p>
               </div>
             </div>
             {reservation.specialRequests && (
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-300 mb-1">
+              <div className='mt-4'>
+                <label className='block text-sm font-medium text-gray-300 mb-1'>
                   Solicitudes especiales
                 </label>
-                <p className="text-white">{reservation.specialRequests}</p>
+                <p className='text-white'>{reservation.specialRequests}</p>
               </div>
             )}
           </div>
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
+        <div className='space-y-6'>
           {/* Status and Actions */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h3 className="text-lg font-bold text-white mb-4">Estado y Acciones</h3>
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h3 className='text-lg font-bold text-white mb-4'>Estado y Acciones</h3>
 
-            <div className="space-y-4">
+            <div className='space-y-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">Estado</label>
+                <label className='block text-sm font-medium text-gray-300 mb-2'>Estado</label>
                 <select
                   value={reservation.status}
-                  onChange={(e) => updateReservation('status', e.target.value)}
+                  onChange={e => updateReservation('status', e.target.value)}
                   disabled={updating}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all"
+                  className='w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all'
                 >
-                  <option value="pending">Pendiente</option>
-                  <option value="confirmed">Confirmada</option>
-                  <option value="completed">Completada</option>
-                  <option value="cancelled">Cancelada</option>
+                  <option value='pending'>Pendiente</option>
+                  <option value='confirmed'>Confirmada</option>
+                  <option value='completed'>Completada</option>
+                  <option value='cancelled'>Cancelada</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className='block text-sm font-medium text-gray-300 mb-2'>
                   Estado de pago
                 </label>
                 <select
                   value={reservation.paymentStatus}
-                  onChange={(e) => updateReservation('paymentStatus', e.target.value)}
+                  onChange={e => updateReservation('paymentStatus', e.target.value)}
                   disabled={updating}
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all"
+                  className='w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all'
                 >
-                  <option value="pending">Pendiente</option>
-                  <option value="paid">Pagado</option>
-                  <option value="failed">Fallido</option>
+                  <option value='pending'>Pendiente</option>
+                  <option value='paid'>Pagado</option>
+                  <option value='failed'>Fallido</option>
                 </select>
               </div>
 
@@ -401,33 +401,33 @@ export default function ReservationDetail() {
           </div>
 
           {/* Admin Notes */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h3 className="text-lg font-bold text-white mb-4">Notas Administrativas</h3>
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h3 className='text-lg font-bold text-white mb-4'>Notas Administrativas</h3>
             <textarea
               value={adminNotes}
-              onChange={(e) => setAdminNotes(e.target.value)}
+              onChange={e => setAdminNotes(e.target.value)}
               onBlur={() => updateReservation('adminNotes', adminNotes)}
-              placeholder="Añadir notas administrativas..."
+              placeholder='Añadir notas administrativas...'
               rows={4}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all resize-none"
+              className='w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-500 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all resize-none'
             />
           </div>
 
           {/* Reservation Info */}
-          <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6">
-            <h3 className="text-lg font-bold text-white mb-4">Información de la Reserva</h3>
-            <div className="space-y-3 text-sm">
+          <div className='bg-white/10 backdrop-blur-md rounded-xl border border-white/20 p-6'>
+            <h3 className='text-lg font-bold text-white mb-4'>Información de la Reserva</h3>
+            <div className='space-y-3 text-sm'>
               <div>
-                <span className="text-gray-400">Creada:</span>
-                <p className="text-white">{formatDateTime(reservation.createdAt)}</p>
+                <span className='text-gray-400'>Creada:</span>
+                <p className='text-white'>{formatDateTime(reservation.createdAt)}</p>
               </div>
               <div>
-                <span className="text-gray-400">Actualizada:</span>
-                <p className="text-white">{formatDateTime(reservation.updatedAt)}</p>
+                <span className='text-gray-400'>Actualizada:</span>
+                <p className='text-white'>{formatDateTime(reservation.updatedAt)}</p>
               </div>
               <div>
-                <span className="text-gray-400">ID de usuario:</span>
-                <p className="text-white font-mono text-xs">{reservation.userId}</p>
+                <span className='text-gray-400'>ID de usuario:</span>
+                <p className='text-white font-mono text-xs'>{reservation.userId}</p>
               </div>
             </div>
           </div>
