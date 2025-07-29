@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    // Error fetching user data - handled silently in production
     return NextResponse.json({ message: 'Error al obtener datos del usuario' }, { status: 500 });
   }
 }

@@ -89,8 +89,8 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-md">
@@ -151,9 +151,9 @@ export default function LoginPage() {
           </form>
 
           <div className="my-6 flex items-center">
-            <div className="border-t border-white/20 flex-1"></div>
+            <div className="border-t border-white/20 flex-1" />
             <span className="px-4 text-gray-400 text-sm">o</span>
-            <div className="border-t border-white/20 flex-1"></div>
+            <div className="border-t border-white/20 flex-1" />
           </div>
 
           <button

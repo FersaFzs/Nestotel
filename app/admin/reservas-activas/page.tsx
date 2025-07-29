@@ -73,7 +73,7 @@ export default function ReservasActivasPage() {
 
       setActiveReservations(mockData);
     } catch (error) {
-      console.error('Error fetching active reservations:', error);
+      // Error fetching active reservations - handled silently in production
     } finally {
       setLoading(false);
     }

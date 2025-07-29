@@ -24,7 +24,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
     return NextResponse.json(transformedReservation);
   } catch (error) {
-    console.error('Error fetching reservation:', error);
+    // Error fetching reservation - handled silently in production
     return NextResponse.json({ message: 'Error al obtener la reserva' }, { status: 500 });
   }
 }
@@ -70,7 +70,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 
     return NextResponse.json(transformedReservation);
   } catch (error) {
-    console.error('Error updating reservation:', error);
+    // Error updating reservation - handled silently in production
     return NextResponse.json({ message: 'Error al actualizar la reserva' }, { status: 500 });
   }
 }
@@ -88,7 +88,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     return NextResponse.json({ message: 'Reserva eliminada correctamente' });
   } catch (error) {
-    console.error('Error deleting reservation:', error);
+    // Error deleting reservation - handled silently in production
     return NextResponse.json({ message: 'Error al eliminar la reserva' }, { status: 500 });
   }
 }

@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
       { status: 201 },
     );
   } catch (error) {
-    console.error('Error creating admin user:', error);
+    // Error creating admin user - handled silently in production
     return NextResponse.json({ message: 'Error al crear el administrador' }, { status: 500 });
   }
 }

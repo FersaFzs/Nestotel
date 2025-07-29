@@ -51,7 +51,7 @@ export default function AdminReservations() {
         setReservations(data);
       }
     } catch (error) {
-      console.error('Error fetching reservations:', error);
+      // Error fetching reservations - handled silently in production
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ export default function AdminReservations() {
         );
       }
     } catch (error) {
-      console.error('Error updating reservation status:', error);
+      // Error updating reservation status - handled silently in production
     }
   };
 

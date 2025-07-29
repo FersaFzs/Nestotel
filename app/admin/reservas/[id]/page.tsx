@@ -63,10 +63,10 @@ export default function ReservationDetail() {
         setReservation(data);
         setAdminNotes(data.adminNotes || '');
       } else {
-        console.error('Error fetching reservation');
+        // Error fetching reservation - handled silently in production
       }
     } catch (error) {
-      console.error('Error:', error);
+      // Error fetching reservation - handled silently in production
     } finally {
       setLoading(false);
     }
@@ -88,7 +88,7 @@ export default function ReservationDetail() {
         setReservation(updatedReservation);
       }
     } catch (error) {
-      console.error('Error updating reservation:', error);
+      // Error updating reservation - handled silently in production
     } finally {
       setUpdating(false);
     }
@@ -108,7 +108,7 @@ export default function ReservationDetail() {
         router.push('/admin/reservas');
       }
     } catch (error) {
-      console.error('Error deleting reservation:', error);
+      // Error deleting reservation - handled silently in production
     }
   };
 

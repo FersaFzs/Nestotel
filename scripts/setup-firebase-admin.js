@@ -62,7 +62,7 @@ try {
   }
 
   // Añadir las nuevas variables al final
-  const newEnvContent = existingEnv + '\n' + envVars;
+  const newEnvContent = `${existingEnv}\n${envVars}`;
 
   // Escribir el archivo
   fs.writeFileSync(envPath, newEnvContent);

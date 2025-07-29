@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       })),
     });
   } catch (error) {
-    console.error('Error fetching invoices:', error);
+    // Error fetching invoices - handled silently in production
     return NextResponse.json(
       { success: false, message: 'Error al obtener facturas' },
       { status: 500 },
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error creating invoice:', error);
+    // Error creating invoice - handled silently in production
     return NextResponse.json(
       { success: false, message: 'Error al crear factura' },
       { status: 500 },

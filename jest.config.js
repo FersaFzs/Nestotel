@@ -25,6 +25,9 @@ const customJestConfig = {
     '^@/styles/(.*)$': '<rootDir>/styles/$1',
     '^@/tests/(.*)$': '<rootDir>/tests/$1',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!(gsap|@gsap)/)',
+  ],
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     'components/**/*.{js,jsx,ts,tsx}',

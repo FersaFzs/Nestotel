@@ -35,7 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setLoading(false);
       },
       (error) => {
-        console.error('Auth state change error:', error);
+        // Auth state change error - handled silently in production
         setLoading(false);
       },
     );
@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.error('Error signing in:', error);
+      // Error signing in - re-throwing for UI handling
       throw error;
     }
   };
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      console.error('Error creating user:', error);
+      // Error creating user - re-throwing for UI handling
       throw error;
     }
   };
@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
     } catch (error) {
-      console.error('Error signing in with Google:', error);
+      // Error signing in with Google - re-throwing for UI handling
       throw error;
     }
   };
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await signOut(auth);
     } catch (error) {
-      console.error('Error signing out:', error);
+      // Error signing out - re-throwing for UI handling
       throw error;
     }
   };

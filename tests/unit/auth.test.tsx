@@ -1,7 +1,5 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import LoginPage from '../../app/login/page';
-import RegisterPage from '../../app/register/page';
-import { AuthProvider } from '../../lib/contexts/AuthContext';
 
 // Mock useAuth hook
 const mockLogin = jest.fn();
@@ -9,6 +7,7 @@ const mockRegister = jest.fn();
 const mockLoginWithGoogle = jest.fn();
 const mockLogout = jest.fn();
 
+// Mock the entire AuthContext module
 jest.mock('../../lib/contexts/AuthContext', () => ({
   AuthProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   useAuth: () => ({
@@ -21,6 +20,32 @@ jest.mock('../../lib/contexts/AuthContext', () => ({
   }),
 }));
 
+// Mock useAuthGuard hook
+jest.mock('../../lib/hooks/useAuthGuard', () => ({
+  useAuthGuard: () => ({
+    isLoading: false,
+    isAuthenticated: false,
+    user: null,
+  }),
+}));
+
+// Mock useRouter
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+    prefetch: jest.fn(),
+    pathname: '/',
+    query: {},
+    asPath: '/',
+  }),
+  usePathname: () => '/',
+  useSearchParams: () => new URLSearchParams(),
+}));
+
 describe('Auth Pages', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -28,6 +53,8 @@ describe('Auth Pages', () => {
 
   describe('LoginPage', () => {
     it('renders login form correctly', () => {
+      // Import dynamically to avoid issues with hooks
+      const LoginPage = require('../../app/login/page').default;
       render(<LoginPage />);
 
       expect(screen.getByText('GRANADA INN')).toBeInTheDocument();
@@ -39,6 +66,7 @@ describe('Auth Pages', () => {
     });
 
     it('handles email login form submission', async () => {
+      const LoginPage = require('../../app/login/page').default;
       render(<LoginPage />);
 
       const emailInput = screen.getByPlaceholderText('tu@email.com');
@@ -55,6 +83,7 @@ describe('Auth Pages', () => {
     });
 
     it('handles Google login', async () => {
+      const LoginPage = require('../../app/login/page').default;
       render(<LoginPage />);
 
       const googleButton = screen.getByRole('button', { name: /continuar con google/i });
@@ -66,6 +95,7 @@ describe('Auth Pages', () => {
     });
 
     it('shows link to register page', () => {
+      const LoginPage = require('../../app/login/page').default;
       render(<LoginPage />);
 
       expect(screen.getByText('Regístrate aquí')).toBeInTheDocument();
@@ -74,6 +104,7 @@ describe('Auth Pages', () => {
 
   describe('RegisterPage', () => {
     it('renders register form correctly', () => {
+      const RegisterPage = require('../../app/register/page').default;
       render(<RegisterPage />);
 
       expect(screen.getByText('GRANADA INN')).toBeInTheDocument();
@@ -84,6 +115,7 @@ describe('Auth Pages', () => {
     });
 
     it('validates password confirmation', async () => {
+      const RegisterPage = require('../../app/register/page').default;
       render(<RegisterPage />);
 
       const emailInput = screen.getByPlaceholderText('tu@email.com');
@@ -103,6 +135,7 @@ describe('Auth Pages', () => {
     });
 
     it('validates password length', async () => {
+      const RegisterPage = require('../../app/register/page').default;
       render(<RegisterPage />);
 
       const emailInput = screen.getByPlaceholderText('tu@email.com');
@@ -124,6 +157,7 @@ describe('Auth Pages', () => {
     });
 
     it('handles successful registration', async () => {
+      const RegisterPage = require('../../app/register/page').default;
       render(<RegisterPage />);
 
       const emailInput = screen.getByPlaceholderText('tu@email.com');
@@ -142,6 +176,7 @@ describe('Auth Pages', () => {
     });
 
     it('shows link to login page', () => {
+      const RegisterPage = require('../../app/register/page').default;
       render(<RegisterPage />);
 
       expect(screen.getByText('Inicia sesión aquí')).toBeInTheDocument();

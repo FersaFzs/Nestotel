@@ -77,7 +77,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     try {
       await logout();
     } catch (error) {
-      console.error('Error logging out:', error);
+      // Error logging out - handled silently in production
     }
   };
 

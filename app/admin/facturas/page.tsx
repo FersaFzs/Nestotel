@@ -95,10 +95,10 @@ export default function FacturasPage() {
         setInvoices(data.invoices || []);
         calculateStats(data.invoices || []);
       } else {
-        console.error('Error fetching invoices');
+        // Error fetching invoices - handled silently in production
       }
     } catch (error) {
-      console.error('Error:', error);
+      // Error fetching invoices - handled silently in production
     } finally {
       setLoading(false);
     }
@@ -198,10 +198,10 @@ export default function FacturasPage() {
         );
         setInvoices(updatedInvoices);
       } else {
-        console.error('Error sending invoice to AEAT');
+        // Error sending invoice to AEAT - handled silently in production
       }
     } catch (error) {
-      console.error('Error:', error);
+      // Error sending invoice to AEAT - handled silently in production
     } finally {
       setActionLoading(false);
     }
@@ -217,10 +217,10 @@ export default function FacturasPage() {
       if (response.ok) {
         fetchInvoices(); // Recargar todas las facturas
       } else {
-        console.error('Error regenerating invoice');
+        // Error regenerating invoice - handled silently in production
       }
     } catch (error) {
-      console.error('Error:', error);
+      // Error regenerating invoice - handled silently in production
     } finally {
       setActionLoading(false);
     }

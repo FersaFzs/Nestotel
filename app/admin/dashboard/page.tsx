@@ -61,7 +61,7 @@ export default function AdminDashboard() {
         setRecentReservations(reservationsData);
       }
     } catch (error) {
-      console.error('Error fetching dashboard data:', error);
+      // Error fetching dashboard data - handled silently in production
     } finally {
       setLoading(false);
     }

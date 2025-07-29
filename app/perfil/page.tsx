@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '../../lib/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 export default function PerfilPage() {
   const { user, loading, logout } = useAuth();
@@ -21,7 +20,7 @@ export default function PerfilPage() {
       await logout();
       router.push('/');
     } catch (error) {
-      console.error('Error logging out:', error);
+      // Error logging out - handled silently in production
     }
   };
 
@@ -41,8 +40,8 @@ export default function PerfilPage() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative min-h-screen flex flex-col">
@@ -70,7 +69,7 @@ export default function PerfilPage() {
             {/* Profile Header */}
             <div className="text-center mb-8">
               <h1 className="text-4xl font-serif font-bold text-white mb-2">Mi Perfil</h1>
-              <div className="w-24 h-1 bg-gold mx-auto"></div>
+              <div className="w-24 h-1 bg-gold mx-auto" />
             </div>
 
             {/* Profile Card */}

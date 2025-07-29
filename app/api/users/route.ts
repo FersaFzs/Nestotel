@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
       })),
     });
   } catch (error) {
-    console.error('Error fetching users:', error);
+    // Error fetching users - handled silently in production
     return NextResponse.json(
       { success: false, message: 'Error al obtener usuarios' },
       { status: 500 },

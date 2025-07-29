@@ -5,9 +5,11 @@ jest.mock('gsap', () => ({
   gsap: {
     to: jest.fn(),
     from: jest.fn(),
+    fromTo: jest.fn(),
     timeline: jest.fn(() => ({
       to: jest.fn(),
       from: jest.fn(),
+      fromTo: jest.fn(),
       add: jest.fn(),
       addLabel: jest.fn(),
       call: jest.fn(),
@@ -15,7 +17,6 @@ jest.mock('gsap', () => ({
       delay: jest.fn(),
       duration: jest.fn(),
       eventCallback: jest.fn(),
-      fromTo: jest.fn(),
       getTweensOf: jest.fn(),
       invalidate: jest.fn(),
       kill: jest.fn(),
@@ -34,7 +35,6 @@ jest.mock('gsap', () => ({
       staggerTo: jest.fn(),
       time: jest.fn(),
       timeScale: jest.fn(),
-      to: jest.fn(),
       tweenFromTo: jest.fn(),
       tweenTo: jest.fn(),
       yoyo: jest.fn(),
@@ -46,9 +46,6 @@ jest.mock('gsap', () => ({
     isTweening: jest.fn(),
     killTweensOf: jest.fn(),
     setTweensOf: jest.fn(),
-    to: jest.fn(),
-    from: jest.fn(),
-    fromTo: jest.fn(),
     staggerFrom: jest.fn(),
     staggerFromTo: jest.fn(),
     staggerTo: jest.fn(),
@@ -91,12 +88,8 @@ jest.mock('gsap', () => ({
       staggerFrom: jest.fn(),
       staggerFromTo: jest.fn(),
       staggerTo: jest.fn(),
-      time: jest.fn(),
-      timeScale: jest.fn(),
-      to: jest.fn(),
       tweenFromTo: jest.fn(),
       tweenTo: jest.fn(),
-      yoyo: jest.fn(),
     },
   },
   ScrollTrigger: {
@@ -115,11 +108,32 @@ jest.mock('gsap', () => ({
     isInViewport: jest.fn(),
     maxScroll: jest.fn(),
     observe: jest.fn(),
-    refresh: jest.fn(),
     setMatchMedia: jest.fn(),
     sort: jest.fn(),
-    update: jest.fn(),
   },
+}));
+
+// Mock Next.js router
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(() => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+    prefetch: jest.fn(),
+    pathname: '/',
+    query: {},
+    asPath: '/',
+  })),
+  usePathname: jest.fn(() => '/'),
+  useSearchParams: jest.fn(() => new URLSearchParams()),
+}));
+
+// Mock Next.js
+jest.mock('next', () => ({
+  __esModule: true,
+  default: jest.fn(),
 }));
 
 // Mock window.matchMedia

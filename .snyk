@@ -1,0 +1,11 @@
+version: v1.25.0
+ignore:
+  'npm:package-name@version':
+    - id: 'vulnerability-id'
+      reason: 'No fix available'
+      expires: '2024-12-31T00:00:00.000Z'
+patch:
+  'npm:package-name@version':
+    - id: 'vulnerability-id'
+      path: 'path/to/patch'
+      expires: '2024-12-31T00:00:00.000Z' 

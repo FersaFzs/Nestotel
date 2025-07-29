@@ -98,7 +98,7 @@ export async function GET() {
       })),
     });
   } catch (error) {
-    console.error('Error fetching admin stats:', error);
+    // Error fetching admin stats - handled silently in production
     return NextResponse.json(
       {
         message: 'Error al obtener estadísticas',

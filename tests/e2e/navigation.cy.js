@@ -33,6 +33,6 @@ describe('Navigation Tests', () => {
   it('should navigate back to homepage from auth pages', () => {
     cy.visit('/login');
     cy.contains('GRANADA INN').click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/');
+    cy.url().should('eq', `${Cypress.config().baseUrl}/`);
   });
 });

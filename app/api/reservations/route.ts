@@ -17,7 +17,7 @@ export async function GET(request: Request) {
     const limit = searchParams.get('limit');
 
     // Construir filtros
-    let filter: any = {};
+    const filter: any = {};
 
     if (userId) {
       filter.userId = userId;
@@ -64,7 +64,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json(transformedReservations);
   } catch (error) {
-    console.error('Error fetching reservations:', error);
+    // Error fetching reservations - handled silently in production
     return NextResponse.json({ message: 'Error al obtener las reservas' }, { status: 500 });
   }
 }

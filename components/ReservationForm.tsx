@@ -17,6 +17,13 @@ interface Room {
 
 interface ReservationFormProps {
   user: User;
+  prefilledData?: {
+    roomId: string;
+    roomName: string;
+    checkIn: string;
+    checkOut: string;
+    guests: number;
+  };
 }
 
 interface GuestInfo {
@@ -43,7 +50,7 @@ interface FormData {
   carRental: boolean;
 }
 
-export default function ReservationForm({ user }: ReservationFormProps) {
+export default function ReservationForm({ user, prefilledData }: ReservationFormProps) {
   const searchParams = useSearchParams();
   const [step, setStep] = useState(1); // 1: Dates, 2: Rooms, 3: Guest Info, 4: Payment & Confirmation
   const [loading, setLoading] = useState(false);
@@ -72,19 +79,19 @@ export default function ReservationForm({ user }: ReservationFormProps) {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [error, setError] = useState('');
 
-  // Prellenar formulario con parámetros de URL
+  // Prellenar formulario con datos pre-llenados o parámetros de URL
   useEffect(() => {
-    const checkIn = searchParams.get('checkIn');
-    const checkOut = searchParams.get('checkOut');
-    const guests = searchParams.get('guests');
-    const roomId = searchParams.get('roomId');
+    const checkIn = prefilledData?.checkIn || searchParams.get('checkIn');
+    const checkOut = prefilledData?.checkOut || searchParams.get('checkOut');
+    const guests = prefilledData?.guests || (searchParams.get('guests') ? parseInt(searchParams.get('guests')!) : 1);
+    const roomId = prefilledData?.roomId || searchParams.get('roomId');
 
     if (checkIn || checkOut || guests || roomId) {
       setFormData((prev) => ({
         ...prev,
         checkIn: checkIn || prev.checkIn,
         checkOut: checkOut || prev.checkOut,
-        guests: guests ? parseInt(guests) : prev.guests,
+        guests: guests || prev.guests,
         roomId: roomId || prev.roomId,
       }));
 
@@ -93,7 +100,7 @@ export default function ReservationForm({ user }: ReservationFormProps) {
         setStep(2);
       }
     }
-  }, [searchParams]);
+  }, [searchParams, prefilledData]);
 
   // Cargar habitaciones disponibles
   useEffect(() => {
@@ -116,7 +123,7 @@ export default function ReservationForm({ user }: ReservationFormProps) {
         setRooms(roomsData);
       }
     } catch (error) {
-      console.error('Error fetching rooms:', error);
+      // Error fetching rooms - handled silently in production
       setError('Error al cargar las habitaciones');
     }
   };

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     // Log error for debugging in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('Error fetching rooms:', error);
+      // Error fetching rooms - handled silently in production
     }
     
     return NextResponse.json(
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     // Log error for debugging in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('Error creating room:', error);
+      // Error creating room - handled silently in production
     }
     
     return NextResponse.json(

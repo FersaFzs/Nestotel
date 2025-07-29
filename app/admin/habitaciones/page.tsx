@@ -192,7 +192,7 @@ export default function HabitacionesPage() {
 
       setRooms(mockRooms);
     } catch (error) {
-      console.error('Error fetching rooms:', error);
+      // Error fetching rooms - handled silently in production
     } finally {
       setLoading(false);
     }

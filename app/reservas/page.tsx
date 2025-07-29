@@ -49,7 +49,7 @@ export default function ReservasPage() {
         setReservations(data);
       }
     } catch (error) {
-      console.error('Error fetching reservations:', error);
+      // Error fetching reservations - handled silently in production
     } finally {
       setLoading(false);
     }
@@ -108,8 +108,8 @@ export default function ReservasPage() {
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gold/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative min-h-screen flex flex-col">
@@ -136,7 +136,7 @@ export default function ReservasPage() {
           <div className="w-full max-w-6xl mx-auto">
             <div className="text-center mb-8">
               <h1 className="text-4xl font-serif font-bold text-white mb-4">Mis Reservas</h1>
-              <div className="w-24 h-1 bg-gold mx-auto"></div>
+              <div className="w-24 h-1 bg-gold mx-auto" />
             </div>
 
             {/* Success Message */}

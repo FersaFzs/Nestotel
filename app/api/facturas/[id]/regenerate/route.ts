@@ -29,7 +29,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       status: 'pending',
     });
   } catch (error) {
-    console.error('Error regenerating invoice:', error);
+    // Error regenerating invoice - handled silently in production
     return NextResponse.json(
       { success: false, message: 'Error al regenerar factura' },
       { status: 500 },

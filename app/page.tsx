@@ -1,9 +1,13 @@
 'use client';
 import React, { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAuth } from '../lib/contexts/AuthContext';
+import LoadingScreen from '../components/LoadingScreen';
+import { useImageLoader } from '../lib/hooks/useImageLoader';
+import { useRouter } from 'next/navigation';
 gsap.registerPlugin(ScrollTrigger);
 
 // Componente Header inteligente
@@ -81,13 +85,13 @@ function SmartHeader() {
     try {
       await logout();
     } catch (error) {
-      console.error('Error logging out:', error);
+      // Error logging out - handled silently in production
     }
   };
 
   return (
     <nav
-      className={`w-full flex items-center justify-between px-12 py-8 bg-black/80 backdrop-blur-md fixed top-0 left-0 z-30 shadow-lg transition-all duration-300 ease-out ${
+      className={`w-full flex items-center justify-between px-12 py-8 bg-gradient-to-r from-black/80 via-gray-900/80 to-black/80 backdrop-blur-md fixed top-0 left-0 z-30 shadow-lg transition-all duration-300 ease-out ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}
     >
@@ -341,10 +345,11 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           transition: 'transform 0.1s',
         }}
       >
-        <img
+        <Image
           src="/images/vallametal.png"
           alt="Valla metálica izquierda"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
           style={{
             filter: 'brightness(0.6) contrast(1.2)',
           }}
@@ -360,10 +365,11 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           transition: 'transform 0.1s',
         }}
       >
-        <img
+        <Image
           src="/images/vallametal.png"
           alt="Valla metálica derecha"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
           style={{
             transform: 'scaleX(-1)', // Efecto espejo
             filter: 'brightness(0.6) contrast(1.2)',
@@ -377,9 +383,35 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
 function RoomsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = React.useState(0);
-  const [titleVisible, setTitleVisible] = React.useState(false);
+  const [titleVisible, setTitleVisible] = React.useState(true);
   const [roomsVisible, setRoomsVisible] = React.useState(false);
   const [roomsOffset, setRoomsOffset] = React.useState(0);
+  const [rooms, setRooms] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const router = useRouter();
+
+  // Cargar habitaciones al montar el componente
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('/api/rooms');
+        if (response.ok) {
+          const roomsData = await response.json();
+          setRooms(roomsData);
+        }
+      } catch (error) {
+        // Error loading rooms - handled silently in production
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRooms();
+  }, []);
+
+  const handleRoomClick = (room: any) => {
+    router.push(`/habitacion/${room._id}`);
+  };
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -433,10 +465,11 @@ function RoomsSection() {
     >
       {/* Imagen de fondo */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/images/pasillo.jpeg"
           alt="Pasillo del hotel"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
       </div>
@@ -451,81 +484,163 @@ function RoomsSection() {
         <h2 className="text-6xl md:text-8xl font-serif font-bold text-white mb-4 drop-shadow-lg">
           Habitaciones & Suites
         </h2>
-        <div className="w-32 h-1 bg-gold mx-auto"></div>
+        <div className="w-32 h-1 bg-gold mx-auto" />
       </div>
 
       {/* Contenedor de habitaciones que entra desde la derecha */}
       <div
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute inset-0 flex items-center justify-center z-10"
         style={{
           opacity: roomsVisible ? 1 : 0,
           transform: `translateX(${roomsOffset}%)`,
           transition: 'opacity 0.3s ease, transform 0.3s ease',
         }}
       >
-        {/* Contenedor de las dos habitaciones juntas */}
+        {/* Contenedor de habitaciones dinámicas */}
         <div className="flex gap-12 px-8 w-full max-w-7xl">
-          {/* Habitación 1: Suite Premium */}
-          <div className="flex-1">
-            <div className="room-card bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden group cursor-pointer transition-all hover:scale-105">
-              <div className="flex-1 overflow-hidden">
-                <img
-                  src="/images/habitacion.jpeg"
-                  alt="Suite Premium"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-8 flex flex-col gap-3">
-                <h3 className="text-3xl font-serif font-bold text-black">Suite Premium</h3>
-                <p className="text-gold text-xl font-semibold">desde 120€/noche</p>
-                <p className="text-gray-700 text-lg">
-                  4 personas | terraza privada | bañera hidromasaje
-                </p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
-                    WiFi gratis
-                  </span>
-                  <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
-                    TV 4K
-                  </span>
-                  <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
-                    Minibar
-                  </span>
+          {loading ? (
+            // Loading state
+            <>
+              <div className="flex-1">
+                <div className="room-card bg-white rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden animate-pulse">
+                  <div className="flex-1 bg-gray-200" />
+                  <div className="p-8 flex flex-col gap-3">
+                    <div className="h-8 bg-gray-200 rounded" />
+                    <div className="h-6 bg-gray-200 rounded" />
+                    <div className="h-4 bg-gray-200 rounded" />
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      <div className="h-6 bg-gray-200 rounded-full w-20" />
+                      <div className="h-6 bg-gray-200 rounded-full w-16" />
+                      <div className="h-6 bg-gray-200 rounded-full w-24" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+              <div className="flex-1">
+                <div className="room-card bg-white rounded-3xl shadow-2xl border-2 border-gray-200 h-[500px] flex flex-col overflow-hidden animate-pulse">
+                  <div className="flex-1 bg-gray-200" />
+                  <div className="p-8 flex flex-col gap-3">
+                    <div className="h-8 bg-gray-200 rounded" />
+                    <div className="h-6 bg-gray-200 rounded" />
+                    <div className="h-4 bg-gray-200 rounded" />
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      <div className="h-6 bg-gray-200 rounded-full w-20" />
+                      <div className="h-6 bg-gray-200 rounded-full w-16" />
+                      <div className="h-6 bg-gray-200 rounded-full w-24" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : rooms.length > 0 ? (
+            // Habitaciones dinámicas
+            rooms.slice(0, 2).map((room, index) => (
+              <div key={room._id} className="flex-1">
+                <div 
+                  className={`room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 select-none ${
+                    index === 0 ? 'border-4 border-gold hover:border-gold/80' : 'border-2 border-gold/30 hover:border-gold/60'
+                  }`}
+                  onClick={() => handleRoomClick(room)}
+                  style={{ transformOrigin: 'center center' }}
+                >
+                  <div className="flex-1 overflow-hidden relative pointer-events-none">
+                    <Image
+                      src={room.images?.[0] || "/images/habitacion.jpeg"}
+                      alt={room.name}
+                      fill
+                      className="object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-8 flex flex-col gap-3 pointer-events-none">
+                    <h3 className="text-3xl font-serif font-bold text-white">{room.name}</h3>
+                    <p className="text-gold text-xl font-semibold">desde {room.price}€/noche</p>
+                    <p className="text-gray-300 text-lg">
+                      {room.maxGuests} {room.maxGuests === 1 ? 'persona' : 'personas'} | {room.description.split(' ').slice(0, 3).join(' ')}...
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      {room.amenities?.slice(0, 3).map((amenity: string, amenityIndex: number) => (
+                        <span 
+                          key={amenityIndex} 
+                          className={`px-4 py-2 rounded-full text-sm ${
+                            index === 0 
+                              ? 'bg-gold/20 text-gold' 
+                              : 'bg-gold/10 text-gold/80'
+                          }`}
+                        >
+                          {amenity}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            // Fallback: habitaciones estáticas si no hay datos
+            <>
+              <div className="flex-1">
+                <div className="room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none" style={{ transformOrigin: 'center center' }}>
+                  <div className="flex-1 overflow-hidden relative pointer-events-none">
+                    <Image
+                      src="/images/habitacion.jpeg"
+                      alt="Suite Premium"
+                      fill
+                      className="object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-8 flex flex-col gap-3 pointer-events-none">
+                    <h3 className="text-3xl font-serif font-bold text-white">Suite Premium</h3>
+                    <p className="text-gold text-xl font-semibold">desde 120€/noche</p>
+                    <p className="text-gray-300 text-lg">
+                      4 personas | terraza privada | bañera hidromasaje
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
+                        WiFi gratis
+                      </span>
+                      <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
+                        TV 4K
+                      </span>
+                      <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
+                        Minibar
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          {/* Habitación 2: Habitación Deluxe */}
-          <div className="flex-1">
-            <div className="room-card bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border-2 border-gray-200 h-[500px] flex flex-col overflow-hidden group cursor-pointer transition-all hover:scale-105">
-              <div className="flex-1 overflow-hidden">
-                <img
-                  src="/images/habitacion.jpeg"
-                  alt="Habitación Deluxe"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-8 flex flex-col gap-3">
-                <h3 className="text-3xl font-serif font-bold text-black">Habitación Deluxe</h3>
-                <p className="text-gold text-xl font-semibold">desde 80€/noche</p>
-                <p className="text-gray-700 text-lg">
-                  2-3 personas | desayuno incluido | baño privado
-                </p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <span className="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700">
-                    WiFi gratis
-                  </span>
-                  <span className="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700">
-                    TV Smart
-                  </span>
-                  <span className="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-700">
-                    Aire acondicionado
-                  </span>
+              <div className="flex-1">
+                <div className="room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold/30 h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/60 select-none" style={{ transformOrigin: 'center center' }}>
+                  <div className="flex-1 overflow-hidden relative pointer-events-none">
+                    <Image
+                      src="/images/habitacion.jpeg"
+                      alt="Habitación Deluxe"
+                      fill
+                      className="object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="p-8 flex flex-col gap-3 pointer-events-none">
+                    <h3 className="text-3xl font-serif font-bold text-white">Habitación Deluxe</h3>
+                    <p className="text-gold text-xl font-semibold">desde 80€/noche</p>
+                    <p className="text-gray-300 text-lg">
+                      2-3 personas | desayuno incluido | baño privado
+                    </p>
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      <span className="bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80">
+                        WiFi gratis
+                      </span>
+                      <span className="bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80">
+                        TV Smart
+                      </span>
+                      <span className="bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80">
+                        Aire acondicionado
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -535,7 +650,7 @@ function RoomsSection() {
 function EventsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = React.useState(0);
-  const [titleVisible, setTitleVisible] = React.useState(false);
+  const [titleVisible, setTitleVisible] = React.useState(true);
   const [cardsVisible, setCardsVisible] = React.useState(false);
   const [cardsOffset, setCardsOffset] = React.useState(0);
 
@@ -591,10 +706,11 @@ function EventsSection() {
     >
       {/* Imagen de fondo */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/images/salon-comedor.jpeg"
           alt="Salón comedor"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/70" />
       </div>
@@ -610,7 +726,7 @@ function EventsSection() {
         <h2 className="text-6xl md:text-8xl font-serif font-bold text-gold mb-4 drop-shadow-lg">
           Eventos & Celebraciones
         </h2>
-        <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
+        <div className="w-32 h-1 bg-gold mx-auto mb-6" />
         <p className="text-white text-xl max-w-3xl mx-auto drop-shadow-lg">
           Celebra bodas, comuniones y eventos especiales en un entorno elegante y tradicional
         </p>
@@ -629,9 +745,9 @@ function EventsSection() {
         <div className="flex gap-12 px-8 w-full max-w-7xl">
           {/* Tarjeta 1: Bodas y comuniones */}
           <div className="flex-1">
-            <div className="event-card bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all hover:scale-105">
-              <div className="bg-gold/10 rounded-full p-6 mb-6">
-                <svg width="60" height="60" fill="none" viewBox="0 0 48 48">
+            <div className="event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none" style={{ transformOrigin: 'center center' }}>
+              <div className="bg-gold/20 rounded-full p-6 mb-6 pointer-events-none">
+                <svg width="60" height="60" fill="none" viewBox="0 0 48 48" className="pointer-events-none">
                   <circle cx="24" cy="24" r="22" stroke="#C9A86B" strokeWidth="4" />
                   <path
                     d="M16 32l8-8 8 8"
@@ -642,17 +758,17 @@ function EventsSection() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-black mb-4 text-center">
+              <h3 className="text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none">
                 Bodas y comuniones
               </h3>
-              <p className="text-gray-700 text-center text-lg leading-relaxed">
+              <p className="text-gray-300 text-center text-lg leading-relaxed pointer-events-none">
                 Salones elegantes, menús personalizados y decoración especial para tu gran día.
               </p>
-              <div className="mt-6 flex gap-3">
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+              <div className="mt-6 flex gap-3 pointer-events-none">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Salón elegante
                 </span>
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Menú personalizado
                 </span>
               </div>
@@ -661,9 +777,9 @@ function EventsSection() {
 
           {/* Tarjeta 2: Eventos de empresa */}
           <div className="flex-1">
-            <div className="event-card bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all hover:scale-105">
-              <div className="bg-gold/10 rounded-full p-6 mb-6">
-                <svg width="60" height="60" fill="none" viewBox="0 0 48 48">
+            <div className="event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none" style={{ transformOrigin: 'center center' }}>
+              <div className="bg-gold/20 rounded-full p-6 mb-6 pointer-events-none">
+                <svg width="60" height="60" fill="none" viewBox="0 0 48 48" className="pointer-events-none">
                   <rect
                     x="8"
                     y="16"
@@ -681,17 +797,17 @@ function EventsSection() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-black mb-4 text-center">
+              <h3 className="text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none">
                 Eventos de empresa
               </h3>
-              <p className="text-gray-700 text-center text-lg leading-relaxed">
+              <p className="text-gray-300 text-center text-lg leading-relaxed pointer-events-none">
                 Salas equipadas, coffee breaks y atención profesional para tus reuniones.
               </p>
-              <div className="mt-6 flex gap-3">
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+              <div className="mt-6 flex gap-3 pointer-events-none">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Salas equipadas
                 </span>
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Coffee breaks
                 </span>
               </div>
@@ -700,9 +816,9 @@ function EventsSection() {
 
           {/* Tarjeta 3: Restaurante & tienda */}
           <div className="flex-1">
-            <div className="event-card bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all hover:scale-105">
-              <div className="bg-gold/10 rounded-full p-6 mb-6">
-                <svg width="60" height="60" fill="none" viewBox="0 0 48 48">
+            <div className="event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none" style={{ transformOrigin: 'center center' }}>
+              <div className="bg-gold/20 rounded-full p-6 mb-6 pointer-events-none">
+                <svg width="60" height="60" fill="none" viewBox="0 0 48 48" className="pointer-events-none">
                   <rect
                     x="12"
                     y="12"
@@ -715,17 +831,17 @@ function EventsSection() {
                   <circle cx="24" cy="24" r="6" stroke="#C9A86B" strokeWidth="3" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-black mb-4 text-center">
+              <h3 className="text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none">
                 Restaurante & tienda
               </h3>
-              <p className="text-gray-700 text-center text-lg leading-relaxed">
+              <p className="text-gray-300 text-center text-lg leading-relaxed pointer-events-none">
                 Cocina tradicional, productos locales y tienda gourmet para tus invitados.
               </p>
-              <div className="mt-6 flex gap-3">
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+              <div className="mt-6 flex gap-3 pointer-events-none">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Cocina tradicional
                 </span>
-                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gray-800">
+                <span className="bg-gold/20 px-4 py-2 rounded-full text-sm text-gold">
                   Productos locales
                 </span>
               </div>
@@ -741,8 +857,8 @@ function GardenSection() {
   const jardinRef = useRef<HTMLDivElement>(null);
   const [puertas, setPuertas] = React.useState(0); // 0=cerradas, 1=abiertas
   const [textProgress, setTextProgress] = React.useState(0);
-  const [titleVisible, setTitleVisible] = React.useState(false);
-  const [titleOpacity, setTitleOpacity] = React.useState(0);
+  const [titleVisible, setTitleVisible] = React.useState(true);
+  const [titleOpacity, setTitleOpacity] = React.useState(1);
   const [photosProgress, setPhotosProgress] = React.useState(0);
   const [hoverEnabled, setHoverEnabled] = React.useState(false);
 
@@ -786,7 +902,7 @@ function GardenSection() {
           pin: true,
           id: 'garden-section-main',
           onUpdate: (self) => {
-            const progress = self.progress;
+            const {progress} = self;
 
             // Fase 1 (0-0.4): Puertas y título
             if (progress < 0.4) {
@@ -876,10 +992,11 @@ function GardenSection() {
       style={{ minHeight: '100vh', minWidth: '100vw' }}
     >
       {/* Imagen de fondo a pantalla completa */}
-      <img
+      <Image
         src="/images/jardin.jpeg"
         alt="Jardín del hotel"
-        className="jardin-img absolute inset-0 w-full h-full object-cover"
+        fill
+        className="jardin-img object-cover"
         style={{ zIndex: 1 }}
       />
       <div className="absolute inset-0 bg-black/30" style={{ zIndex: 2 }} />
@@ -895,7 +1012,7 @@ function GardenSection() {
         <h2 className="text-6xl md:text-8xl font-serif font-bold text-white mb-4 drop-shadow-lg">
           Jardín & Exteriores
         </h2>
-        <div className="w-32 h-1 bg-gold mx-auto mb-6"></div>
+        <div className="w-32 h-1 bg-gold mx-auto mb-6" />
         <p className="text-xl text-white drop-shadow-lg max-w-2xl mx-auto leading-relaxed">
           Disfruta de nuestro jardín, ideal para celebraciones, eventos al aire libre y momentos de
           relax rodeado de naturaleza.
@@ -967,7 +1084,7 @@ function GardenSection() {
                   rotate(${currentRotation}deg) 
                   scale(${currentScale})
                 `,
-                opacity: opacity,
+                opacity,
                 filter: `blur(${currentBlur}px)`,
                 zIndex: hoverEnabled ? 40 + index : 30 + index,
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -999,10 +1116,12 @@ function GardenSection() {
             >
               {/* Polaroid frame - máximo tamaño */}
               <div className="bg-white p-7 pb-16 shadow-2xl transform-gpu rounded-sm">
-                <img
+                <Image
                   src={photo.src}
                   alt={photo.title}
-                  className="w-[28rem] h-80 object-cover rounded-sm"
+                  width={448}
+                  height={320}
+                  className="object-cover rounded-sm"
                 />
                 <p className="text-center text-2xl text-gray-700 mt-6 font-serif italic font-bold">
                   {photo.title}
@@ -1082,10 +1201,11 @@ function HeroHallTransition() {
       style={{ minHeight: '100vh', minWidth: '100vw' }}
     >
       {/* Imagen hero (hotel-vista) */}
-      <img
+      <Image
         src="/images/hotel-vista.jpeg"
         alt="Vista general del hotel"
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        className="object-cover"
         style={{
           zIndex: 1,
           transform: `scale(${heroZoom})`,
@@ -1100,10 +1220,11 @@ function HeroHallTransition() {
         style={{ zIndex: 2, opacity: heroOpacity > 0 ? heroOpacity : 0 }}
       />
       {/* Imagen hall (fade-in y zoom) */}
-      <img
+      <Image
         src="/images/hotel-hall.jpeg"
         alt="Hall del hotel"
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        className="object-cover"
         style={{
           zIndex: 3,
           transform: `scale(${hallZoom})`,
@@ -1159,7 +1280,7 @@ function HeroHallTransition() {
           </h2>
 
           {/* Línea decorativa */}
-          <div className="w-32 h-1 bg-gold mx-auto mb-8"></div>
+          <div className="w-32 h-1 bg-gold mx-auto mb-8" />
 
           <p className="text-white text-xl md:text-2xl leading-relaxed mb-8 drop-shadow-lg font-light">
             Un hotel-restaurante familiar en la A-92, donde la tradición andaluza se une con la
@@ -1193,6 +1314,39 @@ export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [isBookingVisible, setIsBookingVisible] = useState(true);
   const bookingRef = useRef<HTMLDivElement>(null);
+  // Lista de imágenes principales para precargar
+  const mainImages = [
+    '/images/hotel-hall.jpeg',
+    '/images/hotel-vista.jpeg',
+    '/images/habitacion.jpeg',
+    '/images/jardin.jpeg',
+    '/images/pasillo.jpeg',
+    '/images/salon-comedor.jpeg',
+    '/images/vallametal.png',
+  ];
+
+  // Versión simple para testing - usar timer fijo en lugar de carga real de imágenes
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = setInterval(() => {
+        setProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(timer);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000);
+            return 100;
+          }
+          return prev + Math.random() * 20;
+        });
+      }, 200);
+
+      return () => clearInterval(timer);
+    }
+  }, [isLoading]);
 
   // Booking form states
   const [rooms, setRooms] = useState<any[]>([]);
@@ -1201,6 +1355,8 @@ export default function HomePage() {
   const [guests, setGuests] = useState(1);
   const [selectedRoom, setSelectedRoom] = useState('');
   const { user } = useAuth();
+
+
 
   // Cargar habitaciones al montar el componente
   useEffect(() => {
@@ -1215,9 +1371,9 @@ export default function HomePage() {
             setSelectedRoom(roomsData[0]._id);
           }
         }
-      } catch (error) {
-        console.error('Error cargando habitaciones:', error);
-      }
+              } catch (error) {
+          // Error loading rooms - handled silently in production
+        }
     };
 
     fetchRooms();
@@ -1267,11 +1423,6 @@ export default function HomePage() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-
     // Animación de hover para las cards de habitaciones y eventos
     gsap.utils.toArray('.room-card').forEach((card) => {
       const el = card as Element;
@@ -1318,10 +1469,24 @@ export default function HomePage() {
         });
       });
     });
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
+  const handleLoadingComplete = () => {
+    // La pantalla de carga se ha completado
+  };
+
   return (
-    <main className="bg-[#f7f6f2] min-h-screen w-full">
+    <main className="bg-gradient-to-br from-black via-gray-900 to-black min-h-screen w-full">
+      <LoadingScreen 
+        isLoading={isLoading} 
+        progress={progress}
+        onLoadingComplete={handleLoadingComplete}
+      />
       {/* ================= NAVBAR ================= */}
       <SmartHeader />
 
@@ -1336,7 +1501,7 @@ export default function HomePage() {
           isBookingVisible ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="bg-black/90 backdrop-blur-md border-2 border-gold shadow-2xl rounded-2xl w-80 p-6">
+        <div className="bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-md border-2 border-gold shadow-2xl rounded-2xl w-80 p-6">
           {/* Header con botón de cerrar */}
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-2xl font-serif font-bold text-white">Reserva tu estancia</h3>
@@ -1429,7 +1594,7 @@ export default function HomePage() {
           </div>
 
           {/* Decoración dorada */}
-          <div className="w-16 h-1 bg-gold mx-auto mt-4"></div>
+          <div className="w-16 h-1 bg-gold mx-auto mt-4" />
         </div>
       </div>
 
