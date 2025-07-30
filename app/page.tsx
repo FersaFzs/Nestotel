@@ -331,7 +331,7 @@ function SmartHeader() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className='lg:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-md'>
+        <div className='lg:hidden fixed inset-0 z-40 bg-gradient-to-r from-black via-gray-900 to-black'>
           <div className='flex flex-col h-full'>
             {/* Mobile Menu Header */}
             <div className='flex items-center justify-between p-6 border-b border-white/10'>
@@ -636,18 +636,12 @@ function RoomsSection() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        console.log('RoomsSection: Fetching rooms from API...');
         const response = await fetch('/api/rooms');
-        console.log('RoomsSection: Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
-          console.log('RoomsSection: Rooms data:', roomsData);
           setRooms(roomsData);
-        } else {
-          console.error('RoomsSection: Failed to fetch rooms:', response.status);
         }
       } catch (error) {
-        console.error('RoomsSection: Error fetching rooms:', error);
         // Error loading rooms - handled silently in production
       } finally {
         setLoading(false);
@@ -1602,7 +1596,7 @@ function HeroHallTransition() {
 
 export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const [isBookingVisible, setIsBookingVisible] = useState(true);
+  const [isBookingVisible, setIsBookingVisible] = useState(false);
   const bookingRef = useRef<HTMLDivElement>(null);
   // Lista de imágenes principales para precargar
   const mainImages = [
@@ -1650,12 +1644,9 @@ export default function HomePage() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        console.log('Fetching rooms from API...');
         const response = await fetch('/api/rooms');
-        console.log('Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
-          console.log('Rooms data:', roomsData);
           setRooms(roomsData);
           // Seleccionar la primera habitación por defecto
           if (roomsData.length > 0) {
@@ -1791,7 +1782,7 @@ export default function HomePage() {
       {/* Tarjeta de reservas lateral */}
       <div
         ref={bookingRef}
-        className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out ${
+        className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out hidden lg:block ${
           isBookingVisible ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -1894,7 +1885,7 @@ export default function HomePage() {
 
       {/* Pestaña para abrir cuando está oculto */}
       <div
-        className={`fixed top-32 left-0 z-40 transition-transform duration-500 ease-out ${
+        className={`fixed top-32 left-0 z-40 transition-transform duration-500 ease-out hidden lg:block ${
           isBookingVisible ? '-translate-x-full' : 'translate-x-0'
         }`}
       >
