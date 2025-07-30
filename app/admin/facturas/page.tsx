@@ -76,10 +76,7 @@ export default function FacturasPage() {
   ]);
 
   // Proteger rutas de admin
-  const {
-    loading: guardLoading,
-    hasAccess,
-  } = useAdminGuard({
+  const { loading: guardLoading, hasAccess } = useAdminGuard({
     requiredRole: 'admin',
     redirectTo: '/login',
   });

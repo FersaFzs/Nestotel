@@ -532,7 +532,7 @@ function RoomsSection() {
             rooms.slice(0, 2).map((room, index) => (
               <div key={room._id} className='flex-1'>
                 <div
-                  className={`room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 select-none ${
+                  className={`room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 select-none relative ${
                     index === 0
                       ? 'border-4 border-gold hover:border-gold/80'
                       : 'border-2 border-gold/30 hover:border-gold/60'
@@ -540,6 +540,9 @@ function RoomsSection() {
                   onClick={() => handleRoomClick(room)}
                   style={{ transformOrigin: 'center center' }}
                 >
+                  {/* Overlay invisible para capturar todos los eventos de hover */}
+                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src={room.images?.[0] || '/images/habitacion.jpeg'}
@@ -576,9 +579,12 @@ function RoomsSection() {
             <>
               <div className='flex-1'>
                 <div
-                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none'
+                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
                   style={{ transformOrigin: 'center center' }}
                 >
+                  {/* Overlay invisible para capturar todos los eventos de hover */}
+                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src='/images/habitacion.jpeg'
@@ -610,9 +616,12 @@ function RoomsSection() {
 
               <div className='flex-1'>
                 <div
-                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold/30 h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/60 select-none'
+                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold/30 h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/60 select-none relative'
                   style={{ transformOrigin: 'center center' }}
                 >
+                  {/* Overlay invisible para capturar todos los eventos de hover */}
+                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src='/images/habitacion.jpeg'
@@ -743,9 +752,12 @@ function EventsSection() {
           {/* Tarjeta 1: Bodas y comuniones */}
           <div className='flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
+              {/* Overlay invisible para capturar todos los eventos de hover */}
+              <div className='absolute inset-0 z-10 bg-transparent' />
+              
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
@@ -784,9 +796,12 @@ function EventsSection() {
           {/* Tarjeta 2: Eventos de empresa */}
           <div className='flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
+              {/* Overlay invisible para capturar todos los eventos de hover */}
+              <div className='absolute inset-0 z-10 bg-transparent' />
+              
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
@@ -832,9 +847,12 @@ function EventsSection() {
           {/* Tarjeta 3: Restaurante & tienda */}
           <div className='flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
+              {/* Overlay invisible para capturar todos los eventos de hover */}
+              <div className='absolute inset-0 z-10 bg-transparent' />
+              
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
