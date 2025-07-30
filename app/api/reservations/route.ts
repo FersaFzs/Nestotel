@@ -81,10 +81,10 @@ export async function POST(req: Request) {
   }
   try {
     const reservation = await Reservation.create(parse.data);
-    
+
     // Obtener información de la habitación
     const room = await Room.findById(reservation.roomId);
-    
+
     // Enviar email de confirmación
     const emailData = {
       reservationId: reservation._id.toString(),
@@ -100,12 +100,12 @@ export async function POST(req: Request) {
       hotelPhone: '+34 958 123 456',
       hotelEmail: 'info@granadainn.com',
     };
-    
+
     // Enviar email de forma asíncrona (no bloquear la respuesta)
     sendReservationConfirmationEmail(emailData).catch(error => {
       console.error('Error enviando email de confirmación:', error);
     });
-    
+
     return NextResponse.json(reservation, { status: 201 });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Error desconocido';

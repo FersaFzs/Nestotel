@@ -32,23 +32,23 @@ export interface EmailTemplate {
 
 // Template para email de confirmación de reserva
 export function createReservationConfirmationEmail(data: ReservationEmailData): EmailTemplate {
-  const { 
-    reservationId, 
-    guestName, 
-    guestEmail, 
-    roomName, 
-    checkIn, 
-    checkOut, 
-    guests, 
+  const {
+    reservationId,
+    guestName,
+    guestEmail,
+    roomName,
+    checkIn,
+    checkOut,
+    guests,
     totalPrice,
     hotelName,
     hotelAddress,
     hotelPhone,
-    hotelEmail
+    hotelEmail,
   } = data;
 
   const subject = `✅ Confirmación de Reserva - ${hotelName}`;
-  
+
   const html = `
     <!DOCTYPE html>
     <html lang="es">
@@ -285,10 +285,12 @@ Este es un prototipo demostrativo. Granada Inn es un hotel ficticio.
 }
 
 // Función para enviar email de confirmación
-export async function sendReservationConfirmationEmail(data: ReservationEmailData): Promise<boolean> {
+export async function sendReservationConfirmationEmail(
+  data: ReservationEmailData,
+): Promise<boolean> {
   try {
     const emailTemplate = createReservationConfirmationEmail(data);
-    
+
     const mailOptions = {
       from: `"${data.hotelName}" <${process.env.EMAIL_USER || 'granadainn.demo@gmail.com'}>`,
       to: data.guestEmail,
@@ -307,7 +309,9 @@ export async function sendReservationConfirmationEmail(data: ReservationEmailDat
 }
 
 // Función para enviar email de cancelación
-export async function sendReservationCancellationEmail(data: ReservationEmailData): Promise<boolean> {
+export async function sendReservationCancellationEmail(
+  data: ReservationEmailData,
+): Promise<boolean> {
   try {
     const mailOptions = {
       from: `"${data.hotelName}" <${process.env.EMAIL_USER || 'granadainn.demo@gmail.com'}>`,
@@ -361,4 +365,4 @@ Este es un prototipo demostrativo. Granada Inn es un hotel ficticio.
     console.error('Error enviando email de cancelación:', error);
     return false;
   }
-} 
+}

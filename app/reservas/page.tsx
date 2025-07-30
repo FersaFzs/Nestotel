@@ -27,6 +27,8 @@ export default function ReservasPage() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [testingEmail, setTestingEmail] = useState(false);
+  const [emailTestResult, setEmailTestResult] = useState<string | null>(null);
 
   useEffect(() => {
     if (searchParams.get('success') === 'true') {
@@ -93,6 +95,38 @@ export default function ReservasPage() {
         return 'Cancelada';
       default:
         return status;
+    }
+  };
+
+  const testEmailSystem = async () => {
+    if (!user?.email) {
+      setEmailTestResult('Error: No hay email disponible');
+      return;
+    }
+
+    setTestingEmail(true);
+    setEmailTestResult(null);
+
+    try {
+      const response = await fetch('/api/test-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: user.email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setEmailTestResult('✅ Email de prueba enviado correctamente. Revisa tu bandeja de entrada.');
+      } else {
+        setEmailTestResult(`❌ Error: ${data.error}`);
+      }
+    } catch (error) {
+      setEmailTestResult('❌ Error al enviar email de prueba');
+    } finally {
+      setTestingEmail(false);
     }
   };
 
@@ -181,7 +215,7 @@ export default function ReservasPage() {
             ) : (
               <div className='space-y-6'>
                 {/* Add New Reservation Button */}
-                <div className='text-center'>
+                <div className='text-center space-y-4'>
                   <Link
                     href='/reserva'
                     className='inline-flex items-center gap-2 bg-gold hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-xl transition-all duration-300'
@@ -196,6 +230,40 @@ export default function ReservasPage() {
                     </svg>
                     Nueva Reserva
                   </Link>
+                  
+                  {/* Test Email Button */}
+                  <div className='flex flex-col items-center gap-2'>
+                    <button
+                      onClick={testEmailSystem}
+                      disabled={testingEmail}
+                      className='inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 text-sm'
+                    >
+                      {testingEmail ? (
+                        <>
+                          <svg className='w-4 h-4 animate-spin' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' />
+                          </svg>
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' />
+                          </svg>
+                          Probar Email de Confirmación
+                        </>
+                      )}
+                    </button>
+                    {emailTestResult && (
+                      <div className={`text-sm px-3 py-2 rounded-lg ${
+                        emailTestResult.includes('✅') 
+                          ? 'bg-green-500/20 text-green-200 border border-green-500/50' 
+                          : 'bg-red-500/20 text-red-200 border border-red-500/50'
+                      }`}>
+                        {emailTestResult}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Reservations List */}
