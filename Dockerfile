@@ -1,5 +1,5 @@
 # Stage 1: Dependencies
-FROM node:20-alpine AS deps
+FROM node:24-alpine AS deps
 WORKDIR /app
 
 # Install dependencies only when needed
@@ -8,7 +8,7 @@ RUN corepack enable && corepack prepare pnpm@8.15.5 --activate
 RUN pnpm install --frozen-lockfile --prod=false
 
 # Stage 2: Builder
-FROM node:20-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Copy dependencies from deps stage
@@ -24,7 +24,7 @@ RUN corepack enable && corepack prepare pnpm@8.15.5 --activate
 RUN pnpm build
 
 # Stage 3: Runner
-FROM node:20-alpine AS runner
+FROM node:24-alpine AS runner
 WORKDIR /app
 
 # Create a non-root user
