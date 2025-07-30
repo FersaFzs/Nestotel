@@ -637,7 +637,7 @@ function RoomsSection() {
     const fetchRooms = async () => {
       try {
         console.log('RoomsSection: Fetching rooms from API...');
-        const response = await fetch('http://localhost:3001/api/rooms');
+        const response = await fetch('/api/rooms');
         console.log('RoomsSection: Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
@@ -1651,7 +1651,7 @@ export default function HomePage() {
     const fetchRooms = async () => {
       try {
         console.log('Fetching rooms from API...');
-        const response = await fetch('http://localhost:3001/api/rooms');
+        const response = await fetch('/api/rooms');
         console.log('Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
