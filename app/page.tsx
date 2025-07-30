@@ -331,7 +331,10 @@ function SmartHeader() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className='lg:hidden fixed inset-0 z-50 bg-black'>
+        <div 
+          className='lg:hidden fixed inset-0 z-[9999] bg-black backdrop-blur-none'
+          style={{ backgroundColor: 'black' }}
+        >
           <div className='flex flex-col h-full'>
             {/* Mobile Menu Header */}
             <div className='flex items-center justify-between p-6 border-b border-white/10'>
@@ -1783,7 +1786,7 @@ export default function HomePage() {
       <div
         ref={bookingRef}
         className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out ${
-          isBookingVisible ? 'translate-x-0' : '-translate-x-full'
+          isBookingVisible ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
         }`}
       >
         <div className='bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-md border-2 border-gold shadow-2xl rounded-2xl w-80 p-6'>
