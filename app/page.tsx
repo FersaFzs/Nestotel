@@ -331,7 +331,7 @@ function SmartHeader() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className='lg:hidden fixed inset-0 z-50 bg-gradient-to-r from-black via-gray-900 to-black'>
+        <div className='lg:hidden fixed inset-0 z-50 bg-black'>
           <div className='flex flex-col h-full'>
             {/* Mobile Menu Header */}
             <div className='flex items-center justify-between p-6 border-b border-white/10'>
@@ -1782,7 +1782,7 @@ export default function HomePage() {
       {/* Tarjeta de reservas lateral */}
       <div
         ref={bookingRef}
-        className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out hidden lg:block ${
+        className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out ${
           isBookingVisible ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -1891,11 +1891,11 @@ export default function HomePage() {
       >
         <button
           onClick={() => setIsBookingVisible(true)}
-          className='bg-gold hover:bg-yellow-500 text-black font-bold py-6 px-4 rounded-r-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center group'
+          className='bg-gold hover:bg-yellow-500 text-black font-bold py-6 px-4 lg:py-6 lg:px-4 py-3 px-2 rounded-r-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center group'
         >
           <div className='flex items-center'>
             <svg
-              className='w-6 h-6 text-black group-hover:animate-bounce'
+              className='w-6 h-6 lg:w-6 lg:h-6 w-4 h-4 text-black group-hover:animate-bounce'
               fill='none'
               stroke='currentColor'
               viewBox='0 0 24 24'
