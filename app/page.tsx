@@ -109,12 +109,7 @@ function SmartHeader() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className='lg:hidden text-white hover:text-gold transition-colors p-2'
         >
-          <svg
-            className='w-6 h-6'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-          >
+          <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             {isMobileMenuOpen ? (
               <path
                 strokeLinecap='round'
@@ -348,7 +343,12 @@ function SmartHeader() {
                 className='text-white hover:text-gold transition-colors p-2'
               >
                 <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M6 18L18 6M6 6l12 12'
+                  />
                 </svg>
               </button>
             </div>
@@ -429,8 +429,18 @@ function SmartHeader() {
                         className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+                        <svg
+                          className='w-5 h-5'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                          />
                         </svg>
                         <span>Mi Perfil</span>
                       </Link>
@@ -440,8 +450,18 @@ function SmartHeader() {
                         className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' />
+                        <svg
+                          className='w-5 h-5'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+                          />
                         </svg>
                         <span>Mis Reservas</span>
                       </Link>
@@ -451,8 +471,18 @@ function SmartHeader() {
                         className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6m0 0v6m0-6h6m-6 0H6' />
+                        <svg
+                          className='w-5 h-5'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M12 6v6m0 0v6m0-6h6m-6 0H6'
+                          />
                         </svg>
                         <span>Nueva Reserva</span>
                       </Link>
@@ -464,8 +494,18 @@ function SmartHeader() {
                         }}
                         className='flex items-center gap-3 p-3 text-white hover:bg-red-500/20 hover:text-red-400 transition-colors rounded-lg w-full text-left'
                       >
-                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1' />
+                        <svg
+                          className='w-5 h-5'
+                          fill='none'
+                          stroke='currentColor'
+                          viewBox='0 0 24 24'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth={2}
+                            d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1'
+                          />
                         </svg>
                         <span>Cerrar Sesión</span>
                       </button>
@@ -596,12 +636,18 @@ function RoomsSection() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('/api/rooms');
+        console.log('RoomsSection: Fetching rooms from API...');
+        const response = await fetch('http://localhost:3001/api/rooms');
+        console.log('RoomsSection: Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
+          console.log('RoomsSection: Rooms data:', roomsData);
           setRooms(roomsData);
+        } else {
+          console.error('RoomsSection: Failed to fetch rooms:', response.status);
         }
       } catch (error) {
+        console.error('RoomsSection: Error fetching rooms:', error);
         // Error loading rooms - handled silently in production
       } finally {
         setLoading(false);
@@ -1604,16 +1650,22 @@ export default function HomePage() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('/api/rooms');
+        console.log('Fetching rooms from API...');
+        const response = await fetch('http://localhost:3001/api/rooms');
+        console.log('Response status:', response.status);
         if (response.ok) {
           const roomsData = await response.json();
+          console.log('Rooms data:', roomsData);
           setRooms(roomsData);
           // Seleccionar la primera habitación por defecto
           if (roomsData.length > 0) {
             setSelectedRoom(roomsData[0]._id);
           }
+        } else {
+          console.error('Failed to fetch rooms:', response.status);
         }
       } catch (error) {
+        console.error('Error fetching rooms:', error);
         // Error loading rooms - handled silently in production
       }
     };
