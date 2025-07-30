@@ -13,10 +13,12 @@ estas pautas:
 
 ### 📧 Contacto Directo
 
-> **⚠️ NOTA:** Granada Inn es un hotel ficticio. Para reportar vulnerabilidades de seguridad en este prototipo, contacta al desarrollador.
+> **⚠️ NOTA:** Granada Inn es un hotel ficticio. Para reportar vulnerabilidades
+> de seguridad en este prototipo, contacta al desarrollador.
 
-**Email**: security@granadainn.com *(simulado)*  
-**PGP Key**: [Descargar clave pública](https://granadainn.com/security.asc) *(simulado)*
+**Email**: security@granadainn.com _(simulado)_  
+**PGP Key**: [Descargar clave pública](https://granadainn.com/security.asc)
+_(simulado)_
 
 ### 👨‍💻 **Contacto Real del Desarrollador**
 

@@ -18,13 +18,20 @@
 
 ## ⚠️ **IMPORTANTE: PROYECTO DEMO/PROTOTIPO**
 
-> **🚨 Granada Inn es un hotel ficticio creado únicamente con fines demostrativos.**
-> 
-> Este proyecto es un **prototipo funcional** desarrollado para mostrar capacidades técnicas y de desarrollo. Granada Inn no existe como entidad real, y toda la información de contacto, datos de reservas, facturas y usuarios son simulados.
-> 
-> **🎯 Objetivo del proyecto:** Demostrar habilidades técnicas y servir como base para adaptar a hoteles reales que requieran un sistema de gestión personalizado.
-> 
-> **💼 Para hoteles interesados:** Este prototipo puede ser adaptado y personalizado para las necesidades específicas de su establecimiento hotelero.
+> **🚨 Granada Inn es un hotel ficticio creado únicamente con fines
+> demostrativos.**
+>
+> Este proyecto es un **prototipo funcional** desarrollado para mostrar
+> capacidades técnicas y de desarrollo. Granada Inn no existe como entidad real,
+> y toda la información de contacto, datos de reservas, facturas y usuarios son
+> simulados.
+>
+> **🎯 Objetivo del proyecto:** Demostrar habilidades técnicas y servir como
+> base para adaptar a hoteles reales que requieran un sistema de gestión
+> personalizado.
+>
+> **💼 Para hoteles interesados:** Este prototipo puede ser adaptado y
+> personalizado para las necesidades específicas de su establecimiento hotelero.
 
 ## 📸 Capturas de Pantalla
 
@@ -356,12 +363,14 @@ detalles.
 
 ### 📞 **Información de Contacto**
 
-> **⚠️ NOTA:** Granada Inn es un hotel ficticio. La información de contacto es simulada.
+> **⚠️ NOTA:** Granada Inn es un hotel ficticio. La información de contacto es
+> simulada.
 
-- 📧 **Email**: soporte@granadainn.com *(simulado)*
-- 📞 **Teléfono**: +34 958 123 456 *(simulado)*
-- 🌐 **Web**: https://granadainn.com *(simulado*)
-- 💬 **Discord**: [Unirse al servidor](https://discord.gg/granadainn) *(simulado)*
+- 📧 **Email**: soporte@granadainn.com _(simulado)_
+- 📞 **Teléfono**: +34 958 123 456 _(simulado)_
+- 🌐 **Web**: https://granadainn.com _(simulado_)
+- 💬 **Discord**: [Unirse al servidor](https://discord.gg/granadainn)
+  _(simulado)_
 
 ### 👨‍💻 **Contacto Real del Desarrollador**
 
@@ -401,7 +410,7 @@ Para consultas sobre el proyecto o adaptaciones para hoteles reales:
 
 **🏨 Prototipo desarrollado con ❤️ para demostrar capacidades técnicas**
 
-*Granada Inn es un hotel ficticio creado únicamente con fines demostrativos*
+_Granada Inn es un hotel ficticio creado únicamente con fines demostrativos_
 
 [![GitHub stars](https://img.shields.io/github/stars/FersaFzs/Nestotel?style=social)](https://github.com/FersaFzs/Nestotel/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/FersaFzs/Nestotel?style=social)](https://github.com/FersaFzs/Nestotel/network/members)

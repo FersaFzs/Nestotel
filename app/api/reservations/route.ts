@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/db/mongoose';
 import Reservation from '../../../lib/db/models/Reservation';
+import Room from '../../../lib/db/models/Room';
 import { reservationSchema } from '../../../lib/validators/reservation';
+import { sendReservationConfirmationEmail } from '../../../lib/services/email';
 
 // Listar reservas (GET)
 export async function GET(request: Request) {
@@ -79,6 +81,31 @@ export async function POST(req: Request) {
   }
   try {
     const reservation = await Reservation.create(parse.data);
+    
+    // Obtener información de la habitación
+    const room = await Room.findById(reservation.roomId);
+    
+    // Enviar email de confirmación
+    const emailData = {
+      reservationId: reservation._id.toString(),
+      guestName: `${reservation.guestInfo.firstName} ${reservation.guestInfo.lastName}`,
+      guestEmail: reservation.userEmail,
+      roomName: room?.name || 'Habitación',
+      checkIn: reservation.checkIn.toISOString(),
+      checkOut: reservation.checkOut.toISOString(),
+      guests: reservation.guests,
+      totalPrice: reservation.totalPrice,
+      hotelName: 'Granada Inn',
+      hotelAddress: 'Calle Granada 123, 18001 Granada, España',
+      hotelPhone: '+34 958 123 456',
+      hotelEmail: 'info@granadainn.com',
+    };
+    
+    // Enviar email de forma asíncrona (no bloquear la respuesta)
+    sendReservationConfirmationEmail(emailData).catch(error => {
+      console.error('Error enviando email de confirmación:', error);
+    });
+    
     return NextResponse.json(reservation, { status: 201 });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Error desconocido';

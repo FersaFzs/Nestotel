@@ -142,11 +142,15 @@ adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### 🎯 **Propósito del Proyecto**
 
-Este proyecto es un **prototipo funcional** desarrollado para demostrar capacidades técnicas en el desarrollo de sistemas de gestión hotelera. Granada Inn es un hotel ficticio creado únicamente con fines demostrativos.
+Este proyecto es un **prototipo funcional** desarrollado para demostrar
+capacidades técnicas en el desarrollo de sistemas de gestión hotelera. Granada
+Inn es un hotel ficticio creado únicamente con fines demostrativos.
 
 ### 💼 **Aplicación Comercial**
 
-Este prototipo puede ser adaptado y personalizado para hoteles reales que requieran un sistema de gestión personalizado. Para consultas sobre adaptaciones comerciales, contacta al desarrollador.
+Este prototipo puede ser adaptado y personalizado para hoteles reales que
+requieran un sistema de gestión personalizado. Para consultas sobre adaptaciones
+comerciales, contacta al desarrollador.
 
 ---
 
