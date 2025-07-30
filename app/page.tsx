@@ -470,7 +470,7 @@ function RoomsSection() {
       </div>
       {/* Título principal */}
       <div
-        className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-center'
+        className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-5 text-center pointer-events-none'
         style={{
           opacity: titleVisible ? 1 : 0,
           transition: 'opacity 0.3s ease',
@@ -723,7 +723,7 @@ function EventsSection() {
 
       {/* Título principal */}
       <div
-        className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-center'
+        className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-5 text-center pointer-events-none'
         style={{
           opacity: titleVisible ? 1 : 0,
           transition: 'opacity 0.3s ease',
