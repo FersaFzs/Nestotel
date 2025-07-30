@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../../lib/contexts/AuthContext';
 import { useAdminGuard } from '../../lib/hooks/useAdminGuard';
+import { useOrientation } from '../../lib/hooks/useOrientation';
+import OrientationMessage from '../../components/OrientationMessage';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -14,6 +16,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const { isMobile, isPortrait } = useOrientation();
+
+  // Mostrar mensaje de orientación solo en móvil en modo portrait
+  const showOrientationMessage = isMobile && isPortrait;
 
   // Proteger rutas de admin con verificación de roles
   const {
@@ -90,7 +96,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <h1 className='text-xl font-bold text-gold'>Panel Admin</h1>
           </div>
 
-          <nav className='flex-1 p-6 space-y-2'>
+          <nav className='flex-1 p-6 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent'>
             {navigation.map(item => (
               <Link
                 key={item.name}
@@ -157,7 +163,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               </svg>
             </button>
           </div>
-          <nav className='p-6 space-y-2'>
+          <nav className='p-6 space-y-2 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent max-h-[calc(100vh-200px)]'>
             {navigation.map(item => (
               <Link
                 key={item.name}
@@ -207,6 +213,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         {/* Page content */}
         <main className='p-6'>{children}</main>
       </div>
+
+      {/* Orientation message for mobile */}
+      <OrientationMessage isVisible={showOrientationMessage} />
     </div>
   );
 }

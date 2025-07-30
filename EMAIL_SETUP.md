@@ -2,7 +2,9 @@
 
 ## 🎯 Descripción
 
-El sistema de emails de Granada Inn envía confirmaciones automáticas cuando se crean reservas. Los emails incluyen todos los detalles de la reserva y una nota clara de que es un prototipo demostrativo.
+El sistema de emails de Granada Inn envía confirmaciones automáticas cuando se
+crean reservas. Los emails incluyen todos los detalles de la reserva y una nota
+clara de que es un prototipo demostrativo.
 
 ## ⚙️ Configuración
 
@@ -22,7 +24,8 @@ Para usar Gmail como servidor SMTP:
 
 1. **Habilita la verificación en dos pasos** en tu cuenta de Google
 2. **Genera una contraseña de aplicación**:
-   - Ve a [Configuración de seguridad de Google](https://myaccount.google.com/security)
+   - Ve a
+     [Configuración de seguridad de Google](https://myaccount.google.com/security)
    - Busca "Contraseñas de aplicación"
    - Genera una nueva contraseña para "Correo"
    - Usa esta contraseña como `EMAIL_PASS`
@@ -57,7 +60,8 @@ const transporter = nodemailer.createTransporter({
 
 ### 1. Botón de Prueba
 
-En la página de reservas (`/reservas`), hay un botón azul "Probar Email de Confirmación" que envía un email de prueba a tu dirección registrada.
+En la página de reservas (`/reservas`), hay un botón azul "Probar Email de
+Confirmación" que envía un email de prueba a tu dirección registrada.
 
 ### 2. API de Prueba
 
@@ -74,7 +78,8 @@ curl -X POST http://localhost:3000/api/test-email \
 ### 1. Confirmación de Reserva
 
 - **Cuándo se envía**: Al crear una nueva reserva
-- **Contenido**: Detalles completos de la reserva, información del hotel, nota de prototipo
+- **Contenido**: Detalles completos de la reserva, información del hotel, nota
+  de prototipo
 - **Diseño**: HTML profesional con estilos CSS inline
 
 ### 2. Cancelación de Reserva
@@ -130,11 +135,13 @@ const emailData = {
 
 ### 1. Prototipo Demostrativo
 
-Todos los emails incluyen una nota clara de que Granada Inn es un hotel ficticio y que las reservas son demostrativas.
+Todos los emails incluyen una nota clara de que Granada Inn es un hotel ficticio
+y que las reservas son demostrativas.
 
 ### 2. Envío Asíncrono
 
-Los emails se envían de forma asíncrona para no bloquear la respuesta de la API. Si falla el envío, no afecta la creación de la reserva.
+Los emails se envían de forma asíncrona para no bloquear la respuesta de la API.
+Si falla el envío, no afecta la creación de la reserva.
 
 ### 3. Logs
 
@@ -148,10 +155,11 @@ Para un entorno de producción:
 2. **Configura SPF, DKIM y DMARC** para mejorar la entregabilidad
 3. **Implementa reintentos** para emails fallidos
 4. **Añade monitoreo** para detectar problemas de envío
-5. **Considera usar una cola de trabajos** como Bull o Agenda para emails masivos
+5. **Considera usar una cola de trabajos** como Bull o Agenda para emails
+   masivos
 
 ## 📚 Recursos Adicionales
 
 - [Documentación de Nodemailer](https://nodemailer.com/)
 - [Configuración de Gmail SMTP](https://support.google.com/mail/answer/7126229)
-- [Mejores prácticas de email](https://www.emailjs.com/docs/best-practices/) 
+- [Mejores prácticas de email](https://www.emailjs.com/docs/best-practices/)
