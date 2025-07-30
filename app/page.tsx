@@ -16,6 +16,7 @@ function SmartHeader() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout, loading } = useAuth();
 
   useEffect(() => {
@@ -95,14 +96,46 @@ function SmartHeader() {
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
       }`}
     >
-      <div
-        className='text-3xl font-serif tracking-widest text-gold font-bold cursor-pointer hover:text-yellow-400 transition-colors'
-        onClick={scrollToTop}
-      >
-        GRANADA INN
+      <div className='flex items-center gap-4'>
+        <div
+          className='text-3xl font-serif tracking-widest text-gold font-bold cursor-pointer hover:text-yellow-400 transition-colors'
+          onClick={scrollToTop}
+        >
+          GRANADA INN
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className='lg:hidden text-white hover:text-gold transition-colors p-2'
+        >
+          <svg
+            className='w-6 h-6'
+            fill='none'
+            stroke='currentColor'
+            viewBox='0 0 24 24'
+          >
+            {isMobileMenuOpen ? (
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M6 18L18 6M6 6l12 12'
+              />
+            ) : (
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M4 6h16M4 12h16M4 18h16'
+              />
+            )}
+          </svg>
+        </button>
       </div>
 
-      <div className='flex items-center gap-10'>
+      {/* Desktop Navigation */}
+      <div className='hidden lg:flex items-center gap-10'>
         {/* Navigation Menu */}
         <ul className='flex gap-10 text-lg text-white font-medium'>
           <li className='hover:text-gold transition-colors cursor-pointer' onClick={scrollToTop}>
@@ -116,15 +149,15 @@ function SmartHeader() {
           </li>
           <li
             className='hover:text-gold transition-colors cursor-pointer'
-            onClick={() => scrollToSection('events-section')}
-          >
-            Eventos
-          </li>
-          <li
-            className='hover:text-gold transition-colors cursor-pointer'
             onClick={() => scrollToSection('garden-section')}
           >
             Jardín
+          </li>
+          <li
+            className='hover:text-gold transition-colors cursor-pointer'
+            onClick={() => scrollToSection('events-section')}
+          >
+            Eventos
           </li>
           <li
             className='hover:text-gold transition-colors cursor-pointer'
@@ -300,6 +333,175 @@ function SmartHeader() {
           )}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className='lg:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-md'>
+          <div className='flex flex-col h-full'>
+            {/* Mobile Menu Header */}
+            <div className='flex items-center justify-between p-6 border-b border-white/10'>
+              <div className='text-2xl font-serif tracking-widest text-gold font-bold'>
+                GRANADA INN
+              </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className='text-white hover:text-gold transition-colors p-2'
+              >
+                <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+                </svg>
+              </button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className='flex-1 p-6'>
+              <ul className='space-y-6 text-xl text-white font-medium'>
+                <li
+                  className='hover:text-gold transition-colors cursor-pointer py-3 border-b border-white/10'
+                  onClick={() => {
+                    scrollToTop();
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Inicio
+                </li>
+                <li
+                  className='hover:text-gold transition-colors cursor-pointer py-3 border-b border-white/10'
+                  onClick={() => {
+                    scrollToSection('rooms-section');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Habitaciones
+                </li>
+                <li
+                  className='hover:text-gold transition-colors cursor-pointer py-3 border-b border-white/10'
+                  onClick={() => {
+                    scrollToSection('garden-section');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Jardín
+                </li>
+                <li
+                  className='hover:text-gold transition-colors cursor-pointer py-3 border-b border-white/10'
+                  onClick={() => {
+                    scrollToSection('events-section');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Eventos
+                </li>
+                <li
+                  className='hover:text-gold transition-colors cursor-pointer py-3 border-b border-white/10'
+                  onClick={() => {
+                    scrollToSection('footer');
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Contacto
+                </li>
+              </ul>
+
+              {/* Mobile Auth Section */}
+              <div className='mt-8 pt-6 border-t border-white/10'>
+                {loading ? (
+                  <div className='text-gray-400 text-center'>Cargando...</div>
+                ) : user ? (
+                  <div className='space-y-4'>
+                    <div className='flex items-center gap-3 p-3 bg-white/10 rounded-lg'>
+                      <div className='w-10 h-10 bg-gold rounded-full flex items-center justify-center text-black font-bold'>
+                        {user.displayName
+                          ? user.displayName[0].toUpperCase()
+                          : user.email?.[0]?.toUpperCase() || 'U'}
+                      </div>
+                      <div className='flex-1'>
+                        <p className='text-white font-medium'>
+                          {user.displayName || user.email?.split('@')[0] || 'Usuario'}
+                        </p>
+                        <p className='text-gray-400 text-sm'>{user.email}</p>
+                      </div>
+                    </div>
+
+                    <div className='space-y-2'>
+                      <Link
+                        href='/perfil'
+                        className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' />
+                        </svg>
+                        <span>Mi Perfil</span>
+                      </Link>
+
+                      <Link
+                        href='/reservas'
+                        className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' />
+                        </svg>
+                        <span>Mis Reservas</span>
+                      </Link>
+
+                      <Link
+                        href='/reserva'
+                        className='flex items-center gap-3 p-3 text-white hover:bg-gold/20 hover:text-gold transition-colors rounded-lg'
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 6v6m0 0v6m0-6h6m-6 0H6' />
+                        </svg>
+                        <span>Nueva Reserva</span>
+                      </Link>
+
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className='flex items-center gap-3 p-3 text-white hover:bg-red-500/20 hover:text-red-400 transition-colors rounded-lg w-full text-left'
+                      >
+                        <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1' />
+                        </svg>
+                        <span>Cerrar Sesión</span>
+                      </button>
+                    </div>
+
+                    <Link
+                      href='/reserva'
+                      className='block w-full bg-gold hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-medium transition-colors text-center mt-4'
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Reservar Ahora
+                    </Link>
+                  </div>
+                ) : (
+                  <div className='space-y-4'>
+                    <Link
+                      href='/login'
+                      className='block w-full text-white hover:text-gold transition-colors text-center py-3 border border-white/20 rounded-lg'
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Iniciar Sesión
+                    </Link>
+                    <Link
+                      href='/register'
+                      className='block w-full bg-gold hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-medium transition-colors text-center'
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Registrarse
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
