@@ -542,7 +542,7 @@ function RoomsSection() {
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
                   <div className='absolute inset-0 z-10 bg-transparent' />
-                  
+
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src={room.images?.[0] || '/images/habitacion.jpeg'}
@@ -558,11 +558,11 @@ function RoomsSection() {
                       {room.maxGuests} {room.maxGuests === 1 ? 'persona' : 'personas'} |{' '}
                       {room.description.split(' ').slice(0, 3).join(' ')}...
                     </p>
-                    <div className='flex flex-wrap gap-3 mt-4'>
+                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
                       {room.amenities?.slice(0, 3).map((amenity: string, amenityIndex: number) => (
                         <span
                           key={amenityIndex}
-                          className={`px-4 py-2 rounded-full text-sm ${
+                          className={`px-4 py-2 rounded-full text-sm pointer-events-none ${
                             index === 0 ? 'bg-gold/20 text-gold' : 'bg-gold/10 text-gold/80'
                           }`}
                         >
@@ -584,7 +584,7 @@ function RoomsSection() {
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
                   <div className='absolute inset-0 z-10 bg-transparent' />
-                  
+
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src='/images/habitacion.jpeg'
@@ -599,14 +599,14 @@ function RoomsSection() {
                     <p className='text-gray-300 text-lg'>
                       4 personas | terraza privada | bañera hidromasaje
                     </p>
-                    <div className='flex flex-wrap gap-3 mt-4'>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
+                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                         WiFi gratis
                       </span>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                         TV 4K
                       </span>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                         Minibar
                       </span>
                     </div>
@@ -621,7 +621,7 @@ function RoomsSection() {
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
                   <div className='absolute inset-0 z-10 bg-transparent' />
-                  
+
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src='/images/habitacion.jpeg'
@@ -636,14 +636,14 @@ function RoomsSection() {
                     <p className='text-gray-300 text-lg'>
                       2-3 personas | desayuno incluido | baño privado
                     </p>
-                    <div className='flex flex-wrap gap-3 mt-4'>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80'>
+                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
+                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
                         WiFi gratis
                       </span>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80'>
+                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
                         TV Smart
                       </span>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80'>
+                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
                         Aire acondicionado
                       </span>
                     </div>
@@ -757,7 +757,7 @@ function EventsSection() {
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
-              
+
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
@@ -783,10 +783,10 @@ function EventsSection() {
                 Salones elegantes, menús personalizados y decoración especial para tu gran día.
               </p>
               <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Salón elegante
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Menú personalizado
                 </span>
               </div>
@@ -801,7 +801,7 @@ function EventsSection() {
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
-              
+
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
@@ -834,10 +834,10 @@ function EventsSection() {
                 Salas equipadas, coffee breaks y atención profesional para tus reuniones.
               </p>
               <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Salas equipadas
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Coffee breaks
                 </span>
               </div>
@@ -852,7 +852,7 @@ function EventsSection() {
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
-              
+
               <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
                 <svg
                   width='60'
@@ -880,10 +880,10 @@ function EventsSection() {
                 Cocina tradicional, productos locales y tienda gourmet para tus invitados.
               </p>
               <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Cocina tradicional
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold'>
+                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
                   Productos locales
                 </span>
               </div>
