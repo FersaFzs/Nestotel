@@ -331,7 +331,7 @@ function SmartHeader() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className='lg:hidden fixed inset-0 z-40 bg-gradient-to-r from-black via-gray-900 to-black'>
+        <div className='lg:hidden fixed inset-0 z-50 bg-gradient-to-r from-black via-gray-900 to-black'>
           <div className='flex flex-col h-full'>
             {/* Mobile Menu Header */}
             <div className='flex items-center justify-between p-6 border-b border-white/10'>
@@ -1885,7 +1885,7 @@ export default function HomePage() {
 
       {/* Pestaña para abrir cuando está oculto */}
       <div
-        className={`fixed top-32 left-0 z-40 transition-transform duration-500 ease-out hidden lg:block ${
+        className={`fixed top-32 left-0 z-40 transition-transform duration-500 ease-out ${
           isBookingVisible ? '-translate-x-full' : 'translate-x-0'
         }`}
       >
