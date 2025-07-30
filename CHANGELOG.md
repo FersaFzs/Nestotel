@@ -2,12 +2,14 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
-El formato está basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/),
-y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+El formato está basado en
+[Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/), y este proyecto
+adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
 ### 🚀 Añadido
+
 - Sistema de CI/CD completo con GitHub Actions
 - Análisis de seguridad con Snyk
 - Cobertura de código con Codecov
@@ -16,6 +18,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Dependabot para actualizaciones automáticas
 
 ### 🔧 Mejorado
+
 - Optimización de imágenes con Next.js Image
 - Limpieza de console.log en producción
 - Unificación de estilos en toda la aplicación
@@ -23,6 +26,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Pantalla de carga profesional
 
 ### 🐛 Corregido
+
 - Z-index de títulos de sección que interfería con hover
 - Problemas de pointer-events en elementos de tarjetas
 - Console.log en código de producción
@@ -31,6 +35,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [1.0.0] - 2024-01-15
 
 ### 🚀 Añadido
+
 - **Sistema de gestión hotelera completo**
   - Landing page con animaciones GSAP
   - Sistema de reservas con validación
@@ -39,6 +44,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
   - Facturación electrónica española
 
 ### 🎨 Frontend
+
 - Next.js 14 con App Router
 - TypeScript para type safety
 - Tailwind CSS para diseño responsive
@@ -46,6 +52,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Componentes reutilizables
 
 ### 🔧 Backend
+
 - API Routes de Next.js
 - MongoDB con Mongoose
 - Validación con Zod
@@ -53,6 +60,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Docker para desarrollo
 
 ### 📊 Funcionalidades
+
 - Sistema de reservas completo
 - Facturación electrónica (AEAT)
 - Panel de administración
@@ -61,6 +69,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Testing con Jest y Cypress
 
 ### 🔒 Seguridad
+
 - Validación de datos con Zod
 - Autenticación Firebase
 - Protección de rutas
@@ -68,6 +77,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Rate limiting en APIs
 
 ### 📈 Performance
+
 - Server-side rendering
 - Code splitting automático
 - Optimización de imágenes
@@ -77,6 +87,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [0.9.0] - 2024-01-10
 
 ### 🚀 Añadido
+
 - Estructura base del proyecto
 - Configuración inicial de Next.js
 - Setup de TypeScript y Tailwind CSS
@@ -84,6 +95,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 - Modelos de base de datos
 
 ### 🔧 Mejorado
+
 - Configuración de desarrollo
 - Scripts de build y deployment
 - Documentación inicial
@@ -91,6 +103,7 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 ## [0.8.0] - 2024-01-05
 
 ### 🚀 Añadido
+
 - Concepto inicial del proyecto
 - Planificación de arquitectura
 - Definición de funcionalidades
@@ -125,4 +138,17 @@ y este proyecto adhiere al [Semantic Versioning](https://semver.org/spec/v2.0.0.
 
 ---
 
-**Para más información sobre cambios específicos, consulta los [commits de Git](https://github.com/FersaFzs/Nestotel/commits/master).** 
+## 📝 Notas del Proyecto
+
+### 🎯 **Propósito del Proyecto**
+
+Este proyecto es un **prototipo funcional** desarrollado para demostrar capacidades técnicas en el desarrollo de sistemas de gestión hotelera. Granada Inn es un hotel ficticio creado únicamente con fines demostrativos.
+
+### 💼 **Aplicación Comercial**
+
+Este prototipo puede ser adaptado y personalizado para hoteles reales que requieran un sistema de gestión personalizado. Para consultas sobre adaptaciones comerciales, contacta al desarrollador.
+
+---
+
+**Para más información sobre cambios específicos, consulta los
+[commits de Git](https://github.com/FersaFzs/Nestotel/commits/master).**

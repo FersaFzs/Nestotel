@@ -1,6 +1,7 @@
 # 🤝 Guía de Contribución
 
-¡Gracias por tu interés en contribuir a Granada Inn! Este documento te ayudará a comenzar.
+¡Gracias por tu interés en contribuir a Granada Inn! Este documento te ayudará a
+comenzar.
 
 ## 📋 Tabla de Contenidos
 
@@ -317,7 +318,8 @@ Cualquier información adicional relevante.
 
 ## 📄 Conventional Commits
 
-Usamos [Conventional Commits](https://www.conventionalcommits.org/) para mantener un historial de commits limpio.
+Usamos [Conventional Commits](https://www.conventionalcommits.org/) para
+mantener un historial de commits limpio.
 
 ### Tipos de Commits
 
@@ -354,6 +356,7 @@ chore: update dependencies to latest versions
 ```
 
 Ejemplo:
+
 ```bash
 feat(auth): add Google OAuth integration
 
@@ -395,4 +398,4 @@ Closes #123
 
 ---
 
-**¡Gracias por contribuir a Granada Inn! 🏨✨** 
+**¡Gracias por contribuir a Granada Inn! 🏨✨**

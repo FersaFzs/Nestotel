@@ -12,25 +12,44 @@
 [![Security](https://img.shields.io/badge/Security-Snyk%20Verified-brightgreen?style=for-the-badge)](https://snyk.io/)
 [![Performance](https://img.shields.io/badge/Performance-Lighthouse%20Score%3E90-brightgreen?style=for-the-badge)](https://developers.google.com/web/tools/lighthouse)
 
-> **Sistema de gestión hotelera moderno y completo** construido con tecnologías de vanguardia. Incluye reservas, facturación electrónica española, panel de administración avanzado y autenticación segura.
+> **Sistema de gestión hotelera moderno y completo** construido con tecnologías
+> de vanguardia. Incluye reservas, facturación electrónica española, panel de
+> administración avanzado y autenticación segura.
+
+## ⚠️ **IMPORTANTE: PROYECTO DEMO/PROTOTIPO**
+
+> **🚨 Granada Inn es un hotel ficticio creado únicamente con fines demostrativos.**
+> 
+> Este proyecto es un **prototipo funcional** desarrollado para mostrar capacidades técnicas y de desarrollo. Granada Inn no existe como entidad real, y toda la información de contacto, datos de reservas, facturas y usuarios son simulados.
+> 
+> **🎯 Objetivo del proyecto:** Demostrar habilidades técnicas y servir como base para adaptar a hoteles reales que requieran un sistema de gestión personalizado.
+> 
+> **💼 Para hoteles interesados:** Este prototipo puede ser adaptado y personalizado para las necesidades específicas de su establecimiento hotelero.
+
+## 📸 Capturas de Pantalla
 
 ## 📸 Capturas de Pantalla
 
 ### 🏠 Landing Page
+
 ![Landing Page](https://via.placeholder.com/800x450/1f2937/ffffff?text=Landing+Page+-+Granada+Inn)
 
 ### 📱 Panel de Administración
+
 ![Admin Dashboard](https://via.placeholder.com/800x450/1f2937/ffffff?text=Admin+Dashboard)
 
 ### 📅 Sistema de Reservas
+
 ![Reservation System](https://via.placeholder.com/800x450/1f2937/ffffff?text=Reservation+System)
 
 ### 🧾 Facturación Electrónica
+
 ![E-Invoice System](https://via.placeholder.com/800x450/1f2937/ffffff?text=E-Invoice+System)
 
 ## ✨ Características Destacadas
 
 ### 🎨 **Frontend Avanzado**
+
 - **Next.js 14** con App Router para máxima performance
 - **TypeScript** para type safety y desarrollo robusto
 - **Tailwind CSS** para diseño responsive y moderno
@@ -38,12 +57,14 @@
 - **Firebase Auth** para autenticación segura
 
 ### 🔧 **Backend Robusto**
+
 - **API Routes** de Next.js optimizadas
 - **MongoDB** con Mongoose para gestión de datos
 - **Zod** para validación de esquemas
 - **Docker** para desarrollo y producción consistente
 
 ### 📊 **Funcionalidades Completas**
+
 - ✅ **Sistema de reservas** completo con validación
 - ✅ **Facturación electrónica** española (AEAT)
 - ✅ **Panel de administración** avanzado
@@ -57,7 +78,7 @@
 
 ### Prerrequisitos
 
-- **Node.js** 20+ 
+- **Node.js** 20+
 - **pnpm** 8+
 - **Docker** y Docker Compose
 - **MongoDB** (local o Atlas)
@@ -120,7 +141,8 @@ AEAT_API_KEY=tu_api_key_aeat
 
 ### Configuración de Facturación
 
-Ver [E_INVOICE_SETUP.md](./E_INVOICE_SETUP.md) para configuración detallada de facturación electrónica española.
+Ver [E_INVOICE_SETUP.md](./E_INVOICE_SETUP.md) para configuración detallada de
+facturación electrónica española.
 
 ## 📁 Arquitectura del Proyecto
 
@@ -212,16 +234,16 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - NODE_ENV=production
     depends_on:
       - mongo
-  
+
   mongo:
     image: mongo:7.0
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo_data:/data/db
 
@@ -232,6 +254,7 @@ volumes:
 ## 📊 Funcionalidades Principales
 
 ### 🏠 **Landing Page Cinematográfica**
+
 - **Animaciones GSAP** fluidas y profesionales
 - **Secciones interactivas**: Habitaciones, Eventos, Jardín
 - **Formulario de reserva** lateral flotante
@@ -239,6 +262,7 @@ volumes:
 - **Optimización de imágenes** con Next.js Image
 
 ### 🔐 **Sistema de Autenticación**
+
 - **Login/Registro** con email/password
 - **Login social** con Google
 - **Protección de rutas** automática
@@ -246,6 +270,7 @@ volumes:
 - **Persistencia de sesión** segura
 
 ### 📅 **Sistema de Reservas Avanzado**
+
 - **Formulario multi-paso** intuitivo
 - **Validación en tiempo real** con Zod
 - **Integración con habitaciones** dinámica
@@ -253,6 +278,7 @@ volumes:
 - **Gestión de estados** de reserva
 
 ### 🧾 **Facturación Electrónica Española**
+
 - **Cumplimiento normativa** AEAT completa
 - **Integración con APIs** oficiales
 - **Generación de PDF/XML/QR** automática
@@ -260,6 +286,7 @@ volumes:
 - **Validación fiscal** automática
 
 ### 👨‍💼 **Panel de Administración Profesional**
+
 - **Dashboard** con estadísticas en tiempo real
 - **Gestión completa** de reservas
 - **Gestión de usuarios** y roles
@@ -269,6 +296,7 @@ volumes:
 ## 🔒 Seguridad y Compliance
 
 ### 🛡️ **Medidas de Seguridad**
+
 - ✅ **Validación de datos** con Zod
 - ✅ **Autenticación Firebase** segura
 - ✅ **Protección de rutas** automática
@@ -278,6 +306,7 @@ volumes:
 - ✅ **Headers de seguridad** implementados
 
 ### 📋 **Compliance**
+
 - ✅ **GDPR** compliant
 - ✅ **LOPD** (Ley Orgánica de Protección de Datos)
 - ✅ **Facturación electrónica** española
@@ -286,6 +315,7 @@ volumes:
 ## 📈 Performance y Optimización
 
 ### ⚡ **Optimizaciones Implementadas**
+
 - ✅ **Server-side rendering** (SSR)
 - ✅ **Code splitting** automático
 - ✅ **Optimización de imágenes** Next.js
@@ -294,6 +324,7 @@ volumes:
 - ✅ **Lighthouse score** >90
 
 ### 📊 **Métricas de Performance**
+
 - **First Contentful Paint**: <1.5s
 - **Largest Contentful Paint**: <2.5s
 - **Cumulative Layout Shift**: <0.1
@@ -318,17 +349,30 @@ volumes:
 
 ## 📝 Licencia
 
-Este proyecto está bajo la **Licencia MIT**. Ver [LICENSE](LICENSE) para más detalles.
+Este proyecto está bajo la **Licencia MIT**. Ver [LICENSE](LICENSE) para más
+detalles.
 
 ## 🆘 Soporte y Contacto
 
 ### 📞 **Información de Contacto**
-- 📧 **Email**: soporte@granadainn.com
-- 📞 **Teléfono**: +34 958 123 456
-- 🌐 **Web**: https://granadainn.com
-- 💬 **Discord**: [Unirse al servidor](https://discord.gg/granadainn)
+
+> **⚠️ NOTA:** Granada Inn es un hotel ficticio. La información de contacto es simulada.
+
+- 📧 **Email**: soporte@granadainn.com *(simulado)*
+- 📞 **Teléfono**: +34 958 123 456 *(simulado)*
+- 🌐 **Web**: https://granadainn.com *(simulado*)
+- 💬 **Discord**: [Unirse al servidor](https://discord.gg/granadainn) *(simulado)*
+
+### 👨‍💻 **Contacto Real del Desarrollador**
+
+Para consultas sobre el proyecto o adaptaciones para hoteles reales:
+
+- 📧 **Email**: [Tu email real]
+- 💼 **LinkedIn**: [Tu perfil LinkedIn]
+- 🌐 **Portfolio**: [Tu portfolio web]
 
 ### 📚 **Documentación Adicional**
+
 - [📖 Guía de Instalación](./ADMIN_SETUP.md)
 - [🔥 Configuración Firebase](./FIREBASE_SETUP.md)
 - [🧾 Configuración Facturación](./E_INVOICE_SETUP.md)
@@ -337,6 +381,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver [LICENSE](LICENSE) para más d
 ## 🙏 Agradecimientos
 
 ### 🛠️ **Tecnologías Utilizadas**
+
 - [Next.js](https://nextjs.org/) - Framework React de vanguardia
 - [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utility-first
 - [GSAP](https://greensock.com/gsap/) - Animaciones profesionales
@@ -345,6 +390,7 @@ Este proyecto está bajo la **Licencia MIT**. Ver [LICENSE](LICENSE) para más d
 - [Zod](https://zod.dev/) - Validación de esquemas TypeScript
 
 ### 🎨 **Recursos de Diseño**
+
 - [Heroicons](https://heroicons.com/) - Iconos SVG
 - [Unsplash](https://unsplash.com/) - Imágenes de alta calidad
 - [Google Fonts](https://fonts.google.com/) - Tipografías
@@ -353,7 +399,9 @@ Este proyecto está bajo la **Licencia MIT**. Ver [LICENSE](LICENSE) para más d
 
 <div align="center">
 
-**Desarrollado con ❤️ para Granada Inn**
+**🏨 Prototipo desarrollado con ❤️ para demostrar capacidades técnicas**
+
+*Granada Inn es un hotel ficticio creado únicamente con fines demostrativos*
 
 [![GitHub stars](https://img.shields.io/github/stars/FersaFzs/Nestotel?style=social)](https://github.com/FersaFzs/Nestotel/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/FersaFzs/Nestotel?style=social)](https://github.com/FersaFzs/Nestotel/network/members)

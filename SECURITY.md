@@ -7,12 +7,23 @@
 
 ## 🛡️ Reportar Vulnerabilidades
 
-Agradecemos a los investigadores de seguridad que nos ayudan a mantener Granada Inn seguro. Si has encontrado una vulnerabilidad de seguridad, por favor sigue estas pautas:
+Agradecemos a los investigadores de seguridad que nos ayudan a mantener Granada
+Inn seguro. Si has encontrado una vulnerabilidad de seguridad, por favor sigue
+estas pautas:
 
 ### 📧 Contacto Directo
 
-**Email**: security@granadainn.com  
-**PGP Key**: [Descargar clave pública](https://granadainn.com/security.asc)
+> **⚠️ NOTA:** Granada Inn es un hotel ficticio. Para reportar vulnerabilidades de seguridad en este prototipo, contacta al desarrollador.
+
+**Email**: security@granadainn.com *(simulado)*  
+**PGP Key**: [Descargar clave pública](https://granadainn.com/security.asc) *(simulado)*
+
+### 👨‍💻 **Contacto Real del Desarrollador**
+
+Para reportar vulnerabilidades de seguridad en este prototipo:
+
+- 📧 **Email**: [Tu email real]
+- 💼 **LinkedIn**: [Tu perfil LinkedIn]
 
 ### 🔐 Reporte Privado
 
@@ -62,24 +73,28 @@ Para un reporte efectivo, incluye:
 ### 🏅 Tipos de Vulnerabilidades
 
 #### 🔴 Críticas
+
 - Ejecución remota de código
 - Elevación de privilegios
 - Acceso no autorizado a datos sensibles
 - Bypass de autenticación
 
 #### 🟠 Altas
+
 - Cross-site scripting (XSS)
 - Cross-site request forgery (CSRF)
 - Inyección SQL
 - Exposición de información sensible
 
 #### 🟡 Medias
+
 - Denial of service
 - Information disclosure
 - Weak authentication
 - Insecure direct object references
 
 #### 🟢 Bajas
+
 - UI/UX issues
 - Best practices violations
 - Documentation improvements
@@ -176,7 +191,8 @@ Para un reporte efectivo, incluye:
 ### 🔗 Comunidad
 
 - **Discord**: [Canal de Seguridad](https://discord.gg/granadainn)
-- **GitHub**: [Issues de Seguridad](https://github.com/FersaFzs/Nestotel/security)
+- **GitHub**:
+  [Issues de Seguridad](https://github.com/FersaFzs/Nestotel/security)
 - **Blog**: [Artículos de Seguridad](https://granadainn.com/security)
 
 ## 📄 Compliance
@@ -204,6 +220,6 @@ Para un reporte efectivo, incluye:
 <div align="center">
 
 **🔒 Granada Inn - Seguridad Primero**  
-*Protegemos tu información con los más altos estándares de seguridad*
+_Protegemos tu información con los más altos estándares de seguridad_
 
-</div> 
+</div>
