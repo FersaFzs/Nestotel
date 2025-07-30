@@ -150,10 +150,10 @@ function SmartHeader() {
                   <div className='w-8 h-8 bg-gold rounded-full flex items-center justify-center text-black font-bold text-sm'>
                     {user.displayName
                       ? user.displayName[0].toUpperCase()
-                      : user.email?.[0].toUpperCase()}
+                      : user.email?.[0]?.toUpperCase() || 'U'}
                   </div>
                   <span className='text-white text-sm hidden md:block'>
-                    {user.displayName || user.email?.split('@')[0]}
+                    {user.displayName || user.email?.split('@')[0] || 'Usuario'}
                   </span>
                   {/* Dropdown arrow */}
                   <svg
@@ -541,12 +541,12 @@ function RoomsSection() {
                   style={{ transformOrigin: 'center center' }}
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
-                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  <div className='absolute inset-0 z-10 bg-transparent pointer-events-none' />
 
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
                       src={room.images?.[0] || '/images/habitacion.jpeg'}
-                      alt={room.name}
+                      alt={room.name || 'Habitación'}
                       fill
                       className='object-cover transition-transform duration-500'
                     />
@@ -583,7 +583,7 @@ function RoomsSection() {
                   style={{ transformOrigin: 'center center' }}
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
-                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  <div className='absolute inset-0 z-10 bg-transparent pointer-events-none' />
 
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image
@@ -620,7 +620,7 @@ function RoomsSection() {
                   style={{ transformOrigin: 'center center' }}
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
-                  <div className='absolute inset-0 z-10 bg-transparent' />
+                  <div className='absolute inset-0 z-10 bg-transparent pointer-events-none' />
 
                   <div className='flex-1 overflow-hidden relative pointer-events-none'>
                     <Image

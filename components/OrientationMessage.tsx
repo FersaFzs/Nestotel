@@ -46,13 +46,12 @@ export default function OrientationMessage({ isVisible }: OrientationMessageProp
         </div>
 
         {/* Título */}
-        <h2 className='text-2xl font-bold text-white mb-4'>
-          Panel de Administración
-        </h2>
+        <h2 className='text-2xl font-bold text-white mb-4'>Panel de Administración</h2>
 
         {/* Mensaje */}
         <p className='text-gray-300 mb-6 leading-relaxed'>
-          Para una mejor experiencia en el panel de administración, por favor gira tu dispositivo a modo horizontal.
+          Para una mejor experiencia en el panel de administración, por favor gira tu dispositivo a
+          modo horizontal.
         </p>
 
         {/* Instrucciones */}
@@ -67,9 +66,10 @@ export default function OrientationMessage({ isVisible }: OrientationMessageProp
 
         {/* Nota */}
         <p className='text-xs text-gray-400'>
-          El panel de administración está optimizado para orientación horizontal en dispositivos móviles.
+          El panel de administración está optimizado para orientación horizontal en dispositivos
+          móviles.
         </p>
       </div>
     </div>
   );
-} 
+}

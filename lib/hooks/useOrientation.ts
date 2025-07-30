@@ -25,4 +25,4 @@ export function useOrientation() {
   }, []);
 
   return { orientation, isMobile, isPortrait: orientation === 'portrait' };
-} 
+}
