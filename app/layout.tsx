@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/globals.css';
 import { AuthProvider } from '../lib/contexts/AuthContext';
+import { MobileMenuProvider } from '../lib/contexts/MobileMenuContext';
 
 export const metadata = {
   title: 'Granada Inn - Hotel Premium',
@@ -19,7 +20,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className='font-sans bg-black text-black'>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <MobileMenuProvider>
+            {children}
+          </MobileMenuProvider>
+        </AuthProvider>
       </body>
     </html>
   );

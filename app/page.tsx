@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAuth } from '../lib/contexts/AuthContext';
+import { useMobileMenu } from '../lib/contexts/MobileMenuContext';
 import LoadingScreen from '../components/LoadingScreen';
 import { useImageLoader } from '../lib/hooks/useImageLoader';
 import { useRouter } from 'next/navigation';
@@ -16,7 +17,7 @@ function SmartHeader() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isMobileMenuOpen, setIsMobileMenuOpen } = useMobileMenu();
   const { user, logout, loading } = useAuth();
 
   useEffect(() => {
@@ -64,6 +65,22 @@ function SmartHeader() {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [lastScrollY, isHovering]);
+
+  // Bloquear scroll cuando el menú móvil está abierto
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -329,11 +346,21 @@ function SmartHeader() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+            {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div 
-          className='lg:hidden fixed inset-0 z-[9999] bg-black backdrop-blur-none'
-          style={{ backgroundColor: 'black' }}
+        <div
+          className='lg:hidden fixed inset-0 z-[999999] bg-gradient-to-r from-black/95 via-gray-900/95 to-black/95 backdrop-blur-md'
+          style={{ 
+            pointerEvents: 'auto',
+            isolation: 'isolate',
+            touchAction: 'none',
+            width: '100vw',
+            height: '100vh',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
         >
           <div className='flex flex-col h-full'>
             {/* Mobile Menu Header */}
@@ -1642,6 +1669,7 @@ export default function HomePage() {
   const [guests, setGuests] = useState(1);
   const [selectedRoom, setSelectedRoom] = useState('');
   const { user } = useAuth();
+  const { isMobileMenuOpen } = useMobileMenu();
 
   // Cargar habitaciones al montar el componente
   useEffect(() => {
@@ -1783,12 +1811,12 @@ export default function HomePage() {
 
       {/* ================= COMPONENTE DE RESERVAS LATERAL ================= */}
       {/* Tarjeta de reservas lateral */}
-      <div
-        ref={bookingRef}
-        className={`fixed top-32 left-4 z-40 transition-transform duration-500 ease-out ${
-          isBookingVisible ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
-        }`}
-      >
+              <div
+          ref={bookingRef}
+          className={`fixed top-32 left-4 transition-transform duration-500 ease-out ${
+            isBookingVisible ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
+          } ${isMobileMenuOpen ? 'hidden' : 'z-40'}`}
+        >
         <div className='bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-md border-2 border-gold shadow-2xl rounded-2xl w-80 p-6'>
           {/* Header con botón de cerrar */}
           <div className='flex items-center justify-between mb-6'>
@@ -1890,7 +1918,7 @@ export default function HomePage() {
       <div
         className={`fixed top-32 left-0 z-40 transition-transform duration-500 ease-out ${
           isBookingVisible ? '-translate-x-full' : 'translate-x-0'
-        }`}
+        } ${isMobileMenuOpen ? 'hidden' : ''}`}
       >
         <button
           onClick={() => setIsBookingVisible(true)}
