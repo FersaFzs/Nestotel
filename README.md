@@ -16,38 +16,44 @@
 > de vanguardia. Incluye reservas, facturación electrónica española, panel de
 > administración avanzado y autenticación segura.
 
-## ⚠️ **IMPORTANTE: PROYECTO DEMO/PROTOTIPO**
+## ⚠️ **PROYECTO PROTOTIPO PROFESIONAL**
 
-> **🚨 Granada Inn es un hotel ficticio creado únicamente con fines
-> demostrativos.**
+> **🏆 Granada Inn es un prototipo de sistema de gestión hotelera desarrollado como demostración de capacidades técnicas avanzadas.**
 >
-> Este proyecto es un **prototipo funcional** desarrollado para mostrar
-> capacidades técnicas y de desarrollo. Granada Inn no existe como entidad real,
-> y toda la información de contacto, datos de reservas, facturas y usuarios son
-> simulados.
+> Este proyecto representa un **sistema empresarial completo** con todas las funcionalidades necesarias para gestionar un hotel real. Está diseñado como **portfolio técnico** y **base adaptable** para hoteles que busquen una solución personalizada.
 >
-> **🎯 Objetivo del proyecto:** Demostrar habilidades técnicas y servir como
-> base para adaptar a hoteles reales que requieran un sistema de gestión
-> personalizado.
+> **🎯 Características del prototipo:**
+> - ✅ **Arquitectura escalable** lista para producción
+> - ✅ **Código de calidad empresarial** con testing completo
+> - ✅ **Integración española** (Facturación AEAT, cumplimiento LOPD)
+> - ✅ **UI/UX profesional** con animaciones cinematográficas
+> - ✅ **Seguridad avanzada** y mejores prácticas
 >
-> **💼 Para hoteles interesados:** Este prototipo puede ser adaptado y
-> personalizado para las necesidades específicas de su establecimiento hotelero.
+> **💼 Adaptación comercial:** Sistema completamente funcional listo para personalizar según las necesidades específicas de cualquier establecimiento hotelero.
+>
+> **📞 Contacto profesional:** 
+- 📧 **Email:** [tu-email@dominio.com]
+- 💼 **LinkedIn:** [tu-perfil-linkedin]
+- 🌐 **Portfolio:** [tu-portfolio-web]
+- 💻 **GitHub:** [tu-github-profile]
 
-## 📸 Capturas de Pantalla
+> **🎯 ¿Interesado en adaptar Granada Inn para tu hotel?** Este sistema está diseñado para ser personalizable y escalable según las necesidades específicas de cualquier establecimiento hotelero.
 
 ## 📸 Capturas de Pantalla
 
 ### 🏠 Landing Page
+*Página principal con animaciones GSAP y diseño cinematográfico*
 
-![Landing Page](https://via.placeholder.com/800x450/1f2937/ffffff?text=Landing+Page+-+Granada+Inn)
-
-### 📱 Panel de Administración
-
-![Admin Dashboard](https://via.placeholder.com/800x450/1f2937/ffffff?text=Admin+Dashboard)
+### 📱 Panel de Administración  
+*Dashboard completo con métricas en tiempo real y gestión avanzada*
 
 ### 📅 Sistema de Reservas
+*Formulario multi-paso con validación en tiempo real y UX moderna*
 
-![Reservation System](https://via.placeholder.com/800x450/1f2937/ffffff?text=Reservation+System)
+### 🧾 Sistema de Facturación
+*Generación automática de facturas conforme a normativa española*
+
+> **📝 Nota:** Las capturas de pantalla se actualizarán tras el despliegue en producción
 
 ### 🧾 Facturación Electrónica
 
@@ -372,13 +378,22 @@ detalles.
 - 💬 **Discord**: [Unirse al servidor](https://discord.gg/granadainn)
   _(simulado)_
 
-### 👨‍💻 **Contacto Real del Desarrollador**
+### 👨‍💻 **Desarrollador**
 
-Para consultas sobre el proyecto o adaptaciones para hoteles reales:
+**Proyecto desarrollado por**: [Tu Nombre Completo]  
+**Perfil profesional**: Desarrollador Full-Stack Junior especializado en React/Next.js
 
-- 📧 **Email**: [Tu email real]
-- 💼 **LinkedIn**: [Tu perfil LinkedIn]
-- 🌐 **Portfolio**: [Tu portfolio web]
+**Contacto profesional**:
+- 📧 **Email**: [tu.email@profesional.com]
+- 💼 **LinkedIn**: [linkedin.com/in/tu-perfil]
+- 🌐 **Portfolio**: [tu-portfolio-web.com]
+- 💻 **GitHub**: [github.com/tu-usuario]
+
+**Disponible para**:
+- 🏢 Oportunidades laborales como desarrollador junior
+- 🤝 Colaboraciones en proyectos open source
+- 💬 Consultas sobre adaptación del sistema para hoteles reales
+- 🎓 Mentoring con otros desarrolladores junior
 
 ### 📚 **Documentación Adicional**
 

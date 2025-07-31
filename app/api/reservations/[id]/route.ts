@@ -3,7 +3,7 @@ import dbConnect from '../../../../lib/db/mongoose';
 import Reservation from '../../../../lib/db/models/Reservation';
 
 // Obtener reserva por ID (GET)
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
@@ -76,7 +76,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
 }
 
 // Eliminar reserva (DELETE)
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 

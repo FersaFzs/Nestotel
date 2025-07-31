@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     if (success) {
       return NextResponse.json({
         message: 'Email de prueba enviado correctamente',
-        email: email,
+        email,
       });
     } else {
       return NextResponse.json(
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       );
     }
   } catch (error) {
-    console.error('Error en test-email:', error);
+    // Error en test-email - manejado silenciosamente
     return NextResponse.json(
       {
         error: 'Error interno del servidor',

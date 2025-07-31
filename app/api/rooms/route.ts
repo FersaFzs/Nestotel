@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '../../../lib/db/mongoose';
 import Room from '../../../lib/db/models/Room';
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     await dbConnect();
     const rooms = await Room.find({ isActive: { $ne: false } }).sort({ price: 1 });

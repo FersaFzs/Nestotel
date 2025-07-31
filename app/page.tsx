@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useAuth } from '../lib/contexts/AuthContext';
 import { useMobileMenu } from '../lib/contexts/MobileMenuContext';
 import LoadingScreen from '../components/LoadingScreen';
-import { useImageLoader } from '../lib/hooks/useImageLoader';
+
 import { useRouter } from 'next/navigation';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,12 +114,12 @@ function SmartHeader() {
       }`}
     >
       <div className='flex items-center gap-4'>
-      <div
+        <div
           className='text-3xl font-serif tracking-widest text-gold font-bold cursor-pointer hover:text-yellow-400 transition-colors'
-        onClick={scrollToTop}
-      >
-        GRANADA INN
-      </div>
+          onClick={scrollToTop}
+        >
+          GRANADA INN
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -194,7 +194,7 @@ function SmartHeader() {
                   {/* Avatar placeholder */}
                   <div className='w-8 h-8 bg-gold rounded-full flex items-center justify-center text-black font-bold text-sm'>
                     {user.displayName
-                      ? user.displayName[0].toUpperCase()
+                      ? user.displayName[0]?.toUpperCase()
                       : user.email?.[0]?.toUpperCase() || 'U'}
                   </div>
                   <span className='text-white text-sm hidden md:block'>
@@ -442,7 +442,7 @@ function SmartHeader() {
                     <div className='flex items-center gap-3 p-3 bg-white/10 rounded-lg'>
                       <div className='w-10 h-10 bg-gold rounded-full flex items-center justify-center text-black font-bold'>
                         {user.displayName
-                          ? user.displayName[0].toUpperCase()
+                          ? user.displayName[0]?.toUpperCase()
                           : user.email?.[0]?.toUpperCase() || 'U'}
                       </div>
                       <div className='flex-1'>
@@ -576,32 +576,7 @@ function SmartHeader() {
   );
 }
 
-function FotoPlaceholder({ className = '', text = 'FOTO' }: { className?: string; text?: string }) {
-  return (
-    <svg
-      className={className}
-      width='100%'
-      height='100%'
-      viewBox='0 0 400 400'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <rect width='400' height='400' rx='32' fill='#e5e7eb' />
-      <text
-        x='50%'
-        y='50%'
-        textAnchor='middle'
-        dominantBaseline='middle'
-        fontSize='48'
-        fill='#b1b1b1'
-        fontFamily='Montserrat, sans-serif'
-        fontWeight='bold'
-      >
-        {text}
-      </text>
-    </svg>
-  );
-}
+
 
 function PuertasSVG({ progress = 0 }: { progress: number }) {
   // progress: 0 (cerradas), 1 (abiertas)
@@ -621,6 +596,7 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           src='/images/vallametal.png'
           alt='Valla metálica izquierda'
           fill
+          sizes="50vw"
           className='object-cover'
           style={{
             filter: 'brightness(0.6) contrast(1.2)',
@@ -641,6 +617,7 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           src='/images/vallametal.png'
           alt='Valla metálica derecha'
           fill
+          sizes="50vw"
           className='object-cover'
           style={{
             transform: 'scaleX(-1)', // Efecto espejo
@@ -654,7 +631,6 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
 
 function RoomsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = React.useState(0);
   const [titleVisible, setTitleVisible] = React.useState(true);
   const [roomsVisible, setRoomsVisible] = React.useState(false);
   const [roomsOffset, setRoomsOffset] = React.useState(0);
@@ -686,46 +662,46 @@ function RoomsSection() {
   };
 
   useEffect(() => {
-    if (sectionRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: '+=300%', // 3 veces la altura de la pantalla
-          scrub: 1,
-          pin: true,
-          onUpdate: self => {
-            setProgress(self.progress);
+    if (!sectionRef.current) return;
+    
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=300%', // 3 veces la altura de la pantalla
+        scrub: 1,
+        pin: true,
+        onUpdate: self => {
+          const progress = self.progress;
 
-            // Fase 1 (0-0.3): Solo aparece el título
-            if (self.progress < 0.3) {
-              setTitleVisible(true);
-              setRoomsVisible(false);
-              setRoomsOffset(100); // Las habitaciones están fuera de la pantalla a la derecha
-            }
-            // Fase 2 (0.3-0.6): Título desaparece, habitaciones entran desde la derecha
-            else if (self.progress >= 0.3 && self.progress <= 0.6) {
-              setTitleVisible(false);
-              setRoomsVisible(true);
-              const slidePhase = (self.progress - 0.3) / 0.3; // Normalizar a 0-1 en menos tiempo
-              setRoomsOffset(100 - slidePhase * 100); // Las habitaciones se deslizan desde 100% a 0%
-            }
-            // Fase 3 (0.6-1.0): Habitaciones en posición final + espacio vacío para buffer
-            else {
-              setTitleVisible(false);
-              setRoomsVisible(true);
-              setRoomsOffset(0);
-            }
-          },
+          // Fase 1 (0-0.3): Solo aparece el título
+          if (progress < 0.3) {
+            setTitleVisible(true);
+            setRoomsVisible(false);
+            setRoomsOffset(100); // Las habitaciones están fuera de la pantalla a la derecha
+          }
+          // Fase 2 (0.3-0.6): Título desaparece, habitaciones entran desde la derecha
+          else if (progress >= 0.3 && progress <= 0.6) {
+            setTitleVisible(false);
+            setRoomsVisible(true);
+            const slidePhase = (progress - 0.3) / 0.3; // Normalizar a 0-1 en menos tiempo
+            setRoomsOffset(100 - slidePhase * 100); // Las habitaciones se deslizan desde 100% a 0%
+          }
+          // Fase 3 (0.6-1.0): Habitaciones en posición final + espacio vacío para buffer
+          else {
+            setTitleVisible(false);
+            setRoomsVisible(true);
+            setRoomsOffset(0);
+          }
         },
-      });
+      },
+    });
 
-      return () => {
-        if (tl.scrollTrigger) {
-          tl.scrollTrigger.kill();
-        }
-      };
-    }
+    return () => {
+      if (tl.scrollTrigger) {
+        tl.scrollTrigger.kill();
+      }
+    };
   }, []);
 
   return (
@@ -821,11 +797,15 @@ function RoomsSection() {
                       alt={room.name || 'Habitación'}
                       fill
                       className='object-cover transition-transform duration-500'
-                />
-              </div>
+                    />
+                  </div>
                   <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>{room.name}</h3>
-                    <p className='text-gold text-lg lg:text-xl font-semibold'>desde {room.price}€/noche</p>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>
+                      {room.name}
+                    </h3>
+                    <p className='text-gold text-lg lg:text-xl font-semibold'>
+                      desde {room.price}€/noche
+                    </p>
                     <p className='text-gray-300 text-base lg:text-lg'>
                       {room.maxGuests} {room.maxGuests === 1 ? 'persona' : 'personas'} |{' '}
                       {room.description.split(' ').slice(0, 3).join(' ')}...
@@ -866,25 +846,27 @@ function RoomsSection() {
                     />
                   </div>
                   <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>Suite Premium</h3>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>
+                      Suite Premium
+                    </h3>
                     <p className='text-gold text-lg lg:text-xl font-semibold'>desde 120€/noche</p>
                     <p className='text-gray-300 text-base lg:text-lg'>
-                  4 personas | terraza privada | bañera hidromasaje
-                </p>
+                      4 personas | terraza privada | bañera hidromasaje
+                    </p>
                     <div className='flex flex-wrap gap-2 lg:gap-3 mt-4 pointer-events-none'>
                       <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
-                    WiFi gratis
-                  </span>
+                        WiFi gratis
+                      </span>
                       <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
-                    TV 4K
-                  </span>
+                        TV 4K
+                      </span>
                       <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
-                    Minibar
-                  </span>
+                        Minibar
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
               <div className='w-full lg:flex-1'>
                 <div
@@ -900,28 +882,30 @@ function RoomsSection() {
                       alt='Habitación Deluxe'
                       fill
                       className='object-cover transition-transform duration-500'
-                />
-              </div>
+                    />
+                  </div>
                   <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>Habitación Deluxe</h3>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>
+                      Habitación Deluxe
+                    </h3>
                     <p className='text-gold text-lg lg:text-xl font-semibold'>desde 80€/noche</p>
                     <p className='text-gray-300 text-base lg:text-lg'>
-                  2-3 personas | desayuno incluido | baño privado
-                </p>
+                      2-3 personas | desayuno incluido | baño privado
+                    </p>
                     <div className='flex flex-wrap gap-2 lg:gap-3 mt-4 pointer-events-none'>
                       <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
-                    WiFi gratis
-                  </span>
+                        WiFi gratis
+                      </span>
                       <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
-                    TV Smart
-                  </span>
+                        TV Smart
+                      </span>
                       <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
-                    Aire acondicionado
-                  </span>
+                        Aire acondicionado
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
             </>
           )}
         </div>
@@ -932,7 +916,6 @@ function RoomsSection() {
 
 function EventsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = React.useState(0);
   const [titleVisible, setTitleVisible] = React.useState(true);
   const [cardsVisible, setCardsVisible] = React.useState(false);
   const [cardsOffset, setCardsOffset] = React.useState(0);
@@ -947,19 +930,19 @@ function EventsSection() {
           scrub: 1,
           pin: true,
           onUpdate: self => {
-            setProgress(self.progress);
+            const progress = self.progress;
 
             // Fase 1 (0-0.3): Solo aparece el título
-            if (self.progress < 0.3) {
+            if (progress < 0.3) {
               setTitleVisible(true);
               setCardsVisible(false);
               setCardsOffset(100); // Las tarjetas están fuera de la pantalla a la derecha
             }
             // Fase 2 (0.3-0.6): Título desaparece, tarjetas entran desde la derecha
-            else if (self.progress >= 0.3 && self.progress <= 0.6) {
+            else if (progress >= 0.3 && progress <= 0.6) {
               setTitleVisible(false);
               setCardsVisible(true);
-              const slidePhase = (self.progress - 0.3) / 0.3; // Normalizar a 0-1 en menos tiempo
+              const slidePhase = (progress - 0.3) / 0.3; // Normalizar a 0-1 en menos tiempo
               setCardsOffset(100 - slidePhase * 100); // Las tarjetas se deslizan desde 100% a 0%
             }
             // Fase 3 (0.6-1.0): Tarjetas en posición final + espacio vacío para buffer
@@ -978,6 +961,8 @@ function EventsSection() {
         }
       };
     }
+
+    return () => {}; // Return cleanup function for all code paths
   }, []);
 
   return (
@@ -1170,11 +1155,12 @@ function EventsSection() {
 function GardenSection() {
   const jardinRef = useRef<HTMLDivElement>(null);
   const [puertas, setPuertas] = React.useState(0); // 0=cerradas, 1=abiertas
-  const [textProgress, setTextProgress] = React.useState(0);
+
   const [titleVisible, setTitleVisible] = React.useState(true);
   const [titleOpacity, setTitleOpacity] = React.useState(1);
   const [photosProgress, setPhotosProgress] = React.useState(0);
   const [hoverEnabled, setHoverEnabled] = React.useState(false);
+  const [screenDimensions, setScreenDimensions] = React.useState({ width: 1920, height: 1080 });
 
   // Array de fotos del jardín con diferentes propiedades
   const gardenPhotos = [
@@ -1203,6 +1189,21 @@ function GardenSection() {
       rotation: 352, // 360 - 8
     },
   ];
+
+  // Actualizar dimensiones de pantalla en el cliente
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const updateDimensions = () => {
+        setScreenDimensions({ width: window.innerWidth, height: window.innerHeight });
+      };
+      
+      updateDimensions(); // Inicial
+      window.addEventListener('resize', updateDimensions);
+      
+      return () => window.removeEventListener('resize', updateDimensions);
+    }
+    return undefined;
+  }, []);
 
   useEffect(() => {
     if (jardinRef.current) {
@@ -1267,22 +1268,25 @@ function GardenSection() {
         },
       });
 
-      // Zoom al jardín
-      gsap.fromTo(
-        '.jardin-img',
-        { scale: 1, filter: 'brightness(0.7)' },
-        {
-          scale: 1.28,
-          filter: 'brightness(1)',
-          scrollTrigger: {
-            trigger: jardinRef.current,
-            start: 'top top',
-            end: '+=300%',
-            scrub: 1,
-            id: 'garden-section-zoom',
+      // Zoom al jardín - solo si el elemento existe
+      const jardinImg = document.querySelector('.jardin-img');
+      if (jardinImg) {
+        gsap.fromTo(
+          '.jardin-img',
+          { scale: 1, filter: 'brightness(0.7)' },
+          {
+            scale: 1.28,
+            filter: 'brightness(1)',
+            scrollTrigger: {
+              trigger: jardinRef.current,
+              start: 'top top',
+              end: '+=300%',
+              scrub: 1,
+              id: 'garden-section-zoom',
+            },
           },
-        },
-      );
+        );
+      }
 
       // Cleanup function
       return () => {
@@ -1310,6 +1314,7 @@ function GardenSection() {
         src='/images/jardin.jpeg'
         alt='Jardín del hotel'
         fill
+        sizes="100vw"
         className='jardin-img object-cover'
         style={{ zIndex: 1 }}
       />
@@ -1352,8 +1357,8 @@ function GardenSection() {
 
           // Nueva animación: empieza grande y borrosa, se reduce y enfoca
           // Posición de la foto (centrada inicialmente, luego se mueve a su posición final)
-          const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
-          const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 1080;
+          const screenWidth = screenDimensions.width;
+          const screenHeight = screenDimensions.height;
 
           const initialX = screenWidth / 2; // Empieza en el centro
           const initialY = screenHeight / 2; // Empieza en el centro
@@ -1454,16 +1459,16 @@ function GardenSection() {
             const mobileOpacity = photosProgress > 0.3 ? 1 : 0;
             const mobileScale = photosProgress > 0.3 ? 1 : 1.5; // Empieza más grande
             const mobileBlur = photosProgress > 0.3 ? 0 : 8; // Empieza borrosa
-            
+
             // Rotaciones y posiciones naturales
             const rotations = [-3, 2, -1]; // Rotaciones sutiles
             const zIndexes = [10, 20, 30]; // Para superposición
             const offsets = [
               { x: 0, y: 0 },
               { x: 8, y: -4 },
-              { x: -6, y: 2 }
+              { x: -6, y: 2 },
             ];
-            
+
             return (
               <div
                 key={index}
@@ -1497,8 +1502,6 @@ function GardenSection() {
 function HeroHallTransition() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = React.useState(0); // 0: hero, 1: hall
-  const [hallText, setHallText] = React.useState(0); // 0: oculto, 1: visible
-  const [debug, setDebug] = React.useState(''); // Para debug
 
   useEffect(() => {
     if (sectionRef.current) {
@@ -1512,13 +1515,6 @@ function HeroHallTransition() {
           pin: true,
           onUpdate: self => {
             setProgress(self.progress);
-            // El texto del hall aparece en la segunda mitad de la animación
-            setHallText(Math.max(0, (self.progress - 0.4) / 0.3));
-            const hallY =
-              self.progress > 0.4 ? Math.max(0, 500 - ((self.progress - 0.4) / 0.3) * 500) : 500;
-            setDebug(
-              `Progress: ${self.progress.toFixed(2)}, Hall visible: ${self.progress > 0.4}, Hall Y: ${hallY.toFixed(0)}px, Z-index: 50`,
-            );
           },
         },
       });
@@ -1530,6 +1526,8 @@ function HeroHallTransition() {
         }
       };
     }
+
+    return () => {}; // Return cleanup function for all code paths
   }, []);
 
   // Calcula estilos para las imágenes y overlays
@@ -1547,11 +1545,9 @@ function HeroHallTransition() {
 
   // Calcula la posición del texto hero (sube hacia arriba)
   const heroTextY = progress * -1000; // Se mueve más rápido hacia arriba
-  const heroTextOpacity = 1; // No se desvanece, solo se mueve
 
   // Calcula la posición del texto hall (entra desde abajo)
   const hallTextY = progress > 0.4 ? Math.max(0, 500 - ((progress - 0.4) / 0.3) * 500) : 500; // Se mueve hacia arriba desde abajo, se bloquea en 0
-  const hallTextOpacity = 1; // Sin fade, aparece directamente
 
   return (
     <section
@@ -1564,6 +1560,7 @@ function HeroHallTransition() {
         src='/images/hotel-vista.jpeg'
         alt='Vista general del hotel'
         fill
+        sizes="100vw"
         className='object-cover'
         style={{
           zIndex: 1,
@@ -1673,16 +1670,7 @@ export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [isBookingVisible, setIsBookingVisible] = useState(false);
   const bookingRef = useRef<HTMLDivElement>(null);
-  // Lista de imágenes principales para precargar
-  const mainImages = [
-    '/images/hotel-hall.jpeg',
-    '/images/hotel-vista.jpeg',
-    '/images/habitacion.jpeg',
-    '/images/jardin.jpeg',
-    '/images/pasillo.jpeg',
-    '/images/salon-comedor.jpeg',
-    '/images/vallametal.png',
-  ];
+
 
   // Versión simple para testing - usar timer fijo en lugar de carga real de imágenes
   const [isLoading, setIsLoading] = useState(true);
@@ -1729,10 +1717,9 @@ export default function HomePage() {
             setSelectedRoom(roomsData[0]._id);
           }
         } else {
-          console.error('Failed to fetch rooms:', response.status);
+          // Failed to fetch rooms - handled silently in production
         }
       } catch (error) {
-        console.error('Error fetching rooms:', error);
         // Error loading rooms - handled silently in production
       }
     };
@@ -1766,12 +1753,17 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    // Solo ejecutar animaciones en el cliente
+    if (typeof window === 'undefined') return;
+
     // Hero animación fade-in
-    gsap.fromTo(
-      heroRef.current,
-      { opacity: 0, y: 60 },
-      { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' },
-    );
+    if (heroRef.current) {
+      gsap.fromTo(
+        heroRef.current,
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' },
+      );
+    }
 
     // Click fuera del formulario para cerrar
     const handleClickOutside = (event: MouseEvent) => {
@@ -1785,51 +1777,64 @@ export default function HomePage() {
     };
 
     // Animación de hover para las cards de habitaciones y eventos
-    gsap.utils.toArray('.room-card').forEach(card => {
-      const el = card as Element;
-      gsap.set(el, { transformOrigin: 'center center' });
-      el.addEventListener('mouseenter', () => {
-        gsap.to(el, {
-          scale: 1.04,
-          rotateZ: 1,
-          boxShadow: '0 8px 32px #C9A86B55',
-          duration: 0.4,
-          ease: 'power2.out',
-        });
-      });
-      el.addEventListener('mouseleave', () => {
-        gsap.to(el, {
-          scale: 1,
-          rotateZ: 0,
-          boxShadow: '0 4px 16px #00000022',
-          duration: 0.4,
-          ease: 'power2.in',
-        });
-      });
-    });
+    // Esperar a que los elementos estén disponibles en el DOM
+    const setupCardAnimations = () => {
+      const roomCards = document.querySelectorAll('.room-card');
+      const eventCards = document.querySelectorAll('.event-card');
 
-    gsap.utils.toArray('.event-card').forEach(card => {
-      const el = card as Element;
-      gsap.set(el, { transformOrigin: 'center center' });
-      el.addEventListener('mouseenter', () => {
-        gsap.to(el, {
-          scale: 1.05,
-          rotateZ: -1,
-          boxShadow: '0 8px 32px #C9A86B88',
-          duration: 0.4,
-          ease: 'power2.out',
-        });
+      roomCards.forEach(card => {
+        const el = card as Element;
+        if (el) {
+          gsap.set(el, { transformOrigin: 'center center' });
+          el.addEventListener('mouseenter', () => {
+            gsap.to(el, {
+              scale: 1.04,
+              rotateZ: 1,
+              boxShadow: '0 8px 32px #C9A86B55',
+              duration: 0.4,
+              ease: 'power2.out',
+            });
+          });
+          el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+              scale: 1,
+              rotateZ: 0,
+              boxShadow: '0 4px 16px #00000022',
+              duration: 0.4,
+              ease: 'power2.in',
+            });
+          });
+        }
       });
-      el.addEventListener('mouseleave', () => {
-        gsap.to(el, {
-          scale: 1,
-          rotateZ: 0,
-          boxShadow: '0 4px 16px #00000022',
-          duration: 0.4,
-          ease: 'power2.in',
-        });
+
+      eventCards.forEach(card => {
+        const el = card as Element;
+        if (el) {
+          gsap.set(el, { transformOrigin: 'center center' });
+          el.addEventListener('mouseenter', () => {
+            gsap.to(el, {
+              scale: 1.05,
+              rotateZ: -1,
+              boxShadow: '0 8px 32px #C9A86B88',
+              duration: 0.4,
+              ease: 'power2.out',
+            });
+          });
+          el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+              scale: 1,
+              rotateZ: 0,
+              boxShadow: '0 4px 16px #00000022',
+              duration: 0.4,
+              ease: 'power2.in',
+            });
+          });
+        }
       });
-    });
+    };
+
+    // Ejecutar después de que el DOM esté listo
+    setTimeout(setupCardAnimations, 100);
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {

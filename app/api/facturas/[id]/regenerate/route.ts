@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '../../../../../lib/db/mongoose';
 import Invoice from '../../../../../lib/db/models/Invoice';
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
@@ -17,9 +17,9 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     // Resetear estado de la factura para reintentar
     invoice.aeatStatus = 'pending';
     invoice.aeatResponse = 'Regenerada para reintento';
-    invoice.pdfUrl = undefined;
-    invoice.xmlUrl = undefined;
-    invoice.qrUrl = undefined;
+    delete invoice.pdfUrl;
+    delete invoice.xmlUrl;
+    delete invoice.qrUrl;
 
     await invoice.save();
 

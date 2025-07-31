@@ -3,7 +3,7 @@ import dbConnect from '../../../lib/db/mongoose';
 import User from '../../../lib/db/models/User';
 import { userSchema } from '../../../lib/validators/user';
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     await dbConnect();
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../../lib/contexts/AuthContext';
+
 import { useAdminGuard } from '../../../lib/hooks/useAdminGuard';
 
 interface User {
@@ -45,7 +45,6 @@ export default function UsuariosPage() {
 
   // Proteger rutas de admin
   const {
-    user: adminUser,
     loading: guardLoading,
     hasAccess,
   } = useAdminGuard({

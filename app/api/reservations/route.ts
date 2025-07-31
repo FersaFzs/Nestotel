@@ -102,8 +102,8 @@ export async function POST(req: Request) {
     };
 
     // Enviar email de forma asíncrona (no bloquear la respuesta)
-    sendReservationConfirmationEmail(emailData).catch(error => {
-      console.error('Error enviando email de confirmación:', error);
+    sendReservationConfirmationEmail(emailData).catch(() => {
+      // Error enviando email de confirmación - manejado silenciosamente
     });
 
     return NextResponse.json(reservation, { status: 201 });

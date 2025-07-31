@@ -12,7 +12,9 @@
     "prepare": "husky install",
     "create-admin": "node scripts/create-super-admin.js",
     "setup-firebase-admin": "node scripts/setup-firebase-admin.js",
-    "seed": "ts-node scripts/seed.ts"
+    "seed": "ts-node scripts/seed.ts",
+    "deploy-prep": "node scripts/deploy-prep.js",
+    "pre-deploy": "pnpm deploy-prep && pnpm build"
   },
   "dependencies": {
     "@gsap/react": "2.1.2",

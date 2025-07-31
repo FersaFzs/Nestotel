@@ -5,20 +5,20 @@ import Invoice from '../../../../../lib/db/models/Invoice';
 // Configuración de APIs de facturación electrónica
 const E_INVOICE_CONFIG = {
   verifacti: {
-    apiUrl: process.env.VERIFACTI_API_URL || 'https://api.verifacti.com/v1',
-    apiKey: process.env.VERIFACTI_API_KEY,
+    apiUrl: process.env['VERIFACTI_API_URL'] || 'https://api.verifacti.com/v1',
+    apiKey: process.env['VERIFACTI_API_KEY'],
   },
   facturae: {
-    apiUrl: process.env.FACTURAE_API_URL || 'https://api.facturae.com/v1',
-    apiKey: process.env.FACTURAE_API_KEY,
+    apiUrl: process.env['FACTURAE_API_URL'] || 'https://api.facturae.com/v1',
+    apiKey: process.env['FACTURAE_API_KEY'],
   },
   aeat: {
-    apiUrl: process.env.AEAT_API_URL || 'https://www.agenciatributaria.es/ws/facturae',
-    apiKey: process.env.AEAT_API_KEY,
+    apiUrl: process.env['AEAT_API_URL'] || 'https://www.agenciatributaria.es/ws/facturae',
+    apiKey: process.env['AEAT_API_KEY'],
   },
 };
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 

@@ -3,12 +3,12 @@ import dbConnect from '../../../lib/db/mongoose';
 import Invoice from '../../../lib/db/models/Invoice';
 import Reservation from '../../../lib/db/models/Reservation';
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     await dbConnect();
 
     const invoices = await Invoice.find({})
-      .populate('reservation', 'checkIn checkOut totalPrice')
+      .populate('reservation')
       .sort({ createdAt: -1 })
       .lean();
 
@@ -17,12 +17,7 @@ export async function GET(request: NextRequest) {
       invoices: invoices.map(invoice => ({
         ...invoice,
         _id: invoice._id.toString(),
-        reservation: {
-          ...invoice.reservation,
-          _id: invoice.reservation._id.toString(),
-          checkIn: invoice.reservation.checkIn.toISOString(),
-          checkOut: invoice.reservation.checkOut.toISOString(),
-        },
+        reservation: invoice.reservation,
         createdAt: invoice.createdAt.toISOString(),
         updatedAt: invoice.updatedAt.toISOString(),
         date: invoice.date.toISOString(),

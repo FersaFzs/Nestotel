@@ -61,7 +61,7 @@ const nextConfig = {
 
   // Configuración de experimental features
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Deshabilitado - requiere módulo 'critters'
     scrollRestoration: true,
   },
 

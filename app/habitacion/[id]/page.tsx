@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { gsap } from 'gsap';
+// import { gsap } from 'gsap'; // Not used in this component
 
 interface Room {
   _id: string;

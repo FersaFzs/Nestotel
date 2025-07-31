@@ -300,10 +300,10 @@ export async function sendReservationConfirmationEmail(
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email enviado:', info.messageId);
+    // Email enviado exitosamente
     return true;
   } catch (error) {
-    console.error('Error enviando email:', error);
+    // Error enviando email - manejado silenciosamente en producción
     return false;
   }
 }
@@ -359,10 +359,10 @@ Este es un prototipo demostrativo. Granada Inn es un hotel ficticio.
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email de cancelación enviado:', info.messageId);
+    // Email de cancelación enviado exitosamente
     return true;
   } catch (error) {
-    console.error('Error enviando email de cancelación:', error);
+    // Error enviando email de cancelación - manejado silenciosamente en producción
     return false;
   }
 }

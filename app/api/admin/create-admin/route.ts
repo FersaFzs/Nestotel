@@ -16,7 +16,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Token de autorización requerido' }, { status: 401 });
     }
 
-    const token = authHeader.split('Bearer ')[1];
+    const [, token] = authHeader.split('Bearer ');
+
+    if (!token) {
+      return NextResponse.json({ message: 'Token inválido' }, { status: 401 });
+    }
 
     // Verificar el token con Firebase Admin
     const decodedToken = await auth().verifyIdToken(token);

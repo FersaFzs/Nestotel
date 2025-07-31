@@ -53,11 +53,11 @@ export default function ReservationDetail() {
 
   useEffect(() => {
     fetchReservation();
-  }, [params.id]);
+  }, [params['id']]);
 
   const fetchReservation = async () => {
     try {
-      const response = await fetch(`/api/reservations/${params.id}`);
+      const response = await fetch(`/api/reservations/${params['id']}`);
       if (response.ok) {
         const data = await response.json();
         setReservation(data);
@@ -75,7 +75,7 @@ export default function ReservationDetail() {
   const updateReservation = async (field: string, value: string) => {
     setUpdating(true);
     try {
-      const response = await fetch(`/api/reservations/${params.id}`, {
+      const response = await fetch(`/api/reservations/${params['id']}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default function ReservationDetail() {
     }
 
     try {
-      const response = await fetch(`/api/reservations/${params.id}`, {
+      const response = await fetch(`/api/reservations/${params['id']}`, {
         method: 'DELETE',
       });
 
