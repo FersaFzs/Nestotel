@@ -18,42 +18,57 @@
 
 ## ⚠️ **PROYECTO PROTOTIPO PROFESIONAL**
 
-> **🏆 Granada Inn es un prototipo de sistema de gestión hotelera desarrollado como demostración de capacidades técnicas avanzadas.**
+> **🏆 Granada Inn es un prototipo de sistema de gestión hotelera desarrollado
+> como demostración de capacidades técnicas avanzadas.**
 >
-> Este proyecto representa un **sistema empresarial completo** con todas las funcionalidades necesarias para gestionar un hotel real. Está diseñado como **portfolio técnico** y **base adaptable** para hoteles que busquen una solución personalizada.
+> Este proyecto representa un **sistema empresarial completo** con todas las
+> funcionalidades necesarias para gestionar un hotel real. Está diseñado como
+> **portfolio técnico** y **base adaptable** para hoteles que busquen una
+> solución personalizada.
 >
 > **🎯 Características del prototipo:**
+>
 > - ✅ **Arquitectura escalable** lista para producción
 > - ✅ **Código de calidad empresarial** con testing completo
 > - ✅ **Integración española** (Facturación AEAT, cumplimiento LOPD)
 > - ✅ **UI/UX profesional** con animaciones cinematográficas
 > - ✅ **Seguridad avanzada** y mejores prácticas
 >
-> **💼 Adaptación comercial:** Sistema completamente funcional listo para personalizar según las necesidades específicas de cualquier establecimiento hotelero.
+> **💼 Adaptación comercial:** Sistema completamente funcional listo para
+> personalizar según las necesidades específicas de cualquier establecimiento
+> hotelero.
 >
-> **📞 Contacto profesional:** 
+> **📞 Contacto profesional:**
+
 - 📧 **Email:** [tu-email@dominio.com]
 - 💼 **LinkedIn:** [tu-perfil-linkedin]
 - 🌐 **Portfolio:** [tu-portfolio-web]
 - 💻 **GitHub:** [tu-github-profile]
 
-> **🎯 ¿Interesado en adaptar Granada Inn para tu hotel?** Este sistema está diseñado para ser personalizable y escalable según las necesidades específicas de cualquier establecimiento hotelero.
+> **🎯 ¿Interesado en adaptar Granada Inn para tu hotel?** Este sistema está
+> diseñado para ser personalizable y escalable según las necesidades específicas
+> de cualquier establecimiento hotelero.
 
 ## 📸 Capturas de Pantalla
 
 ### 🏠 Landing Page
-*Página principal con animaciones GSAP y diseño cinematográfico*
 
-### 📱 Panel de Administración  
-*Dashboard completo con métricas en tiempo real y gestión avanzada*
+_Página principal con animaciones GSAP y diseño cinematográfico_
+
+### 📱 Panel de Administración
+
+_Dashboard completo con métricas en tiempo real y gestión avanzada_
 
 ### 📅 Sistema de Reservas
-*Formulario multi-paso con validación en tiempo real y UX moderna*
+
+_Formulario multi-paso con validación en tiempo real y UX moderna_
 
 ### 🧾 Sistema de Facturación
-*Generación automática de facturas conforme a normativa española*
 
-> **📝 Nota:** Las capturas de pantalla se actualizarán tras el despliegue en producción
+_Generación automática de facturas conforme a normativa española_
+
+> **📝 Nota:** Las capturas de pantalla se actualizarán tras el despliegue en
+> producción
 
 ### 🧾 Facturación Electrónica
 
@@ -381,15 +396,18 @@ detalles.
 ### 👨‍💻 **Desarrollador**
 
 **Proyecto desarrollado por**: [Tu Nombre Completo]  
-**Perfil profesional**: Desarrollador Full-Stack Junior especializado en React/Next.js
+**Perfil profesional**: Desarrollador Full-Stack Junior especializado en
+React/Next.js
 
 **Contacto profesional**:
+
 - 📧 **Email**: [tu.email@profesional.com]
 - 💼 **LinkedIn**: [linkedin.com/in/tu-perfil]
 - 🌐 **Portfolio**: [tu-portfolio-web.com]
 - 💻 **GitHub**: [github.com/tu-usuario]
 
 **Disponible para**:
+
 - 🏢 Oportunidades laborales como desarrollador junior
 - 🤝 Colaboraciones en proyectos open source
 - 💬 Consultas sobre adaptación del sistema para hoteles reales

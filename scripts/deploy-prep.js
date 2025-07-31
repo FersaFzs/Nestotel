@@ -2,7 +2,7 @@
 
 /**
  * 🚀 Script de Preparación para Despliegue
- * 
+ *
  * Automatiza la verificación y preparación del proyecto
  * para despliegue en producción.
  */
@@ -20,7 +20,7 @@ const colors = {
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
   magenta: '\x1b[35m',
-  cyan: '\x1b[36m'
+  cyan: '\x1b[36m',
 };
 
 function log(message, color = 'reset') {
@@ -52,12 +52,12 @@ function checkFile(filePath, description) {
 
 function checkEnvVars() {
   log('\n🔍 Verificando variables de entorno...', 'yellow');
-  
+
   const requiredVars = [
     'MONGODB_URI',
     'NEXT_PUBLIC_FIREBASE_API_KEY',
     'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
-    'FIREBASE_ADMIN_PROJECT_ID'
+    'FIREBASE_ADMIN_PROJECT_ID',
   ];
 
   const envFile = '.env.local';
@@ -72,7 +72,11 @@ function checkEnvVars() {
   const envContent = fs.readFileSync(envFile, 'utf8');
 
   requiredVars.forEach(varName => {
-    if (envContent.includes(varName) && !envContent.includes(`${varName}=tu_`) && !envContent.includes(`${varName}=`)) {
+    if (
+      envContent.includes(varName) &&
+      !envContent.includes(`${varName}=tu_`) &&
+      !envContent.includes(`${varName}=`)
+    ) {
       log(`✅ ${varName} configurada`, 'green');
     } else {
       log(`❌ ${varName} no configurada`, 'red');
@@ -86,30 +90,30 @@ function checkEnvVars() {
 function displayDeploymentSummary() {
   log('\n🎯 RESUMEN DE DESPLIEGUE', 'magenta');
   log('=' * 50, 'magenta');
-  
+
   log('\n📋 Próximos pasos:', 'cyan');
   log('1. 📤 Push código a GitHub:', 'bright');
   log('   git add . && git commit -m "feat: ready for production" && git push', 'reset');
-  
+
   log('\n2. 🌐 Desplegar en Vercel:', 'bright');
   log('   - Ve a vercel.com', 'reset');
   log('   - Importa tu repositorio GitHub', 'reset');
   log('   - Configura variables de entorno', 'reset');
   log('   - Deploy automático', 'reset');
-  
+
   log('\n3. ✅ Variables de entorno en Vercel:', 'bright');
   log('   - MONGODB_URI', 'reset');
   log('   - NEXT_PUBLIC_FIREBASE_* (todas)', 'reset');
   log('   - FIREBASE_ADMIN_* (todas)', 'reset');
   log('   - NEXTAUTH_SECRET', 'reset');
   log('   - NEXTAUTH_URL', 'reset');
-  
+
   log('\n4. 🔍 Verificar post-despliegue:', 'bright');
   log('   - Página principal carga', 'reset');
   log('   - Login/Register funciona', 'reset');
   log('   - API routes responden', 'reset');
   log('   - Base de datos conecta', 'reset');
-  
+
   log('\n🎉 ¡Granada Inn listo para producción!', 'green');
   log('\n📖 Consulta DEPLOYMENT_GUIDE.md para detalles completos', 'cyan');
 }
@@ -128,7 +132,7 @@ async function main() {
     ['vercel.json', 'Configuración de Vercel'],
     ['app/layout.tsx', 'Layout principal'],
     ['app/page.tsx', 'Página principal'],
-    ['lib/db/mongoose.ts', 'Conexión a base de datos']
+    ['lib/db/mongoose.ts', 'Conexión a base de datos'],
   ];
 
   criticalFiles.forEach(([file, desc]) => {

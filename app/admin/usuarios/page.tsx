@@ -44,10 +44,7 @@ export default function UsuariosPage() {
   const [actionLoading, setActionLoading] = useState(false);
 
   // Proteger rutas de admin
-  const {
-    loading: guardLoading,
-    hasAccess,
-  } = useAdminGuard({
+  const { loading: guardLoading, hasAccess } = useAdminGuard({
     requiredRole: 'admin',
     redirectTo: '/login',
   });

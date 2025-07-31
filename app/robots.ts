@@ -8,24 +8,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/admin/*',
-          '/api/*',
-          '/unauthorized',
-          '/perfil/*',
-          '/reservas/*'
-        ],
+        disallow: ['/admin/*', '/api/*', '/unauthorized', '/perfil/*', '/reservas/*'],
       },
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: [
-          '/admin/*',
-          '/api/*',
-          '/unauthorized',
-          '/perfil/*',
-          '/reservas/*'
-        ],
+        disallow: ['/admin/*', '/api/*', '/unauthorized', '/perfil/*', '/reservas/*'],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

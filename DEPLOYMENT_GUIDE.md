@@ -33,6 +33,7 @@ pnpm format
 En el dashboard de Vercel > Settings > Environment Variables:
 
 #### 🔥 **Firebase (CRÍTICO)**
+
 ```env
 NEXT_PUBLIC_FIREBASE_API_KEY=tu_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=proyecto.firebaseapp.com
@@ -48,23 +49,27 @@ FIREBASE_ADMIN_CLIENT_EMAIL=firebase-adminsdk@proyecto.iam.gserviceaccount.com
 ```
 
 #### 🗄️ **Base de Datos (CRÍTICO)**
+
 ```env
 MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/hotel-next?retryWrites=true&w=majority
 ```
 
 #### 🔐 **Autenticación**
+
 ```env
 NEXTAUTH_SECRET=tu_secret_super_seguro_aqui
 NEXTAUTH_URL=https://tu-dominio.vercel.app
 ```
 
 #### 📧 **Email (OPCIONAL)**
+
 ```env
 EMAIL_USER=tu_email@gmail.com
 EMAIL_PASS=tu_app_password
 ```
 
 #### 🧮 **Facturación AEAT (OPCIONAL)**
+
 ```env
 VERIFACTI_API_URL=https://api.verifacti.com/v1
 VERIFACTI_API_KEY=tu_api_key
@@ -75,6 +80,7 @@ VERIFACTI_API_KEY=tu_api_key
 #### **Opción A: Desde GitHub (Recomendado)**
 
 1. **Push tu código a GitHub:**
+
 ```bash
 git add .
 git commit -m "feat: ready for production deployment"
@@ -104,6 +110,7 @@ vercel --prod
 ### 4. **Configurar Dominio Personalizado** (Opcional)
 
 En Vercel Dashboard > Domains:
+
 - Agregar dominio personalizado
 - Configurar DNS según instrucciones
 - Habilitar HTTPS automático
@@ -160,7 +167,7 @@ npx lighthouse https://tu-dominio.vercel.app --output html
 
 # Core Web Vitals
 # - LCP < 2.5s ✅
-# - FID < 100ms ✅  
+# - FID < 100ms ✅
 # - CLS < 0.1 ✅
 ```
 
@@ -185,6 +192,7 @@ npm install @sentry/nextjs
 ### 🔄 **CI/CD Automático**
 
 El proyecto incluye GitHub Actions que:
+
 - ✅ Ejecuta tests en cada PR
 - ✅ Verifica calidad de código
 - ✅ Despliega automáticamente en merge
@@ -211,7 +219,7 @@ El proyecto incluye GitHub Actions que:
 Tu proyecto **Granada Inn** está ahora en producción, mostrando:
 
 - ⚡ **Performance empresarial**
-- 🔒 **Seguridad robusta**  
+- 🔒 **Seguridad robusta**
 - 📱 **Experiencia mobile-first**
 - 🎨 **Diseño profesional**
 - 🚀 **Arquitectura escalable**

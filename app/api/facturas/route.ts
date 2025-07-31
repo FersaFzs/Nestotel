@@ -7,10 +7,7 @@ export async function GET(_request: NextRequest) {
   try {
     await dbConnect();
 
-    const invoices = await Invoice.find({})
-      .populate('reservation')
-      .sort({ createdAt: -1 })
-      .lean();
+    const invoices = await Invoice.find({}).populate('reservation').sort({ createdAt: -1 }).lean();
 
     return NextResponse.json({
       success: true,

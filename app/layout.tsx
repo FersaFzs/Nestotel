@@ -5,8 +5,10 @@ import { MobileMenuProvider } from '../lib/contexts/MobileMenuContext';
 
 export const metadata = {
   title: 'Granada Inn - Sistema de Gestión Hotelera | Prototipo Profesional',
-  description: 'Prototipo avanzado de sistema de gestión hotelera desarrollado con Next.js 14, TypeScript y MongoDB. Incluye reservas, facturación electrónica española, panel administrativo y más.',
-  keywords: 'hotel management, Next.js, TypeScript, MongoDB, sistema hotelero, facturación AEAT, reservas online, prototipo empresarial',
+  description:
+    'Prototipo avanzado de sistema de gestión hotelera desarrollado con Next.js 14, TypeScript y MongoDB. Incluye reservas, facturación electrónica española, panel administrativo y más.',
+  keywords:
+    'hotel management, Next.js, TypeScript, MongoDB, sistema hotelero, facturación AEAT, reservas online, prototipo empresarial',
   authors: [{ name: 'Tu Nombre', url: 'https://tu-portfolio.com' }],
   metadataBase: new URL('https://granada-inn.vercel.app'),
   icons: {
@@ -15,7 +17,8 @@ export const metadata = {
   },
   openGraph: {
     title: 'Granada Inn - Sistema de Gestión Hotelera Profesional',
-    description: 'Prototipo completo de sistema hotelero con arquitectura moderna y funcionalidades empresariales',
+    description:
+      'Prototipo completo de sistema hotelero con arquitectura moderna y funcionalidades empresariales',
     url: 'https://granada-inn.vercel.app',
     siteName: 'Granada Inn',
     type: 'website',

@@ -576,8 +576,6 @@ function SmartHeader() {
   );
 }
 
-
-
 function PuertasSVG({ progress = 0 }: { progress: number }) {
   // progress: 0 (cerradas), 1 (abiertas)
   // Imagen de valla metal con efecto 3D
@@ -596,7 +594,7 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           src='/images/vallametal.png'
           alt='Valla metálica izquierda'
           fill
-          sizes="50vw"
+          sizes='50vw'
           className='object-cover'
           style={{
             filter: 'brightness(0.6) contrast(1.2)',
@@ -617,7 +615,7 @@ function PuertasSVG({ progress = 0 }: { progress: number }) {
           src='/images/vallametal.png'
           alt='Valla metálica derecha'
           fill
-          sizes="50vw"
+          sizes='50vw'
           className='object-cover'
           style={{
             transform: 'scaleX(-1)', // Efecto espejo
@@ -663,7 +661,7 @@ function RoomsSection() {
 
   useEffect(() => {
     if (!sectionRef.current) return;
-    
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -1196,10 +1194,10 @@ function GardenSection() {
       const updateDimensions = () => {
         setScreenDimensions({ width: window.innerWidth, height: window.innerHeight });
       };
-      
+
       updateDimensions(); // Inicial
       window.addEventListener('resize', updateDimensions);
-      
+
       return () => window.removeEventListener('resize', updateDimensions);
     }
     return undefined;
@@ -1314,7 +1312,7 @@ function GardenSection() {
         src='/images/jardin.jpeg'
         alt='Jardín del hotel'
         fill
-        sizes="100vw"
+        sizes='100vw'
         className='jardin-img object-cover'
         style={{ zIndex: 1 }}
       />
@@ -1560,7 +1558,7 @@ function HeroHallTransition() {
         src='/images/hotel-vista.jpeg'
         alt='Vista general del hotel'
         fill
-        sizes="100vw"
+        sizes='100vw'
         className='object-cover'
         style={{
           zIndex: 1,
@@ -1670,7 +1668,6 @@ export default function HomePage() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [isBookingVisible, setIsBookingVisible] = useState(false);
   const bookingRef = useRef<HTMLDivElement>(null);
-
 
   // Versión simple para testing - usar timer fijo en lugar de carga real de imágenes
   const [isLoading, setIsLoading] = useState(true);

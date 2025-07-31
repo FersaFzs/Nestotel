@@ -2,15 +2,17 @@
 
 ## 🏆 **ESTADO ACTUAL: PORTFOLIO PROFESIONAL (100/100)**
 
-**Granada Inn** está completamente preparado como **proyecto portfolio de nivel empresarial** listo para:
+**Granada Inn** está completamente preparado como **proyecto portfolio de nivel
+empresarial** listo para:
 
 ✅ **Despliegue en producción** (Vercel/Render)  
 ✅ **Presentación en certificado de profesionalidad**  
 ✅ **Portfolio técnico avanzado**  
 ✅ **Publicación en LinkedIn**  
-✅ **Demostración a empleadores**  
+✅ **Demostración a empleadores**
 
 ### 🎨 Calidad Técnica Alcanzada
+
 - ✅ **Arquitectura empresarial** - Next.js 14 + TypeScript + MongoDB
 - ✅ **Funcionalidades completas** - Sistema hotelero integral
 - ✅ **Seguridad avanzada** - Firebase Auth + validaciones + headers
