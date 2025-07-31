@@ -114,17 +114,17 @@ function SmartHeader() {
       }`}
     >
       <div className='flex items-center gap-4'>
-        <div
+      <div
           className='text-3xl font-serif tracking-widest text-gold font-bold cursor-pointer hover:text-yellow-400 transition-colors'
-          onClick={scrollToTop}
-        >
-          GRANADA INN
-        </div>
+        onClick={scrollToTop}
+      >
+        GRANADA INN
+      </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className='lg:hidden text-white hover:text-gold transition-colors p-2'
+          className='lg:hidden text-white hover:text-gold transition-colors p-2 ml-auto'
         >
           <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
             {isMobileMenuOpen ? (
@@ -346,11 +346,11 @@ function SmartHeader() {
         </div>
       </div>
 
-            {/* Mobile Menu */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div
           className='lg:hidden fixed inset-0 z-[999999] bg-gradient-to-r from-black/95 via-gray-900/95 to-black/95 backdrop-blur-md'
-          style={{ 
+          style={{
             pointerEvents: 'auto',
             isolation: 'isolate',
             touchAction: 'none',
@@ -359,7 +359,7 @@ function SmartHeader() {
             top: 0,
             left: 0,
             right: 0,
-            bottom: 0
+            bottom: 0,
           }}
         >
           <div className='flex flex-col h-full'>
@@ -764,36 +764,36 @@ function RoomsSection() {
         }}
       >
         {/* Contenedor de habitaciones dinámicas */}
-        <div className='flex gap-12 px-8 w-full max-w-7xl'>
+        <div className='flex flex-col lg:flex-row gap-6 lg:gap-12 px-4 lg:px-8 w-full max-w-7xl'>
           {loading ? (
             // Loading state
             <>
-              <div className='flex-1'>
-                <div className='room-card bg-white rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden animate-pulse'>
+              <div className='w-full lg:flex-1'>
+                <div className='room-card bg-white rounded-3xl shadow-2xl border-4 border-gold h-[400px] lg:h-[500px] flex flex-col overflow-hidden animate-pulse'>
                   <div className='flex-1 bg-gray-200' />
-                  <div className='p-8 flex flex-col gap-3'>
-                    <div className='h-8 bg-gray-200 rounded' />
-                    <div className='h-6 bg-gray-200 rounded' />
-                    <div className='h-4 bg-gray-200 rounded' />
-                    <div className='flex flex-wrap gap-3 mt-4'>
-                      <div className='h-6 bg-gray-200 rounded-full w-20' />
-                      <div className='h-6 bg-gray-200 rounded-full w-16' />
-                      <div className='h-6 bg-gray-200 rounded-full w-24' />
+                  <div className='p-6 lg:p-8 flex flex-col gap-3'>
+                    <div className='h-6 lg:h-8 bg-gray-200 rounded' />
+                    <div className='h-4 lg:h-6 bg-gray-200 rounded' />
+                    <div className='h-3 lg:h-4 bg-gray-200 rounded' />
+                    <div className='flex flex-wrap gap-2 lg:gap-3 mt-4'>
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-16 lg:w-20' />
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-12 lg:w-16' />
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-20 lg:w-24' />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='flex-1'>
-                <div className='room-card bg-white rounded-3xl shadow-2xl border-2 border-gray-200 h-[500px] flex flex-col overflow-hidden animate-pulse'>
+              <div className='w-full lg:flex-1'>
+                <div className='room-card bg-white rounded-3xl shadow-2xl border-2 border-gray-200 h-[400px] lg:h-[500px] flex flex-col overflow-hidden animate-pulse'>
                   <div className='flex-1 bg-gray-200' />
-                  <div className='p-8 flex flex-col gap-3'>
-                    <div className='h-8 bg-gray-200 rounded' />
-                    <div className='h-6 bg-gray-200 rounded' />
-                    <div className='h-4 bg-gray-200 rounded' />
-                    <div className='flex flex-wrap gap-3 mt-4'>
-                      <div className='h-6 bg-gray-200 rounded-full w-20' />
-                      <div className='h-6 bg-gray-200 rounded-full w-16' />
-                      <div className='h-6 bg-gray-200 rounded-full w-24' />
+                  <div className='p-6 lg:p-8 flex flex-col gap-3'>
+                    <div className='h-6 lg:h-8 bg-gray-200 rounded' />
+                    <div className='h-4 lg:h-6 bg-gray-200 rounded' />
+                    <div className='h-3 lg:h-4 bg-gray-200 rounded' />
+                    <div className='flex flex-wrap gap-2 lg:gap-3 mt-4'>
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-16 lg:w-20' />
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-12 lg:w-16' />
+                      <div className='h-4 lg:h-6 bg-gray-200 rounded-full w-20 lg:w-24' />
                     </div>
                   </div>
                 </div>
@@ -802,9 +802,9 @@ function RoomsSection() {
           ) : rooms.length > 0 ? (
             // Habitaciones dinámicas
             rooms.slice(0, 2).map((room, index) => (
-              <div key={room._id} className='flex-1'>
+              <div key={room._id} className='w-full lg:flex-1'>
                 <div
-                  className={`room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 select-none relative ${
+                  className={`room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl h-[400px] lg:h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 select-none relative ${
                     index === 0
                       ? 'border-4 border-gold hover:border-gold/80'
                       : 'border-2 border-gold/30 hover:border-gold/60'
@@ -821,20 +821,20 @@ function RoomsSection() {
                       alt={room.name || 'Habitación'}
                       fill
                       className='object-cover transition-transform duration-500'
-                    />
-                  </div>
-                  <div className='p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-3xl font-serif font-bold text-white'>{room.name}</h3>
-                    <p className='text-gold text-xl font-semibold'>desde {room.price}€/noche</p>
-                    <p className='text-gray-300 text-lg'>
+                />
+              </div>
+                  <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>{room.name}</h3>
+                    <p className='text-gold text-lg lg:text-xl font-semibold'>desde {room.price}€/noche</p>
+                    <p className='text-gray-300 text-base lg:text-lg'>
                       {room.maxGuests} {room.maxGuests === 1 ? 'persona' : 'personas'} |{' '}
                       {room.description.split(' ').slice(0, 3).join(' ')}...
                     </p>
-                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
+                    <div className='flex flex-wrap gap-2 lg:gap-3 mt-4 pointer-events-none'>
                       {room.amenities?.slice(0, 3).map((amenity: string, amenityIndex: number) => (
                         <span
                           key={amenityIndex}
-                          className={`px-4 py-2 rounded-full text-sm pointer-events-none ${
+                          className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm pointer-events-none ${
                             index === 0 ? 'bg-gold/20 text-gold' : 'bg-gold/10 text-gold/80'
                           }`}
                         >
@@ -849,9 +849,9 @@ function RoomsSection() {
           ) : (
             // Fallback: habitaciones estáticas si no hay datos
             <>
-              <div className='flex-1'>
+              <div className='w-full lg:flex-1'>
                 <div
-                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-gold h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
+                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-4 border-gold h-[400px] lg:h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
                   style={{ transformOrigin: 'center center' }}
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
@@ -865,30 +865,30 @@ function RoomsSection() {
                       className='object-cover transition-transform duration-500'
                     />
                   </div>
-                  <div className='p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-3xl font-serif font-bold text-white'>Suite Premium</h3>
-                    <p className='text-gold text-xl font-semibold'>desde 120€/noche</p>
-                    <p className='text-gray-300 text-lg'>
-                      4 personas | terraza privada | bañera hidromasaje
-                    </p>
-                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
-                        WiFi gratis
-                      </span>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
-                        TV 4K
-                      </span>
-                      <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
-                        Minibar
-                      </span>
-                    </div>
-                  </div>
+                  <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>Suite Premium</h3>
+                    <p className='text-gold text-lg lg:text-xl font-semibold'>desde 120€/noche</p>
+                    <p className='text-gray-300 text-base lg:text-lg'>
+                  4 personas | terraza privada | bañera hidromasaje
+                </p>
+                    <div className='flex flex-wrap gap-2 lg:gap-3 mt-4 pointer-events-none'>
+                      <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
+                    WiFi gratis
+                  </span>
+                      <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
+                    TV 4K
+                  </span>
+                      <span className='bg-gold/20 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
+                    Minibar
+                  </span>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <div className='flex-1'>
+              <div className='w-full lg:flex-1'>
                 <div
-                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold/30 h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/60 select-none relative'
+                  className='room-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold/30 h-[400px] lg:h-[500px] flex flex-col overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/60 select-none relative'
                   style={{ transformOrigin: 'center center' }}
                 >
                   {/* Overlay invisible para capturar todos los eventos de hover */}
@@ -900,28 +900,28 @@ function RoomsSection() {
                       alt='Habitación Deluxe'
                       fill
                       className='object-cover transition-transform duration-500'
-                    />
-                  </div>
-                  <div className='p-8 flex flex-col gap-3 pointer-events-none'>
-                    <h3 className='text-3xl font-serif font-bold text-white'>Habitación Deluxe</h3>
-                    <p className='text-gold text-xl font-semibold'>desde 80€/noche</p>
-                    <p className='text-gray-300 text-lg'>
-                      2-3 personas | desayuno incluido | baño privado
-                    </p>
-                    <div className='flex flex-wrap gap-3 mt-4 pointer-events-none'>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
-                        WiFi gratis
-                      </span>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
-                        TV Smart
-                      </span>
-                      <span className='bg-gold/10 px-4 py-2 rounded-full text-sm text-gold/80 pointer-events-none'>
-                        Aire acondicionado
-                      </span>
-                    </div>
-                  </div>
+                />
+              </div>
+                  <div className='p-6 lg:p-8 flex flex-col gap-3 pointer-events-none'>
+                    <h3 className='text-2xl lg:text-3xl font-serif font-bold text-white'>Habitación Deluxe</h3>
+                    <p className='text-gold text-lg lg:text-xl font-semibold'>desde 80€/noche</p>
+                    <p className='text-gray-300 text-base lg:text-lg'>
+                  2-3 personas | desayuno incluido | baño privado
+                </p>
+                    <div className='flex flex-wrap gap-2 lg:gap-3 mt-4 pointer-events-none'>
+                      <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
+                    WiFi gratis
+                  </span>
+                      <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
+                    TV Smart
+                  </span>
+                      <span className='bg-gold/10 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm text-gold/80 pointer-events-none'>
+                    Aire acondicionado
+                  </span>
                 </div>
               </div>
+            </div>
+          </div>
             </>
           )}
         </div>
@@ -1001,11 +1001,11 @@ function EventsSection() {
           transition: 'opacity 0.3s ease',
         }}
       >
-        <h2 className='text-6xl md:text-8xl font-serif font-bold text-gold mb-4 drop-shadow-lg'>
+        <h2 className='text-6xl md:text-8xl font-serif font-bold text-gold mb-4 drop-shadow-lg px-8 lg:px-0'>
           Eventos & Celebraciones
         </h2>
         <div className='w-32 h-1 bg-gold mx-auto mb-6' />
-        <p className='text-white text-xl max-w-3xl mx-auto drop-shadow-lg'>
+        <p className='text-white text-xl max-w-3xl mx-auto drop-shadow-lg px-8 lg:px-0'>
           Celebra bodas, comuniones y eventos especiales en un entorno elegante y tradicional
         </p>
       </div>
@@ -1020,23 +1020,23 @@ function EventsSection() {
         }}
       >
         {/* Contenedor de las tres tarjetas juntas */}
-        <div className='flex gap-12 px-8 w-full max-w-7xl'>
+        <div className='flex flex-col lg:flex-row gap-6 lg:gap-12 px-4 lg:px-8 w-full max-w-7xl'>
           {/* Tarjeta 1: Bodas y comuniones */}
-          <div className='flex-1'>
+          <div className='w-full lg:flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[260px] lg:h-[500px] flex flex-col items-center justify-center p-6 lg:p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
 
-              <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
+              <div className='bg-gold/20 rounded-full p-3 lg:p-6 mb-3 lg:mb-6 pointer-events-none'>
                 <svg
-                  width='60'
-                  height='60'
+                  width='32'
+                  height='32'
                   fill='none'
                   viewBox='0 0 48 48'
-                  className='pointer-events-none'
+                  className='pointer-events-none lg:w-[60px] lg:h-[60px]'
                 >
                   <circle cx='24' cy='24' r='22' stroke='#C9A86B' strokeWidth='4' />
                   <path
@@ -1048,17 +1048,17 @@ function EventsSection() {
                   />
                 </svg>
               </div>
-              <h3 className='text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none'>
+              <h3 className='text-lg lg:text-2xl font-serif font-bold text-white mb-2 lg:mb-4 text-center pointer-events-none'>
                 Bodas y comuniones
               </h3>
-              <p className='text-gray-300 text-center text-lg leading-relaxed pointer-events-none'>
+              <p className='text-gray-300 text-center text-sm lg:text-lg leading-relaxed pointer-events-none'>
                 Salones elegantes, menús personalizados y decoración especial para tu gran día.
               </p>
-              <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+              <div className='mt-3 lg:mt-6 flex gap-2 lg:gap-3 pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Salón elegante
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Menú personalizado
                 </span>
               </div>
@@ -1066,21 +1066,21 @@ function EventsSection() {
           </div>
 
           {/* Tarjeta 2: Eventos de empresa */}
-          <div className='flex-1'>
+          <div className='w-full lg:flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[260px] lg:h-[500px] flex flex-col items-center justify-center p-6 lg:p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
 
-              <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
+              <div className='bg-gold/20 rounded-full p-3 lg:p-6 mb-3 lg:mb-6 pointer-events-none'>
                 <svg
-                  width='60'
-                  height='60'
+                  width='32'
+                  height='32'
                   fill='none'
                   viewBox='0 0 48 48'
-                  className='pointer-events-none'
+                  className='pointer-events-none lg:w-[60px] lg:h-[60px]'
                 >
                   <rect
                     x='8'
@@ -1099,17 +1099,17 @@ function EventsSection() {
                   />
                 </svg>
               </div>
-              <h3 className='text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none'>
+              <h3 className='text-lg lg:text-2xl font-serif font-bold text-white mb-2 lg:mb-4 text-center pointer-events-none'>
                 Eventos de empresa
               </h3>
-              <p className='text-gray-300 text-center text-lg leading-relaxed pointer-events-none'>
+              <p className='text-gray-300 text-center text-sm lg:text-lg leading-relaxed pointer-events-none'>
                 Salas equipadas, coffee breaks y atención profesional para tus reuniones.
               </p>
-              <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+              <div className='mt-3 lg:mt-6 flex gap-2 lg:gap-3 pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Salas equipadas
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Coffee breaks
                 </span>
               </div>
@@ -1117,21 +1117,21 @@ function EventsSection() {
           </div>
 
           {/* Tarjeta 3: Restaurante & tienda */}
-          <div className='flex-1'>
+          <div className='w-full lg:flex-1'>
             <div
-              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[500px] flex flex-col items-center justify-center p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
+              className='event-card bg-gradient-to-br from-black/80 via-gray-900/80 to-black/80 backdrop-blur-sm rounded-3xl shadow-2xl border-2 border-gold h-[260px] lg:h-[500px] flex flex-col items-center justify-center p-6 lg:p-10 cursor-pointer transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-gold/30 hover:shadow-2xl hover:-rotate-1 hover:border-gold/80 select-none relative'
               style={{ transformOrigin: 'center center' }}
             >
               {/* Overlay invisible para capturar todos los eventos de hover */}
               <div className='absolute inset-0 z-10 bg-transparent' />
 
-              <div className='bg-gold/20 rounded-full p-6 mb-6 pointer-events-none'>
+              <div className='bg-gold/20 rounded-full p-3 lg:p-6 mb-3 lg:mb-6 pointer-events-none'>
                 <svg
-                  width='60'
-                  height='60'
+                  width='32'
+                  height='32'
                   fill='none'
                   viewBox='0 0 48 48'
-                  className='pointer-events-none'
+                  className='pointer-events-none lg:w-[60px] lg:h-[60px]'
                 >
                   <rect
                     x='12'
@@ -1145,17 +1145,17 @@ function EventsSection() {
                   <circle cx='24' cy='24' r='6' stroke='#C9A86B' strokeWidth='3' />
                 </svg>
               </div>
-              <h3 className='text-2xl font-serif font-bold text-white mb-4 text-center pointer-events-none'>
+              <h3 className='text-lg lg:text-2xl font-serif font-bold text-white mb-2 lg:mb-4 text-center pointer-events-none'>
                 Restaurante & tienda
               </h3>
-              <p className='text-gray-300 text-center text-lg leading-relaxed pointer-events-none'>
+              <p className='text-gray-300 text-center text-sm lg:text-lg leading-relaxed pointer-events-none'>
                 Cocina tradicional, productos locales y tienda gourmet para tus invitados.
               </p>
-              <div className='mt-6 flex gap-3 pointer-events-none'>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+              <div className='mt-3 lg:mt-6 flex gap-2 lg:gap-3 pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Cocina tradicional
                 </span>
-                <span className='bg-gold/20 px-4 py-2 rounded-full text-sm text-gold pointer-events-none'>
+                <span className='bg-gold/20 px-2 lg:px-4 py-1 lg:py-2 rounded-full text-xs lg:text-sm text-gold pointer-events-none'>
                   Productos locales
                 </span>
               </div>
@@ -1336,8 +1336,8 @@ function GardenSection() {
       {/* Puertas SVG animadas y decoradas */}
       <PuertasSVG progress={puertas} />
 
-      {/* Contenedor de fotos polaroid volando hacia la pantalla */}
-      <div className='absolute inset-0 z-40' style={{ perspective: '1000px' }}>
+      {/* Contenedor de fotos polaroid volando hacia la pantalla - Desktop */}
+      <div className='absolute inset-0 z-40 hidden lg:block' style={{ perspective: '1000px' }}>
         {gardenPhotos.map((photo, index) => {
           // Calcular el progreso individual de cada foto con delay
           const photoStartProgress = photo.delay;
@@ -1444,6 +1444,51 @@ function GardenSection() {
             </div>
           );
         })}
+      </div>
+
+      {/* Layout móvil simple - Vertical con rotaciones naturales */}
+      <div className='absolute inset-0 z-40 lg:hidden flex items-center justify-center p-4'>
+        <div className='flex flex-col gap-3 max-w-md relative'>
+          {gardenPhotos.map((photo, index) => {
+            // Animación invertida: empieza grande y borrosa, se enfoca y reduce
+            const mobileOpacity = photosProgress > 0.3 ? 1 : 0;
+            const mobileScale = photosProgress > 0.3 ? 1 : 1.5; // Empieza más grande
+            const mobileBlur = photosProgress > 0.3 ? 0 : 8; // Empieza borrosa
+            
+            // Rotaciones y posiciones naturales
+            const rotations = [-3, 2, -1]; // Rotaciones sutiles
+            const zIndexes = [10, 20, 30]; // Para superposición
+            const offsets = [
+              { x: 0, y: 0 },
+              { x: 8, y: -4 },
+              { x: -6, y: 2 }
+            ];
+            
+            return (
+              <div
+                key={index}
+                className='bg-white p-4 pb-12 shadow-lg rounded-sm transform transition-all duration-500 ease-out'
+                style={{
+                  opacity: mobileOpacity,
+                  transform: `scale(${mobileScale}) rotate(${rotations[index]}deg) translate(${offsets[index].x}px, ${offsets[index].y}px)`,
+                  zIndex: zIndexes[index],
+                  filter: `blur(${mobileBlur}px)`,
+                }}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.title}
+                  width={400}
+                  height={240}
+                  className='object-cover rounded-sm w-full h-36'
+                />
+                <p className='text-center text-base text-gray-700 mt-4 font-serif italic font-bold'>
+                  {photo.title}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -1811,12 +1856,12 @@ export default function HomePage() {
 
       {/* ================= COMPONENTE DE RESERVAS LATERAL ================= */}
       {/* Tarjeta de reservas lateral */}
-              <div
-          ref={bookingRef}
-          className={`fixed top-32 left-4 transition-transform duration-500 ease-out ${
-            isBookingVisible ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
-          } ${isMobileMenuOpen ? 'hidden' : 'z-40'}`}
-        >
+      <div
+        ref={bookingRef}
+        className={`fixed top-32 left-4 transition-transform duration-500 ease-out ${
+          isBookingVisible ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
+        } ${isMobileMenuOpen ? 'hidden' : 'z-40'}`}
+      >
         <div className='bg-gradient-to-br from-black/90 via-gray-900/90 to-black/90 backdrop-blur-md border-2 border-gold shadow-2xl rounded-2xl w-80 p-6'>
           {/* Header con botón de cerrar */}
           <div className='flex items-center justify-between mb-6'>
@@ -1922,11 +1967,11 @@ export default function HomePage() {
       >
         <button
           onClick={() => setIsBookingVisible(true)}
-          className='bg-gold hover:bg-yellow-500 text-black font-bold py-6 px-4 lg:py-6 lg:px-4 py-3 px-2 rounded-r-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center group'
+          className='bg-gold hover:bg-yellow-500 text-black font-bold py-4 px-2 lg:py-6 lg:px-4 rounded-r-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center group'
         >
           <div className='flex items-center'>
             <svg
-              className='w-6 h-6 lg:w-6 lg:h-6 w-4 h-4 text-black group-hover:animate-bounce'
+              className='w-4 h-4 lg:w-6 lg:h-6 text-black group-hover:animate-bounce'
               fill='none'
               stroke='currentColor'
               viewBox='0 0 24 24'

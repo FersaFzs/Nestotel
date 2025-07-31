@@ -21,9 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className='font-sans bg-black text-black'>
         <AuthProvider>
-          <MobileMenuProvider>
-            {children}
-          </MobileMenuProvider>
+          <MobileMenuProvider>{children}</MobileMenuProvider>
         </AuthProvider>
       </body>
     </html>
