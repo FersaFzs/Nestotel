@@ -9,7 +9,7 @@
     "test:e2e": "cypress open",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write .",
-    "prepare": "husky install",
+    "prepare": "husky install || true",
     "create-admin": "node scripts/create-super-admin.js",
     "setup-firebase-admin": "node scripts/setup-firebase-admin.js",
     "seed": "ts-node scripts/seed.ts",
