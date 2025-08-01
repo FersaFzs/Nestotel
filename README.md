@@ -40,10 +40,10 @@
 >
 > **📞 Contacto profesional:**
 
-- 📧 **Email:** [tu-email@dominio.com]
-- 💼 **LinkedIn:** [tu-perfil-linkedin]
-- 🌐 **Portfolio:** [tu-portfolio-web]
-- 💻 **GitHub:** [tu-github-profile]
+- 📧 **Email:** [fersafzs04@gmail.com]
+- 💼 **LinkedIn:** [linkedin.com/in/fersafzs]
+- 🌐 **Portfolio:** [fersa-web-developer.vercel.app]
+- 💻 **GitHub:** [github.com/FersaFzs]
 
 > **🎯 ¿Interesado en adaptar Granada Inn para tu hotel?** Este sistema está
 > diseñado para ser personalizable y escalable según las necesidades específicas
@@ -53,19 +53,25 @@
 
 ### 🏠 Landing Page
 
-_Página principal con animaciones GSAP y diseño cinematográfico_
+<img width="1920" height="965" alt="imagen" src="https://github.com/user-attachments/assets/f79916f0-665a-4b26-b6c0-81afa06ef99f" />
 
 ### 📱 Panel de Administración
 
-_Dashboard completo con métricas en tiempo real y gestión avanzada_
+<img width="1920" height="965" alt="imagen" src="https://github.com/user-attachments/assets/c60fad30-a93f-4ef2-8994-7aba2add6897" />
 
 ### 📅 Sistema de Reservas
 
-_Formulario multi-paso con validación en tiempo real y UX moderna_
+<img width="896" height="502" alt="imagen" src="https://github.com/user-attachments/assets/37c3527f-a353-4235-8d08-09c0f632c393" />
+
+<img width="896" height="784" alt="imagen" src="https://github.com/user-attachments/assets/190a6cb1-a945-46af-b7ac-9d0ee4dedd36" />
+
+<img width="896" height="1089" alt="imagen" src="https://github.com/user-attachments/assets/13693599-70f8-4fd1-8e14-724a7f08476e" />
+
+<img width="1920" height="965" alt="imagen" src="https://github.com/user-attachments/assets/93c30afd-7045-4677-a994-c20277067104" />
 
 ### 🧾 Sistema de Facturación
 
-_Generación automática de facturas conforme a normativa española_
+<img width="1920" height="965" alt="imagen" src="https://github.com/user-attachments/assets/6d655c05-bcb5-4d8e-8e29-305cc28a5d6f" />
 
 > **📝 Nota:** Las capturas de pantalla se actualizarán tras el despliegue en
 > producción
