@@ -1468,14 +1468,19 @@ function GardenSection() {
               { x: -6, y: 2 },
             ];
 
+            // Valores seguros para TypeScript
+            const rotation = rotations[index % rotations.length] ?? 0;
+            const zIndex = zIndexes[index % zIndexes.length] ?? 10;
+            const offset = offsets[index % offsets.length] ?? { x: 0, y: 0 };
+
             return (
               <div
                 key={index}
                 className='bg-white p-4 pb-12 shadow-lg rounded-sm transform transition-all duration-500 ease-out'
                 style={{
                   opacity: mobileOpacity,
-                  transform: `scale(${mobileScale}) rotate(${rotations[index % rotations.length]}deg) translate(${offsets[index % offsets.length].x}px, ${offsets[index % offsets.length].y}px)`,
-                  zIndex: zIndexes[index % zIndexes.length],
+                  transform: `scale(${mobileScale}) rotate(${rotation}deg) translate(${offset.x}px, ${offset.y}px)`,
+                  zIndex,
                   filter: `blur(${mobileBlur}px)`,
                 }}
               >
