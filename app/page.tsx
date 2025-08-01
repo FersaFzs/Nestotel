@@ -1474,8 +1474,8 @@ function GardenSection() {
                 className='bg-white p-4 pb-12 shadow-lg rounded-sm transform transition-all duration-500 ease-out'
                 style={{
                   opacity: mobileOpacity,
-                  transform: `scale(${mobileScale}) rotate(${rotations[index]}deg) translate(${offsets[index].x}px, ${offsets[index].y}px)`,
-                  zIndex: zIndexes[index],
+                  transform: `scale(${mobileScale}) rotate(${rotations[index % rotations.length]}deg) translate(${offsets[index % offsets.length].x}px, ${offsets[index % offsets.length].y}px)`,
+                  zIndex: zIndexes[index % zIndexes.length],
                   filter: `blur(${mobileBlur}px)`,
                 }}
               >
