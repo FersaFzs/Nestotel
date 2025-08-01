@@ -37,5 +37,5 @@ UserSchema.index({ firebaseUid: 1 });
 UserSchema.index({ email: 1 });
 UserSchema.index({ role: 1 });
 
-const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+const User: Model<IUser> = mongoose.models['User'] || mongoose.model<IUser>('User', UserSchema);
 export default User;

@@ -20,10 +20,6 @@ export function middleware(request: NextRequest) {
     response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
 
-  // Rate limiting headers (basic implementation)
-  const ip = request.ip || request.headers.get('x-forwarded-for') || 'unknown';
-  const userAgent = request.headers.get('user-agent') || 'unknown';
-
   // Add rate limiting info to headers
   response.headers.set('X-RateLimit-Limit', '100');
   response.headers.set('X-RateLimit-Remaining', '99'); // This would be calculated in a real implementation

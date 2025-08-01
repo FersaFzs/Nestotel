@@ -34,7 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(user);
         setLoading(false);
       },
-      error => {
+      _error => {
         // Auth state change error - handled silently in production
         setLoading(false);
       },

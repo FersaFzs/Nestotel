@@ -45,7 +45,7 @@
     ".next/types/**/*.ts",
     "middleware.ts"
   ],
-  "exclude": ["node_modules", ".next", "out", "dist", "build"],
+  "exclude": ["node_modules", ".next", "out", "dist", "build", "tests", "cypress"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"

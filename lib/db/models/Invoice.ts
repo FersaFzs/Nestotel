@@ -58,5 +58,5 @@ const InvoiceSchema: Schema = new Schema<IInvoice>(
 );
 
 const Invoice: Model<IInvoice> =
-  mongoose.models.Invoice || mongoose.model<IInvoice>('Invoice', InvoiceSchema);
+  mongoose.models['Invoice'] || mongoose.model<IInvoice>('Invoice', InvoiceSchema);
 export default Invoice;

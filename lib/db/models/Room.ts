@@ -32,5 +32,5 @@ const RoomSchema: Schema = new Schema<IRoom>(
   { timestamps: true },
 );
 
-const Room: Model<IRoom> = mongoose.models.Room || mongoose.model<IRoom>('Room', RoomSchema);
+const Room: Model<IRoom> = mongoose.models['Room'] || mongoose.model<IRoom>('Room', RoomSchema);
 export default Room;

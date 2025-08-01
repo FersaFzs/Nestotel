@@ -77,9 +77,9 @@ export default function PerfilPage() {
               {/* Avatar Section */}
               <div className='text-center mb-8'>
                 <div className='w-24 h-24 bg-gold rounded-full flex items-center justify-center text-black font-bold text-3xl mx-auto mb-4'>
-                  {user.displayName
-                    ? user.displayName[0].toUpperCase()
-                    : user.email?.[0].toUpperCase()}
+                  {user.displayName && user.displayName.length > 0
+                    ? user.displayName[0]?.toUpperCase() ?? 'U'
+                    : user.email?.[0]?.toUpperCase() ?? 'U'}
                 </div>
                 <h2 className='text-2xl font-bold text-white mb-1'>
                   {user.displayName || 'Usuario'}

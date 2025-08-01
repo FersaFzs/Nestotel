@@ -15,8 +15,8 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
   {
     id: 'verifacti',
     name: 'Verifacti',
-    apiUrl: process.env.VERIFACTI_API_URL || 'https://api.verifacti.com/v1',
-    apiKey: process.env.VERIFACTI_API_KEY,
+    apiUrl: process.env['VERIFACTI_API_URL'] || 'https://api.verifacti.com/v1',
+    apiKey: process.env['VERIFACTI_API_KEY'] || '',
     status: 'active',
     features: [
       'Generación automática de Facturae XML',
@@ -30,8 +30,8 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
   {
     id: 'facturae',
     name: 'Facturae',
-    apiUrl: process.env.FACTURAE_API_URL || 'https://api.facturae.com/v1',
-    apiKey: process.env.FACTURAE_API_KEY,
+    apiUrl: process.env['FACTURAE_API_URL'] || 'https://api.facturae.com/v1',
+    apiKey: process.env['FACTURAE_API_KEY'] || '',
     status: 'active',
     features: [
       'Formato Facturae 3.2.2',
@@ -45,8 +45,8 @@ export const E_INVOICE_PROVIDERS: EInvoiceProvider[] = [
   {
     id: 'aeat',
     name: 'AEAT Directo',
-    apiUrl: process.env.AEAT_API_URL || 'https://www.agenciatributaria.es/ws/facturae',
-    apiKey: process.env.AEAT_API_KEY,
+    apiUrl: process.env['AEAT_API_URL'] || 'https://www.agenciatributaria.es/ws/facturae',
+    apiKey: process.env['AEAT_API_KEY'] || '',
     status: 'active',
     features: [
       'Envío directo a AEAT',

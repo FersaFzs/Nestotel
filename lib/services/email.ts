@@ -1,11 +1,11 @@
 import nodemailer from 'nodemailer';
 
 // Configuración del transportador de email
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
   service: 'gmail', // Puedes cambiar a otro servicio
   auth: {
-    user: process.env.EMAIL_USER || 'granadainn.demo@gmail.com',
-    pass: process.env.EMAIL_PASS || 'tu_app_password',
+    user: process.env['EMAIL_USER'] || 'granadainn.demo@gmail.com',
+    pass: process.env['EMAIL_PASS'] || 'tu_app_password',
   },
 });
 
@@ -292,14 +292,14 @@ export async function sendReservationConfirmationEmail(
     const emailTemplate = createReservationConfirmationEmail(data);
 
     const mailOptions = {
-      from: `"${data.hotelName}" <${process.env.EMAIL_USER || 'granadainn.demo@gmail.com'}>`,
+      from: `"${data.hotelName}" <${process.env['EMAIL_USER'] || 'granadainn.demo@gmail.com'}>`,
       to: data.guestEmail,
       subject: emailTemplate.subject,
       html: emailTemplate.html,
       text: emailTemplate.text,
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     // Email enviado exitosamente
     return true;
   } catch (error) {
@@ -314,7 +314,7 @@ export async function sendReservationCancellationEmail(
 ): Promise<boolean> {
   try {
     const mailOptions = {
-      from: `"${data.hotelName}" <${process.env.EMAIL_USER || 'granadainn.demo@gmail.com'}>`,
+      from: `"${data.hotelName}" <${process.env['EMAIL_USER'] || 'granadainn.demo@gmail.com'}>`,
       to: data.guestEmail,
       subject: `❌ Cancelación de Reserva - ${data.hotelName}`,
       html: `
@@ -358,7 +358,7 @@ Este es un prototipo demostrativo. Granada Inn es un hotel ficticio.
       `,
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     // Email de cancelación enviado exitosamente
     return true;
   } catch (error) {

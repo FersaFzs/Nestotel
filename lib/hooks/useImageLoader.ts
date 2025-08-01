@@ -50,7 +50,7 @@ export function useImageLoader({ imageUrls, onComplete }: UseImageLoaderProps) {
     }, 4000);
 
     // Load each image
-    imageUrls.forEach((url, index) => {
+    imageUrls.forEach((url, _index) => {
       const img = new Image();
 
       img.onload = () => {

@@ -7,7 +7,7 @@ declare global {
        * Custom command to login via Firebase
        * @example cy.login('user@example.com', 'password')
        */
-      login(email: string, password: string): Chainable<void>;
+      login(email: string, password: string): Chainable;
     }
   }
 }

@@ -1696,6 +1696,7 @@ export default function HomePage() {
 
       return () => clearInterval(timer);
     }
+    return undefined;
   }, [isLoading]);
 
   // Booking form states
