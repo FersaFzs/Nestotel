@@ -1298,6 +1298,7 @@ function GardenSection() {
         gardenTriggers.forEach(st => st.kill());
       };
     }
+    return undefined;
   }, []);
 
   return (
