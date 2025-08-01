@@ -68,7 +68,7 @@
       "destination": "/api/:path*"
     }
   ],
-  "regions": ["fra1", "mad1"],
+  "regions": ["fra1", "cdg1"],
   "crons": [
     {
       "path": "/api/health",
