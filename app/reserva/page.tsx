@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useAuthGuard } from '../../lib/hooks/useAuthGuard';
 import ReservationForm from '../../components/ReservationForm';
 import { useSearchParams } from 'next/navigation';
 
-export default function ReservaPage() {
+function ReservaContent() {
   const { user, isLoading } = useAuthGuard();
   const searchParams = useSearchParams();
   const [prefilledData, setPrefilledData] = useState({
@@ -82,5 +82,13 @@ export default function ReservaPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ReservaPage() {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <ReservaContent />
+    </Suspense>
   );
 }

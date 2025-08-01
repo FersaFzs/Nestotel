@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useAuthGuard } from '../../lib/hooks/useAuthGuard';
@@ -21,7 +21,7 @@ interface Reservation {
   };
 }
 
-export default function ReservasPage() {
+function ReservasContent() {
   const { user, isLoading } = useAuthGuard();
   const searchParams = useSearchParams();
   const [reservations, setReservations] = useState<Reservation[]>([]);
@@ -359,5 +359,13 @@ export default function ReservasPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ReservasPage() {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <ReservasContent />
+    </Suspense>
   );
 }
