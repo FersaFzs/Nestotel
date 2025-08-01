@@ -27,7 +27,7 @@
     "next": "14.1.0",
     "nodemailer": "^7.0.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react-dom": "19.1.1",
     "zod": "3.22.4"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "@types/jest": "29.5.12",
     "@types/node": "20.11.30",
     "@types/react": "18.2.62",
-    "@types/react-dom": "18.2.19",
+    "@types/react-dom": "19.1.7",
     "@typescript-eslint/eslint-plugin": "^8.37.0",
     "@typescript-eslint/parser": "^8.38.0",
     "autoprefixer": "10.4.16",
