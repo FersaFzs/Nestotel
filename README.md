@@ -401,16 +401,16 @@ detalles.
 
 ### 👨‍💻 **Desarrollador**
 
-**Proyecto desarrollado por**: [Tu Nombre Completo]  
+**Proyecto desarrollado por**: José María Fernández Saavedra  
 **Perfil profesional**: Desarrollador Full-Stack Junior especializado en
 React/Next.js
 
 **Contacto profesional**:
 
-- 📧 **Email**: [tu.email@profesional.com]
-- 💼 **LinkedIn**: [linkedin.com/in/tu-perfil]
-- 🌐 **Portfolio**: [tu-portfolio-web.com]
-- 💻 **GitHub**: [github.com/tu-usuario]
+- 📧 **Email**: [fersafzs04@gmail.com]
+- 💼 **LinkedIn**: [linkedin.com/in/fersafzs]
+- 🌐 **Portfolio**: [fersa-web-developer.vercel.app]
+- 💻 **GitHub**: [github.com/FersaFzs]
 
 **Disponible para**:
 
