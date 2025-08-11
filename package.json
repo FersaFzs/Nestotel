@@ -28,7 +28,7 @@
     "nodemailer": "^7.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zod": "3.22.4"
+    "zod": "4.0.17"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
